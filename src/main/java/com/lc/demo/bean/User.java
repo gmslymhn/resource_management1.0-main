@@ -14,7 +14,7 @@ public class User {
     private String userPassword;
     @Size(min=10,max = 10,message = "学号长度必须为10")
 
-    private String UserNumber;
+    private String userNumber;
     private String userSex;
     @Size(min = 11,max = 11,message = "请输入11位手机号码")
     private String userTele;
@@ -28,7 +28,7 @@ public class User {
         this.userName = userName;
         this.userAccount = userAccount;
         this.userPassword = userPassword;
-        this.UserNumber = UserNumber;
+        this.userNumber = UserNumber;
         this.userSex = userSex;
         this.userTele = userTele;
         this.userpost = userpost;
@@ -63,10 +63,10 @@ public class User {
         this.userPassword = userPassword;
     }
     public String getUserNumber() {
-        return UserNumber;
+        return userNumber;
     }
     public void setUserNumber(String userNumber) {
-        UserNumber = userNumber;
+        userNumber = userNumber;
     }
     public String getUserSex() {
         return userSex;
@@ -101,7 +101,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", userAccount='" + userAccount + '\'' +
                 ", userPassword='" + userPassword + '\'' +
-                ", userNumber='" + UserNumber + '\'' +
+                ", userNumber='" + userNumber + '\'' +
                 ", userSex='" + userSex + '\'' +
                 ", userpost='" + userpost + '\'' +
                 ", userTele='" + userTele + '\'' +

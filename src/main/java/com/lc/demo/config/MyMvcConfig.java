@@ -29,10 +29,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
                 registry.addViewController("/").setViewName("login");
                 registry.addViewController("/index.html").setViewName("login");
                 registry.addViewController("/admmain.html").setViewName("/adm/adminindex");
-                registry.addViewController("/stumain.html").setViewName("/stu/stuindex");
-                registry.addViewController("/stuadmin.html").setViewName("/adm/stulist");
-                registry.addViewController("/addstudent.html").setViewName("/adm/addstu");
-                registry.addViewController("/updateSucc.html").setViewName("/stu/stuUpdateSucc");
+                registry.addViewController("/usermain.html").setViewName("/stu/stuindex");
             }
 
             //注册拦截器

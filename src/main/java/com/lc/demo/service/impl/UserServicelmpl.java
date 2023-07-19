@@ -1,4 +1,38 @@
 package com.lc.demo.service.impl;
+import com.lc.demo.bean.User;
+import com.lc.demo.mapper.UserMapper;
+import com.lc.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class UserServicelmpl {
+
+@Service
+public class UserServicelmpl implements UserService {
+
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public User adminLogin(String userAccount,String userPassword){
+        return userMapper.selectUserByAccountAndPassword(userAccount,userPassword);
+    }
+
+
+    @Override
+    public User userLogin(String userAccount, String userPassword){
+        return userMapper.selectUserByAccountAndPassword(userAccount,userPassword);
+    }
+
+    @Override
+    public User selectByAccount(String userAccount) {
+        return null;
+    }
+
+    @Override
+    public int addUser(User user) {
+            return userMapper.insertUser(user);
+    }
+
+
 }

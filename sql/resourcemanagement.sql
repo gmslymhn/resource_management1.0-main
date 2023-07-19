@@ -38,8 +38,7 @@ CREATE TABLE `assets_log`  (
   `user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '管理',
   `description` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '描述',
   `change_assets` float NULL DEFAULT NULL COMMENT '花了多少',
-  `processing
-_time` datetime NULL DEFAULT NULL COMMENT '处理时间',
+  `process_time` datetime NULL DEFAULT NULL COMMENT '处理时间',
   `before_assets` float NULL DEFAULT NULL COMMENT '花费前可支配资产',
   `afterwards_assets` float NULL DEFAULT NULL COMMENT '花费后可支配资产'
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
@@ -72,7 +71,7 @@ CREATE TABLE `report`  (
   `goods_id` int NOT NULL COMMENT '损坏物品id',
   `goods_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '物品名称',
   `damage_description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL COMMENT '损坏描述',
-  `reporting_time` datetime NULL DEFAULT NULL COMMENT '上报时间',
+  `report_time` datetime NULL DEFAULT NULL COMMENT '上报时间',
   `goods_state` int NULL DEFAULT NULL COMMENT '状态 已处理或未处理',
   PRIMARY KEY (`goods_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
