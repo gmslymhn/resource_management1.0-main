@@ -17,15 +17,15 @@ public class DemoApplicationTests {
     @Autowired
     private  UserMapper userMapper;
 
-//    @Autowired
-//    private  AssetsMapper asssetMapper;
-//
-//    @Autowired
-//    private  Assets_LogMapper assets_logMapper;
-//
-//    @Autowired
-//    private  GoodsMapper goodsMapper;
-//
-//    @Autowired
-//    private  ReportMapper reportsMapper;
+    @Autowired
+    private  AssetsMapper asssetMapper;
+
+    @Autowired
+    private  Assets_LogMapper assets_logMapper;
+
+    @Autowired
+    private  GoodsMapper goodsMapper;
+
+    @Autowired
+    private  ReportMapper reportsMapper;
 }

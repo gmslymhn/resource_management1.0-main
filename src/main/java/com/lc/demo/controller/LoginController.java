@@ -18,8 +18,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-
-    @PostMapping(value = "/adm/login")
+    @PostMapping(value = "login")
     public String login(@RequestParam("userAccount") String userAccount,
                         @RequestParam("userPassword") String userPassword, Map<String,Object> map, HttpSession session)
     {

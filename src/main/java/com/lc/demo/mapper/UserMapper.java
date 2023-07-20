@@ -21,6 +21,10 @@ public interface UserMapper {
     @Select("select * from user where account = #{userAccount}")
     User selectUserByAccount(String userAccount);
 
+    @Insert("insert into user(user_id,account,password) values(#{userId},#{userAccount},#{userPassword})")
+    int abc(int id,String account,String password);
+
+
 
 
 }
