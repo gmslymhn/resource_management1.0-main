@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lc.demo.mapper.Assets_LogMapper">
+
+    <select id="pageQuery" resultType="com.lc.demo.bean.Assets_Log">
+        select * from assets_log
+        <where>
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+    <update id="updateAssetsLog" parameterType="Assets_Log">
+        update assets_log
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="changeAssets != null">change_assets = #{changeAssets},</if>
+            <if test="processTime != null">process_time = #{processTime},</if>
+            <if test="beforeAssets != null">before_assets = #{beforeAssets},</if>
+            <if test="afterAssets != null">afterwards_assets = #{afterAssets},</if>
+        </set>
+        where assets_log_id = #{assetsLogId}
+    </update>
+
+
+    <update id="Synchronize data" >
+
+                UPDATE assetss
+                SET total_asstes = (SELECT afterwards_assets FROM  assets_log );
+                SET time = (SELECT process_time FROM  assets_log );
+
+    </update>
+
+
+</mapper>
