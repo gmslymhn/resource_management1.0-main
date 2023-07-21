@@ -11,12 +11,15 @@ import javax.validation.constraints.Size;
 @Mapper
 public interface UserMapper {
 
+
+
     @Select("select * from user where account = #{userAccount} and password = #{userPassword)")
     User selectUserByAccountAndPassword(@Param("userAccount") String userAccount,@Param("userPassword") String userPassword);
 
-    @Insert("insert into user(user_id,account,password,name,student_number,sex,phone,post) values(#{userId},#{userAccount}," +
-            "#{userPassword},#{userName},#{userNumber},#{userSex},#{userTele},#{userpost})")
+    @Insert("insert into user(account,password,name,student_number,sex,phone,post,role_id) values(#{userAccount}," +
+            "#{userPassword},#{userName},#{userNumber},#{userSex},#{userTele},#{userpost},1)")
     int insertUser(User user);
+
 
     @Select("select * from user where account = #{userAccount}")
     User selectUserByAccount(String userAccount);

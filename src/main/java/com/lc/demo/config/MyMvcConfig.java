@@ -21,27 +21,27 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
 //    }
 
     //所有的WebMvcConfigurerAdapter组件都会一起起作用
-    @Bean //将组件注册在容器
-    public WebMvcConfigurerAdapter webMvcConfigurerAdapter(){
-        WebMvcConfigurerAdapter adapter = new WebMvcConfigurerAdapter() {
-            @Override
-            public void addViewControllers(ViewControllerRegistry registry) {
-                registry.addViewController("/").setViewName("login");
-                registry.addViewController("/login.html").setViewName("login");
-                registry.addViewController("/admmain.html").setViewName("/adm/adminindex");
-                registry.addViewController("/usermain.html").setViewName("/suser/stuindex");
-            }
-
-            //注册拦截器
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
-                super.addInterceptors(registry);
-//                静态资源；  *.css , *.js
-//                SpringBoot已经做好了静态资源映射
-                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                        .excludePathPatterns("/login.html","/","/stu/login","/adm/login","/tea/login");
-            }
-        };
-        return adapter;
-    }
+//    @Bean //将组件注册在容器
+//    public WebMvcConfigurerAdapter webMvcConfigurerAdapter(){
+//        WebMvcConfigurerAdapter adapter = new WebMvcConfigurerAdapter() {
+//            @Override
+//            public void addViewControllers(ViewControllerRegistry registry) {
+//                registry.addViewController("/").setViewName("login");
+//                registry.addViewController("/login.html").setViewName("login");
+//                registry.addViewController("/admmain.html").setViewName("/adm/adminindex");
+//                registry.addViewController("/usermain.html").setViewName("/suser/stuindex");
+//            }
+//
+//            //注册拦截器
+//            @Override
+//            public void addInterceptors(InterceptorRegistry registry) {
+//                super.addInterceptors(registry);
+////                静态资源；  *.css , *.js
+////                SpringBoot已经做好了静态资源映射
+//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+//                        .excludePathPatterns("/login.html","/","/stu/login","/adm/login","/tea/login");
+//            }
+//        };
+//        return adapter;
+//    }
 }

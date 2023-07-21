@@ -2,9 +2,10 @@ package com.lc.demo.service.impl;
 
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class GoodsServicelmpl implements GoodsService {
     @Override
     public List<Goods> getAllGoods() {

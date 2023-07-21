@@ -4,10 +4,12 @@ import com.lc.demo.bean.Report;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+@Mapper
 public interface ReportMapper {
 
     @Select("select * from report")

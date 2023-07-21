@@ -2,9 +2,10 @@ package com.lc.demo.service.impl;
 
 import com.lc.demo.bean.Report;
 import com.lc.demo.service.ReportService;
-"C:\Users\gmsly\Documents\GitHub\resource_management1.0-main"
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public class ReportServicelmpl implements ReportService {
 
 
