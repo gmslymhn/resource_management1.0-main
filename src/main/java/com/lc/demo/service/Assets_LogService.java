@@ -5,8 +5,12 @@ import com.lc.demo.bean.Assets_Log;
 import java.util.List;
 
 public interface Assets_LogService {
-
-    List<Assets_Log> getAllAssets_Logs();
+    /**
+     * 查询所有
+     * @param
+     * @return
+     */
+    List<Assets_Log> selectAllAssets_Logs();
     
     /**
      * 删除
@@ -37,8 +41,7 @@ public interface Assets_LogService {
      * @param assetsLogId
      * @return
      */
-//    日志不可修改
-    List<Assets_Log> selectById(int assetsLogId);
+    Assets_Log selectById(int assetsLogId);
     /**
      * 根据name查询
      * @param userName

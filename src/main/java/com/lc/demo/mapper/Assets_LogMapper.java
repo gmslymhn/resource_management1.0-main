@@ -24,7 +24,7 @@ public interface Assets_LogMapper {
      * @return
      */
     @Select("select * from assets_log where user_name like CONCAT('%', #{userName}, '%')")
-    Assets_Log selectLogByUserName(String userName);
+    List<Assets_Log> selectLogByUserName(String userName);
 
 
 

@@ -18,7 +18,7 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     private ReportService  reportService;
 
     @Override
-    public List<Assets_Log> getAllAssets_Logs() {
+    public List<Assets_Log> selectAllAssets_Logs() {
         List<Assets_Log> list= assetsLogMapper.selectAllLogs();
         return list;
     }
@@ -65,9 +65,9 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
         }
     }
     @Override
-    public List<Assets_Log> selectById(int assetsLogId) {
-        List<Assets_Log> list= (List<Assets_Log>) assetsLogMapper.selectByAssetsLog(assetsLogId);
-        return list;
+    public Assets_Log selectById(int assetsLogId) {
+        Assets_Log assetsLog=  assetsLogMapper.selectByAssetsLog(assetsLogId);
+        return assetsLog;
     }
 
     @Override
