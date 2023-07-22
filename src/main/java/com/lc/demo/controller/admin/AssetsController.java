@@ -22,7 +22,7 @@ public class AssetsController {
      * @param
      * @return
      */
-    @PutMapping
+    @PutMapping("/update")
     public Result<String> updateAssetsPercentage(float percentage){
         log.info("修改可用资产的百分比:{}",percentage);
         assetsService.updateAssetsPercentage(percentage);
@@ -33,18 +33,18 @@ public class AssetsController {
  * @param
  * @return
  */
-    @GetMapping("/list")
+    @GetMapping
     public Result<List<Assets>>  list ()     {
         List<Assets> list = assetsService.selectAllAssets();
         return Result.success(list);
 }
 
     /**
-     * 查询所有new_assets
+     * 查询new_assets
      * @param
      * @return
      */
-    @GetMapping("/list/new")
+    @GetMapping("/new")
     public Result<Assets>  newList ()     {
         Assets assets =assetsService.selectNewAssets();
         return Result.success(assets);

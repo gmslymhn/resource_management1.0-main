@@ -25,7 +25,7 @@ public class AssetsLogController {
      * @param
      * @return
      */
-    @GetMapping("/list")
+    @GetMapping
     public  Result<List<Assets_Log>> getAllAssets_Logs(){
         List<Assets_Log> list =assetsLogService.selectAllAssets_Logs();
         return  Result.success(list);
@@ -36,7 +36,7 @@ public class AssetsLogController {
      * @param   assetsLogId
      * @return
      */
-    @DeleteMapping
+    @DeleteMapping("/{assetsLogId}")
      public Result deleteByAssets_Log(int assetsLogId){
         log.info("删除：{}", assetsLogId);
         assetsLogService.deleteByAssets_Log(assetsLogId);
@@ -74,7 +74,7 @@ public class AssetsLogController {
      * @param assetsLogId
      * @return
      */
-    @GetMapping("/list/{assetsLogId}")
+    @GetMapping("/{assetsLogId}")
     public Result selectById(@PathVariable int assetsLogId){
         log.info("根据id查询:{}",assetsLogId);
         Assets_Log assetsLog =assetsLogService.selectById(assetsLogId);
@@ -86,7 +86,7 @@ public class AssetsLogController {
      * @param userName
      * @return
      */
-    @GetMapping("/list/{userName}")
+    @GetMapping("/{userName}")
     public Result<List<Assets_Log>> selectByName(@PathVariable String userName) {
         log.info("根据name查询:{}",userName);
         List<Assets_Log> list =assetsLogService.selectByName(userName);

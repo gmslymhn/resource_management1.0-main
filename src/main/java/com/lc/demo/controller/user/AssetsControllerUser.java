@@ -23,7 +23,7 @@ public class AssetsControllerUser {
      * @param
      * @return
      */
-    @GetMapping("/list")
+    @GetMapping
     public Result<List<Assets>> list ()     {
         List<Assets> list = assetsService.selectAllAssets();
         return Result.success(list);
@@ -34,7 +34,7 @@ public class AssetsControllerUser {
      * @param
      * @return
      */
-    @GetMapping("/list/new")
+    @GetMapping("new")
     public Result<Assets>  newList ()     {
         Assets assets =assetsService.selectNewAssets();
         return Result.success(assets);
