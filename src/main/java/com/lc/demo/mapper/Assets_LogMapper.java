@@ -51,7 +51,7 @@ public interface Assets_LogMapper {
      */
     @Insert("insert into assets_log (user_name,description,change_assets,process_time,before_assets,afterwards_assets)" +
             "VALUES" +
-            "(#{userName},#{description},#{changeAssets},#{processTime},#{beforeAssets},#{afterAssets}")
+            "(#{userName},#{description},#{changeAssets},#{processTime},#{beforeAssets},#{afterAssets})")
     int insertAssetsLog(Assets_Log log);
 
 
@@ -61,7 +61,7 @@ public interface Assets_LogMapper {
      * @param   assetsLogId
      * @return
      */
-    @Delete("DELETEE from assets_log where assets_log_id = #{assetsLogId}")
+    @Delete("DELETE from assets_log where assets_log_id = #{assetsLogId}")
     int deleteByAssetsLog(int assetsLogId);
 
 

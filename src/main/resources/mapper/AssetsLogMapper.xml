@@ -28,11 +28,11 @@
     </update>
 
 
-    <update id="Synchronize data" >
+    <update id="SynchronizeData" >
 
                 UPDATE assetss
-                SET total_asstes = (SELECT afterwards_assets FROM  assets_log );
-                SET time = (SELECT process_time FROM  assets_log );
+                SET total_asstes = (SELECT afterwards_assets FROM  assets_log ),
+                    time = (SELECT process_time FROM  assets_log );
 
     </update>
 

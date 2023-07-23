@@ -27,7 +27,7 @@ public interface AssetsMapper {
 
     @Insert("insert into assets (total_assets,disposable_assets,time)" +
             "VALUES" +
-            "(#{totalAssets},#{disposableAssets},#{time}")
+            "(#{totalAssets},#{disposableAssets},#{time})")
     int insert(float total, float disposable, LocalDateTime now);
 
 
