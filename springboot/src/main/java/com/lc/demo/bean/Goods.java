@@ -15,11 +15,11 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(String goodsName, int goodsId, String goodsstate, String goodslmage) {
+    public Goods(String goodsName, int goodsId, String goodsstate, String goodsImage) {
         this.goodsName = goodsName;
         this.goodsId = goodsId;
         this.goodsState = goodsstate;
-        this.goodsImage = goodslmage;
+        this.goodsImage = goodsImage;
     }
 
 
@@ -44,16 +44,16 @@ public class Goods {
         return goodsState;
     }
 
-    public void setGoodsState(String goodsstate) {
-        this.goodsState = goodsstate;
+    public void setGoodsState(String goodsState) {
+        this.goodsState = goodsState;
     }
 
     public String getGoodsImage() {
         return goodsImage;
     }
 
-    public void setGoodsImage(String goodslmage) {
-        this.goodsImage = goodslmage;
+    public void setGoodsImage(String goodsImage) {
+        this.goodsImage = goodsImage;
     }
 
     @Override
