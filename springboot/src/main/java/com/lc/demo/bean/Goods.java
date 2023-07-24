@@ -1,12 +1,16 @@
 package com.lc.demo.bean;
 
-import junit.framework.Test;
+
+
+/**
+ * @author: 22932
+ */
 
 public class Goods {
+    private Integer goodsId;
     private String goodsName;
-    private int goodsId;
-    private String goodsstate;
-    private String goodslmage;
+    private String goodsState;
+    private String goodsImage;
 
     public Goods() {
     }
@@ -14,9 +18,10 @@ public class Goods {
     public Goods(String goodsName, int goodsId, String goodsstate, String goodslmage) {
         this.goodsName = goodsName;
         this.goodsId = goodsId;
-        this.goodsstate = goodsstate;
-        this.goodslmage = goodslmage;
+        this.goodsState = goodsstate;
+        this.goodsImage = goodslmage;
     }
+
 
     public String getGoodsName() {
         return goodsName;
@@ -25,37 +30,40 @@ public class Goods {
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
     }
-    public int getGoodsId() {
+
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
-    public String getGoodsstate() {
-        return goodsstate;
+
+
+    public String getGoodsState() {
+        return goodsState;
     }
 
-    public void setGoodsstate(String goodsstate) {
-        this.goodsstate = goodsstate;
+    public void setGoodsState(String goodsstate) {
+        this.goodsState = goodsstate;
     }
 
-    public String getGoodslmage() {
-        return goodslmage;
+    public String getGoodsImage() {
+        return goodsImage;
     }
 
-    public void setGoodslmage(String goodslmage) {
-        this.goodslmage = goodslmage;
+    public void setGoodsImage(String goodslmage) {
+        this.goodsImage = goodslmage;
     }
+
     @Override
     public String toString() {
         return "Goods{" +
-                "goodsName='" + goodsName + '\'' +
-                ", goodsId=" + goodsId +
-                ", goodsstate='" + goodsstate + '\'' +
-                ", goodslmage='" + goodslmage + '\'' +
+                "goodsId=" + goodsId +
+                ", goodsName='" + goodsName + '\'' +
+                ", goodsState='" + goodsState + '\'' +
+                ", goodsImage='" + goodsImage + '\'' +
                 '}';
     }
-
-
 }
+
