@@ -19,15 +19,32 @@ public class UseGoodsController {
     @Autowired
     private GoodsService goodsService;
 
+    /**
+     * 得到一个全部物品的List
+     * @return
+     */
+    @PostMapping("/getAllGoods")
+    public List<Goods> getAllGoods(){
+        return goodsService.getAllGoods();
+    }
+
+    /**
+     * 按id筛选物品
+     * @param goodsId
+     * @return
+     */
     @PostMapping("/selectGoodsById")
     public Goods selectGoodsById(int goodsId){
-        System.out.println(goodsService.selectGoodsById(goodsId));
         return goodsService.selectGoodsById(goodsId);
     }
 
+    /**
+     * 按物品名筛选
+     * @param goodsName
+     * @return
+     */
     @PostMapping("/selectGoodsByGoodsName")
     public List<Goods> selectGoodsByGoodsName(String goodsName){
-        System.out.println(goodsName);
         return goodsService.selectGoodsByGoodsName(goodsName);
     }
 
