@@ -1,8 +1,12 @@
 package com.lc.demo.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
 import com.lc.demo.service.ImageService;
+import com.lc.demo.service.impl.GoodsServicelmpl;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +18,7 @@ import java.util.List;
 /**
  * @author 22932
  */
+@Log4j
 @RestController
 @RequestMapping("/admin/admgoods")
 public class AdmGoodsController {
@@ -25,11 +30,13 @@ public class AdmGoodsController {
 
     /**
      * 得到一个全部物品的List
-     * @return
+     * @param pageNum 页码
+     * @return 该页的List集合
      */
+
     @PostMapping("/getAllGoods")
-    public List<Goods> getAllGoods(){
-        return goodsService.getAllGoods();
+    public PageInfo<Goods> getAllGoods(int pageNum){
+        return goodsService.getAllGoods(pageNum);
     }
 
     /**
@@ -63,7 +70,6 @@ public class AdmGoodsController {
      */
     @GetMapping("/deleteGoods")
     public int deleteGoods( @RequestBody Goods goods){
-
         return goodsService.deleteGoods(goods.getGoodsId());
     }
 
@@ -73,19 +79,19 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsById")
-    public Goods selectGoodsById(int goodsId){
-
+        public Goods selectGoodsById(int goodsId){
         return goodsService.selectGoodsById(goodsId);
     }
 
     /**
      * 按物品名筛选
      * @param goodsName
+     * @param pageNum 页码
      * @return
      */
     @PostMapping("/selectGoodsByGoodsName")
-    public List<Goods> selectGoodsByGoodsName(String goodsName){
-        return goodsService.selectGoodsByGoodsName(goodsName);
+        public PageInfo<Goods> selectGoodsByGoodsName(int pageNum,String goodsName){
+        return goodsService.selectGoodsByGoodsName(pageNum,goodsName);
     }
 
 

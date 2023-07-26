@@ -1,5 +1,6 @@
 package com.lc.demo.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,12 @@ public class UseGoodsController {
 
     /**
      * 得到一个全部物品的List
-     * @return
+     * @param pageNum 页码
+     * @return 该页的List集合
      */
     @PostMapping("/getAllGoods")
-    public List<Goods> getAllGoods(){
-        return goodsService.getAllGoods();
+    public PageInfo<Goods> getAllGoods(int pageNum){
+        return goodsService.getAllGoods(pageNum);
     }
 
     /**
@@ -44,8 +46,8 @@ public class UseGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsByGoodsName")
-    public List<Goods> selectGoodsByGoodsName(String goodsName){
-        return goodsService.selectGoodsByGoodsName(goodsName);
+    public PageInfo<Goods> selectGoodsByGoodsName(int pageNum,String goodsName){
+        return goodsService.selectGoodsByGoodsName(pageNum,goodsName);
     }
 
 }

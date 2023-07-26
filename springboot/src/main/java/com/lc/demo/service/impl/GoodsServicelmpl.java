@@ -1,5 +1,8 @@
 package com.lc.demo.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.mapper.GoodsMapper;
 import com.lc.demo.mapper.UserMapper;
@@ -17,15 +20,20 @@ public class GoodsServicelmpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+    final public int pageSize = 8;
 
     @Override
-    public List<Goods> getAllGoods() {
-        return goodsMapper.selectAllGoods();
+    public PageInfo<Goods>  getAllGoods(int pageNum) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectAllGoods());
+        return pageInfo;
     }
 
     @Override
-    public List<Goods> selectGoodsByGoodsName(String goodsName) {
-        return goodsMapper.selectGoodsByGoodsName(goodsName);
+    public PageInfo<Goods> selectGoodsByGoodsName(int pageNum,String goodsName) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
+        return pageInfo;
     }
 
     @Override
