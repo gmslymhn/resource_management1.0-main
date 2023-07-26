@@ -33,14 +33,14 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
             }
 
             //注册拦截器
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
-                super.addInterceptors(registry);
-//                静态资源；  *.css , *.js
-//                SpringBoot已经做好了静态资源映射
-                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                        .excludePathPatterns("/login.html","/","/stu/login","/adm/login","/tea/login");
-            }
+//            @Override
+//            public void addInterceptors(InterceptorRegistry registry) {
+//                super.addInterceptors(registry);
+////                静态资源；  *.css , *.js
+////                SpringBoot已经做好了静态资源映射
+//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+//                        .excludePathPatterns("/login.html","/","/login","/adm/login","/tea/login");
+//            }
         };
         return adapter;
     }

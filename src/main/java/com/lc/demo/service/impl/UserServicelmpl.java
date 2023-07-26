@@ -14,19 +14,20 @@ public class UserServicelmpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User adminLogin(String userAccount,String userPassword){
+    public User Login(String userAccount,String userPassword){
         return userMapper.selectUserByAccountAndPassword(userAccount,userPassword);
     }
 
 
-    @Override
-    public User userLogin(String userAccount, String userPassword){
-        return userMapper.selectUserByAccountAndPassword(userAccount,userPassword);
-    }
 
     @Override
     public User selectByAccount(String userAccount) {
-        return null;
+        return userMapper.selectUserByAccount(userAccount);
+    }
+
+    @Override
+    public User selectByNumer(String userNumber) {
+        return userMapper.selectUserByNumber(userNumber);
     }
 
     @Override
