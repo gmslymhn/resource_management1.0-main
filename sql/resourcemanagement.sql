@@ -22,10 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `assets`;
 CREATE TABLE `assets`  (
-  `id` int NULL DEFAULT NULL COMMENT 'id只有1',
-  `total_assets` float NULL DEFAULT NULL COMMENT '总资产',
-  `disposable_assets` float NULL DEFAULT NULL COMMENT '可支配资产'
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = DYNAMIC;
+                         total_assets      float    not null comment '总资产',
+                         disposable_assets float    not null comment '可支配资产',
+                         time              datetime not null comment '最后一次修改时间',
+                         id                int auto_increment
+                           primary key
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Records of assets
@@ -36,15 +39,15 @@ CREATE TABLE `assets`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `assets_log`;
 CREATE TABLE `assets_log`  (
-  `assets_log_id` int NULL DEFAULT NULL COMMENT '日志id',
-  `user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '管理',
-  `description` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '描述',
-  `change_assets` float NULL DEFAULT NULL COMMENT '花了多少',
-  `process_time` datetime NULL DEFAULT NULL COMMENT '处理时间',
-  `before_assets` float NULL DEFAULT NULL COMMENT '花费前可支配资产',
-  `afterwards_assets` float NULL DEFAULT NULL COMMENT '花费后可支配资产'
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = DYNAMIC;
-
+                             assets_log_id     int auto_increment comment '日志id'
+                               primary key,
+                             user_name         varchar(255) not null comment '管理',
+                             description       varchar(255) not null comment '描述',
+                             change_assets     float        not null comment '花了多少',
+                             process_time      datetime     not null comment '处理时间',
+                             before_assets     float        not null comment '花费前可支配资产',
+                             afterwards_assets float        not null comment '花费后可支配资产'
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
 -- ----------------------------
 -- Records of assets_log
 -- ----------------------------
@@ -70,16 +73,20 @@ CREATE TABLE `goods`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report`  (
-  `report_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '上报人',
-  `goods_id` int NOT NULL COMMENT '损坏物品id',
-  `goods_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '物品名称',
-  `damage_description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL COMMENT '损坏描述',
-  `reporting_time` datetime NULL DEFAULT NULL COMMENT '上报时间',
-  `process_time` datetime NULL DEFAULT NULL COMMENT '处理时间',
-  `goods_state` int NULL DEFAULT NULL COMMENT '状态 已处理或未处理',
-  `dispose_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '处理人',
-  PRIMARY KEY (`goods_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = DYNAMIC;
+
+                         sequence_id        int          not null comment '上报id',
+                         report_name        varchar(255) not null comment '上报人',
+                         goods_id           int          not null comment '损坏物品id',
+                         goods_name         varchar(255) not null comment '物品名称',
+                         damage_description text         not null comment '损坏描述',
+                         reporting_time     datetime     not null comment '上报时间',
+                         process_time       datetime     not null comment '处理时间',
+                         goods_state        int          not null comment '未处理1    已处理已同意2   已处理但未同意3',
+                         dispose_name       varchar(255) not null comment '处理人',
+                         primary key (goods_id, sequence_id)
+)
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Records of report

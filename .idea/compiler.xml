@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="resource_management1.0-main" />
         <module name="springboot" />
+
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
