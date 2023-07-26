@@ -2,6 +2,7 @@ package com.lc.demo.service;
 
 import com.lc.demo.bean.Assets;
 
+
 import java.util.List;
 
 public interface AssetsService {
@@ -17,6 +18,7 @@ public interface AssetsService {
      int   updateAssetsPercentage(float percentage);
 
     float   selectNewTotalAssets();
+
 
 
     //修改验证 可以不写

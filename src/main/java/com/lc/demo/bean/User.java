@@ -10,25 +10,27 @@ public class User {
     private int userId;
     private String userAccount;
     @Size(min=1,max = 10,message = "名字长度必须在1-10之间")
-    private String userName;
     private String userPassword;
-    @Size(min=10,max = 10,message = "学号长度必须为10")
-
-    private String UserNumber;
-    private String userSex;
+    private String userName;
+    private String userNumber;
+    private int userSex;
     @Size(min = 11,max = 11,message = "请输入11位手机号码")
     private String userTele;
     private String userpost;
 
+    private int loginStatus;
+    private int roleId;
+
+
     public User() {
     }
 
-    public User(int userId,String userName,String userAccount,String userPassword,String UserNumber,String userSex,String userTele,String userpost) {
+    public User(int userId,String userName,String userAccount,String userPassword,String UserNumber,int userSex,String userTele,String userpost) {
         this.userId = userId;
         this.userName = userName;
         this.userAccount = userAccount;
         this.userPassword = userPassword;
-        this.UserNumber = UserNumber;
+        this.userNumber = UserNumber;
         this.userSex = userSex;
         this.userTele = userTele;
         this.userpost = userpost;
@@ -63,16 +65,16 @@ public class User {
         this.userPassword = userPassword;
     }
     public String getUserNumber() {
-        return UserNumber;
+        return userNumber;
     }
     public void setUserNumber(String userNumber) {
-        UserNumber = userNumber;
+        this.userNumber = userNumber;
     }
-    public String getUserSex() {
+    public int getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(String userSex) {
+    public void setUserSex(int userSex) {
         this.userSex = userSex;
     }
 
@@ -92,6 +94,19 @@ public class User {
         this.userTele = userTele;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+    public int getLoginStatus() {
+        return loginStatus;
+    }
+    public void setLoginStatus(int loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
 
 
     @Override
@@ -101,10 +116,12 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", userAccount='" + userAccount + '\'' +
                 ", userPassword='" + userPassword + '\'' +
-                ", userNumber='" + UserNumber + '\'' +
+                ", userNumber='" + userNumber + '\'' +
                 ", userSex='" + userSex + '\'' +
                 ", userpost='" + userpost + '\'' +
                 ", userTele='" + userTele + '\'' +
+                ", loginStatus='" + loginStatus + '\'' +
+                ", roleId='" + roleId + '\'' +
                 '}';
     }
 }

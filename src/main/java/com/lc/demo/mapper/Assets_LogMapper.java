@@ -2,7 +2,9 @@ package com.lc.demo.mapper;
 
 import com.lc.demo.bean.Assets_Log;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+
 import org.apache.ibatis.annotations.*;
+
 
 import java.util.List;
 
@@ -70,5 +72,6 @@ public interface Assets_LogMapper {
      * @param assetsLog
      */
     void update(Assets_Log assetsLog);
+
 
 }

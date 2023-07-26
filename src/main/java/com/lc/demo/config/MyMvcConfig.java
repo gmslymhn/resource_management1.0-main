@@ -27,23 +27,20 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("login");
-                registry.addViewController("/index.html").setViewName("login");
+                registry.addViewController("/login.html").setViewName("login");
                 registry.addViewController("/admmain.html").setViewName("/adm/adminindex");
-                registry.addViewController("/stumain.html").setViewName("/stu/stuindex");
-                registry.addViewController("/stuadmin.html").setViewName("/adm/stulist");
-                registry.addViewController("/addstudent.html").setViewName("/adm/addstu");
-                registry.addViewController("/updateSucc.html").setViewName("/stu/stuUpdateSucc");
+                registry.addViewController("/usermain.html").setViewName("/suser/stuindex");
             }
 
             //注册拦截器
-            @Override
-            public void addInterceptors(InterceptorRegistry registry) {
-                super.addInterceptors(registry);
-//                静态资源；  *.css , *.js
-//                SpringBoot已经做好了静态资源映射
-                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
-                        .excludePathPatterns("/index.html","/","/stu/login","/adm/login","/tea/login");
-            }
+//            @Override
+//            public void addInterceptors(InterceptorRegistry registry) {
+//                super.addInterceptors(registry);
+////                静态资源；  *.css , *.js
+////                SpringBoot已经做好了静态资源映射
+//                registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
+//                        .excludePathPatterns("/login.html","/","/login","/adm/login","/tea/login");
+//            }
         };
         return adapter;
     }
