@@ -1,17 +1,16 @@
 package com.lc.demo.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.mapper.GoodsMapper;
-import com.lc.demo.mapper.UserMapper;
 import com.lc.demo.service.GoodsService;
+import com.lc.demo.utils.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 /**
  * @author 22932
  */
@@ -20,20 +19,20 @@ public class GoodsServicelmpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
-    final public int pageSize = 8;
+
 
     @Override
-    public PageInfo<Goods>  getAllGoods(int pageNum) {
+    public GoodsResult getAllGoods(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectAllGoods());
-        return pageInfo;
+        return GoodsResult.pagingGoodsResult(pageSize,pageInfo);
     }
 
     @Override
-    public PageInfo<Goods> selectGoodsByGoodsName(int pageNum,String goodsName) {
-        PageHelper.startPage(pageNum,pageSize);
+    public GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName) {
+        PageHelper.startPage(pageNum, pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
-        return pageInfo;
+        return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
     }
 
     @Override

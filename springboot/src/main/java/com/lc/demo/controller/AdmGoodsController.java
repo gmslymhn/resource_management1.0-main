@@ -1,24 +1,21 @@
 package com.lc.demo.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
 import com.lc.demo.service.ImageService;
-import com.lc.demo.service.impl.GoodsServicelmpl;
-import lombok.extern.log4j.Log4j;
+import com.lc.demo.utils.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 
 
 /**
  * @author 22932
  */
-@Log4j
+
 @RestController
 @RequestMapping("/admin/admgoods")
 public class AdmGoodsController {
@@ -34,9 +31,9 @@ public class AdmGoodsController {
      * @return 该页的List集合
      */
 
-    @PostMapping("/getAllGoods")
-    public PageInfo<Goods> getAllGoods(int pageNum){
-        return goodsService.getAllGoods(pageNum);
+    @GetMapping("/getAllGoods")
+    public GoodsResult getAllGoods(@RequestParam int pageNum,@RequestParam int pageSize){
+        return goodsService.getAllGoods(pageNum,pageSize);
     }
 
     /**
@@ -46,9 +43,10 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/addGoods")
-    public int addGoods(MultipartFile uploadImage,@RequestBody Goods goods){
+    public ResponseEntity<Void> addGoods(@RequestParam MultipartFile uploadImage, @RequestBody Goods goods){
         imageService.saveGoodsImage(uploadImage,goods);
-        return goodsService.addGoods(goods);
+        goodsService.addGoods(goods);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     /**
@@ -58,19 +56,28 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/updateGoods")
-    public int updateGoods( MultipartFile uploadImage,@RequestBody Goods goods){
+    public ResponseEntity<Void> updateGoods(@RequestParam MultipartFile uploadImage,@RequestBody Goods goods){
         imageService.saveGoodsImage( uploadImage,goods);
-        return goodsService.updateGoods(goods);
+        if(goodsService.updateGoods(goods) == 1){
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
      * 删除物品
-     * @param goods
+     * @param goodsId
      * @return
      */
     @GetMapping("/deleteGoods")
-    public int deleteGoods( @RequestBody Goods goods){
-        return goodsService.deleteGoods(goods.getGoodsId());
+    public ResponseEntity<Void>  deleteGoods(@RequestParam Integer goodsId){
+
+        if( goodsService.deleteGoods(goodsId) == 1){
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -79,8 +86,13 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsById")
-        public Goods selectGoodsById(int goodsId){
-        return goodsService.selectGoodsById(goodsId);
+        public ResponseEntity<Goods> selectGoodsById(@RequestParam int goodsId){
+            Goods goods = goodsService.selectGoodsById(goodsId);
+            if(goods != null){
+                return ResponseEntity.ok(goods);
+            }else {
+                return ResponseEntity.notFound().build();
+            }
     }
 
     /**
@@ -90,8 +102,8 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsByGoodsName")
-        public PageInfo<Goods> selectGoodsByGoodsName(int pageNum,String goodsName){
-        return goodsService.selectGoodsByGoodsName(pageNum,goodsName);
+        public GoodsResult selectGoodsByGoodsName(@RequestParam int pageNum, @RequestParam  int pageSize,@RequestParam  String goodsName){
+        return goodsService.selectGoodsByGoodsName(pageNum,pageSize,goodsName);
     }
 
 

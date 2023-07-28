@@ -3,10 +3,9 @@ package com.lc.demo.controller;
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
+import com.lc.demo.utils.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +21,14 @@ public class UseGoodsController {
 
     /**
      * 得到一个全部物品的List
-     * @param pageNum 页码
-     * @return 该页的List集合
+     * @param pageNum
+     * @param pageSize
+     * @return
      */
-    @PostMapping("/getAllGoods")
-    public PageInfo<Goods> getAllGoods(int pageNum){
-        return goodsService.getAllGoods(pageNum);
+    @GetMapping("/getAllGoods")
+    public GoodsResult getAllGoods(@RequestParam int pageNum, @RequestParam int pageSize){
+        return goodsService.getAllGoods(pageNum,pageSize);
+
     }
 
     /**
@@ -36,18 +37,19 @@ public class UseGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsById")
-    public Goods selectGoodsById(int goodsId){
+    public Goods selectGoodsById(@RequestParam int goodsId){
         return goodsService.selectGoodsById(goodsId);
     }
 
     /**
      * 按物品名筛选
      * @param goodsName
+     * @param pageNum 页码
      * @return
      */
     @PostMapping("/selectGoodsByGoodsName")
-    public PageInfo<Goods> selectGoodsByGoodsName(int pageNum,String goodsName){
-        return goodsService.selectGoodsByGoodsName(pageNum,goodsName);
+    public GoodsResult selectGoodsByGoodsName(@RequestParam int pageNum, @RequestParam int pageSize,@RequestParam String goodsName){
+        return goodsService.selectGoodsByGoodsName(pageNum,pageSize,goodsName);
     }
 
 }
