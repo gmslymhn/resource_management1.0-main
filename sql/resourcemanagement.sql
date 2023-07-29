@@ -85,7 +85,7 @@ CREATE TABLE `report`  (
                          dispose_name       varchar(255) not null comment '处理人',
                          primary key (goods_id, sequence_id)
 )
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
+ ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
 
 
 -- ----------------------------

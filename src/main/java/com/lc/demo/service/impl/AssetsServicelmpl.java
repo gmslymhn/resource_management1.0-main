@@ -52,5 +52,6 @@ private Assets_LogMapper assetsLogMapper;
             return 1;
         }
 
+        return 0;
     }
 }

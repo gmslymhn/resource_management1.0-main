@@ -5,18 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="更新">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="E:/Download/apache-maven-3.9.3" />
+        <option name="userSettingsFile" value="E:\Download\apache-maven-3.9.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="disabledProfiles">
+      <list>
+        <option value="jdk-17" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="2SrRRldnR9l999oYxEDUlgU8Ore" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -34,39 +60,132 @@
     "RequestMappingsPanelWidth2": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "d164d99c46d45be6b1e7585ff7ea10e7",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2816092",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "spring.configuration.checksum": "fe01ce2a7fbac8fafaed7c982a04e229",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "b8e22cca-7e87-4bd1-8749-4d7e6ca62b58/schema/\"resoursemanagement\""
+    ]
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.DemoApplication (1)">
-    <configuration name="DemoApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="springboot" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lc.demo.DemoApplication" />
+  <component name="RunManager" selected="JUnit.ReportTest.selectAllReportTest">
+    <configuration name="ReportTest.deleteReportById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lc.demo.*" />
+          <option name="PATTERN" value="com.lc.demo.test.report.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo.test.report" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.test.report.ReportTest" />
+      <option name="METHOD_NAME" value="deleteReportById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportTest.insertReport" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lc.demo.test.report.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo.test.report" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.test.report.ReportTest" />
+      <option name="METHOD_NAME" value="insertReport" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportTest.selectAllReportTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lc.demo.test.report.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo.test.report" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.test.report.ReportTest" />
+      <option name="METHOD_NAME" value="selectAllReportTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportTest.selectReportByDisposeName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lc.demo.test.report.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo.test.report" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.test.report.ReportTest" />
+      <option name="METHOD_NAME" value="selectReportByDisposeName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportTest.selectReportByReportName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lc.demo.test.report.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo.test.report" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.test.report.ReportTest" />
+      <option name="METHOD_NAME" value="selectReportByReportName" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="resource_management1.0-main" />
+      <module name="demo" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.lc.demo.DemoApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.ReportTest.deleteReportById" />
+      <item itemvalue="JUnit.ReportTest.insertReport" />
+      <item itemvalue="JUnit.ReportTest.selectAllReportTest" />
+      <item itemvalue="JUnit.ReportTest.selectReportByDisposeName" />
+      <item itemvalue="JUnit.ReportTest.selectReportByReportName" />
+      <item itemvalue="Spring Boot.DemoApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.DemoApplication (1)" />
+        <item itemvalue="JUnit.ReportTest.selectAllReportTest" />
+        <item itemvalue="JUnit.ReportTest.selectReportByReportName" />
+        <item itemvalue="JUnit.ReportTest.deleteReportById" />
+        <item itemvalue="JUnit.ReportTest.selectReportByDisposeName" />
+        <item itemvalue="JUnit.ReportTest.insertReport" />
       </list>
     </recent_temporary>
   </component>
@@ -82,6 +201,7 @@
       <workItem from="1689929371442" duration="566000" />
       <workItem from="1689930032655" duration="61000" />
       <workItem from="1690021968803" duration="2463000" />
+      <workItem from="1690644983240" duration="11788000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>
@@ -122,7 +242,14 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
     <MESSAGE value="更新" />
     <option name="LAST_COMMIT_MESSAGE" value="更新" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
