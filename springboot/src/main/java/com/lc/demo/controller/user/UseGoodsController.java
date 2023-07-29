@@ -1,4 +1,4 @@
-package com.lc.demo.controller;
+package com.lc.demo.controller.user;
 
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;

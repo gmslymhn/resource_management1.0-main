@@ -23,20 +23,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/abc/login")
     public String login(@RequestParam("useraccount") String useraccount,
                         @RequestParam("password") String password, Map<String,Object> map, HttpSession session) {
-        System.out.println(useraccount);
-        System.out.println(password);
         User user = userService.Login(useraccount,password);
         System.out.println(user);
         if(user!=null)
         {
-            if (user.getRoleId()==1){
-                return "redirect:admin/adminindex";
+            if (user.getRoleId()==2){
+                session.setAttribute("loginUser",useraccount);
+                return "redirect:/admin/adminindex";
             }
             else{
-                return "redirect:user/userindex";
+                session.setAttribute("loginUser",useraccount);
+                return "redirect:/user/userindex";
             }
         }
         else
@@ -44,17 +44,27 @@ public class UserController {
             map.put("msg","用户名或密码错误");
             return  "login";
         }
-
     }
-    @PostMapping(value = "/register")//参数映射 必须传
-    public String register(User user){
+
+    @PostMapping(value = "/abc/register")//参数映射 必须传
+    public String register(@RequestParam("useraccount") String useraccount,
+                           @RequestParam("password") String password,
+                           @RequestParam("username") String username,
+                           @RequestParam("usernumber") String usernumber,
+                           @RequestParam("userpost") String userpost,Map<String,Object> map, HttpSession session){
+        User user = new User();
+        user.setUserNumber(usernumber);
+        user.setUserpost(userpost);
+        user.setUserAccount(useraccount);
+        user.setUserPassword(password);
+        user.setUserName(username);
 
         System.out.println(user);
         if(userService.selectByAccount(user.getUserAccount())!=null){
-            System.out.println("账号已存在");
+            map.put("msg","账号已存在");
         }else{
             if(userService.selectByNumer(user.getUserNumber())!=null){
-                System.out.println("学号已存在");
+                map.put("msg","学号已存在");
             }
             else{
                 userService.addUser(user);

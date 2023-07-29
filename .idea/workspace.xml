@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="更新">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/config/MyMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/config/MyMvcConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/AdmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -41,6 +45,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelOrder2": "2",
@@ -59,7 +64,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.DemoApplication">
+  <component name="RunManager" selected="Spring Boot.DemoApplication (2)">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="resource_management1.0-main" />
       <method v="2">
@@ -124,6 +129,7 @@
       <workItem from="1690600761883" duration="262000" />
       <workItem from="1690601070209" duration="26000" />
       <workItem from="1690601102085" duration="307000" />
+      <workItem from="1690601421034" duration="6633000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>
@@ -181,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690601252894</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="更新">
+      <created>1690601501751</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690601501751</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,4 +1,4 @@
-package com.lc.demo.controller;
+package com.lc.demo.controller.admin;
 
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
