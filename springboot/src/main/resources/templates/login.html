@@ -40,23 +40,20 @@
 </head>
 <body class="text-center">
 <form id="loginFrom" class="form-signin"  method="post">
-	<img class="mb-4" th:src="@{/asserts/img/bootstrap-solid.svg}" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
 	<h1 class="h3 mb-3 font-weight-normal" >请登录</h1>
 
 	<!--提示框-->
 	<div class="alert alert-danger" role="alert" th:if="${msg!=null}">
 		<div th:text="${msg}"></div>
 	</div>
-
-
 	<label class="sr-only" >用户名</label>
-	<input type="text"  name="useraccount" class="form-control" placeholder="UserAccount"  required="" autofocus="">
+	<input type="text"  name="useraccount" class="form-control" placeholder="Username"  required="" autofocus="">
 	<label class="sr-only ">密码</label>
 	<input type="password" name="password" class="form-control" placeholder="Password"  required="">
 
-	<button class="btn btn-lg btn-success btn-block"  th:attr="uri=@{/login}" onclick="send(0)"  id="bt0">学生登录</button>
-	<button class="btn btn-lg btn-primary btn-block"  th:attr="uri=@{/tea/login}" onclick="send(1)" id="bt1">教师登录</button>
-	<button class="btn btn-lg btn-danger btn-block"   th:attr="uri=@{/adm/login}"  onclick="send(2)" id="bt2">管理员登录</button>
+	<button class="btn btn-lg btn-success btn-block"  th:attr="uri=@{/abc/login}" onclick="send(0)"  id="bt0">学生登录</button>
+
+
 	<p class="mt-5 mb-3 text-muted">© 学生成绩信息管理系统</p>
 
 </form>
