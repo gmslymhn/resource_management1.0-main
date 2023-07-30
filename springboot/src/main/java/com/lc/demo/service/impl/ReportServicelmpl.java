@@ -1,41 +1,45 @@
 package com.lc.demo.service.impl;
 
 import com.lc.demo.bean.Report;
+import com.lc.demo.mapper.ReportMapper;
 import com.lc.demo.service.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class ReportServicelmpl implements ReportService {
 
+    @Autowired
+    private ReportMapper reportMapper;
 
     @Override
     public List<Report> getALLReport() {
-        return null;
+        return reportMapper.selectAllReport();
     }
 
     @Override
     public Report selectById(int goodsId) {
-        return null;
+        return reportMapper.selectReportById(goodsId);
     }
 
     @Override
     public int addReport(Report report) {
-        return 0;
+        return reportMapper.insertReport(report);
     }
 
     @Override
     public List<Report> selectByReportName(String reportName) {
-        return null;
+        return reportMapper.selectReportByReportName(reportName);
     }
 
     @Override
     public List<Report> selectByDisposeName(String dipsoseName) {
-        return null;
+        return reportMapper.selectReportByDisposeName(dipsoseName);
     }
 
     @Override
     public int delecteReport(int goodsId) {
-        return 0;
+        return reportMapper.deleteReportById(goodsId);
     }
 }
