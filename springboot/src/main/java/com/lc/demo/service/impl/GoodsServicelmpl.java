@@ -1,5 +1,6 @@
 package com.lc.demo.service.impl;
 
+//<<<<<<< HEAD
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
@@ -33,25 +34,68 @@ public class GoodsServicelmpl implements GoodsService {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
         return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
+//=======
+//import com.lc.demo.bean.Goods;
+//import com.lc.demo.service.GoodsService;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//@Service
+//public class GoodsServicelmpl implements GoodsService {
+//    @Override
+//    public List<Goods> getAllGoods() {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Goods> selectGoogByGoodsName(String goodsName) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Goods> selectGoodsByGoodsId(Integer goodsId) {
+//        return null;
+//>>>>>>> Xiaojing-Yuan
     }
 
     @Override
     public Goods selectGoodsById(int goodsId) {
+//<<<<<<< HEAD
         return goodsMapper.selectGoodsById(goodsId);
+//=======
+//        return null;
+//    }
+//
+//    @Override
+//    public Goods selectGoodsByName(String goodName) {
+//        return null;
+//>>>>>>> Xiaojing-Yuan
     }
 
     @Override
     public int addGoods(Goods goods) {
+//<<<<<<< HEAD
         return goodsMapper.insertGoods(goods);
+//=======
+//        return 0;
+//>>>>>>> Xiaojing-Yuan
     }
 
     @Override
     public int updateGoods(Goods goods) {
+//<<<<<<< HEAD
         return goodsMapper.updateGoods(goods);
+//=======
+//        return 0;
+//>>>>>>> Xiaojing-Yuan
     }
 
     @Override
     public int deleteGoods(int goodsId) {
+//<<<<<<< HEAD
         return goodsMapper.deleteGoodsById(goodsId);
+//=======
+//        return 0;
+//>>>>>>> Xiaojing-Yuan
     }
 }

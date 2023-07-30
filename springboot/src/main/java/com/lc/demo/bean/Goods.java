@@ -12,6 +12,7 @@ public class Goods {
     private String goodsState;
     private String goodsImage;
 
+
     public Goods() {
     }
 
@@ -21,7 +22,6 @@ public class Goods {
         this.goodsState = goodsstate;
         this.goodsImage = goodsImage;
     }
-
 
     public String getGoodsName() {
         return goodsName;
