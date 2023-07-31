@@ -66,6 +66,8 @@
 </template>
 
 <script>
+// 防抖引入
+import { debounce } from 'lodash-es';
 import Pagination from '@/components/pagination/Pagination';
 import { itemsList,itemsRemove,itemsEdit } from '@/api/admgoods/admgoods.js'
 export default {
@@ -85,57 +87,57 @@ export default {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }, {
         id:"001",
         image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
         state:"已使用",
-        name: '王小虎',
+        name: '门酱',
       }],
       // 控制弹窗
       dialogFormVisible: false,
@@ -177,7 +179,7 @@ export default {
       let res = await itemsList({page})
       console.log("产品列表数据-----",res.data)
       // 列表赋值
-      this.tableData = res.data.data
+      this.tableData = [...res.data.data]
       this.total = res.data.total
       this.pageSize = res.data.pageSize
     },
@@ -203,6 +205,7 @@ export default {
         this.getItemsList(this.currentPage)
       }
     },
+    
     // 更新页码
     currentChange(val){
       console.log("更新页码-----",val);

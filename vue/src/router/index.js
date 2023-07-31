@@ -40,7 +40,7 @@ const router = new VueRouter({
       path:"/zhuye",
       component: Layout,
       children:[
-        // 默认/但是重定向给login
+        // 默认/但是重定向给home
         {
           path:"/",
           redirect:"home",

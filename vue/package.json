@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "dayjs": "^1.11.9",
     "element-ui": "^2.15.13",
+    "lodash-es": "^4.17.21",
     "vue": "^2.7.14",
     "vue-axios": "^3.5.2",
     "vue-router": "^3.6.5",
