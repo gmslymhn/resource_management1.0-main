@@ -27,7 +27,7 @@ public interface ReportMapper {
     Report selectReportById(int goodsId);
 
     /**
-     * 查询：根据上报信息记录名查询记录
+     * 查询：根据上报人记录名查询记录
      * @param reportName
      * @return
      */
@@ -35,7 +35,7 @@ public interface ReportMapper {
     List<Report> selectReportByReportName(String reportName);
 
     /**
-     * 查询：根据处理结果查询记录
+     * 查询：根据处理人查询记录
      * @param disposeName
      * @return
      */
@@ -62,7 +62,7 @@ public interface ReportMapper {
      * @return 返回整形数值为1.删除成功
      *         返回整形数值为0.删除失败
      */
-    @Delete("delect from report where goods_id = #{goodsId}")
+    @Delete("delete from report where goods_id = #{goodsId}")
     int deleteReportById(int goodsId);
 
 

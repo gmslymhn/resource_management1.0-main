@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class ReportServicelmpl implements ReportService {
+public class ReportServiceImpl implements ReportService {
     private ReportMapper reportMapper;
 
     @Override
@@ -42,8 +42,8 @@ public class ReportServicelmpl implements ReportService {
     }
 
     @Override
-    public int delecteReport(int goodsId) {
-        int isDelectSuccess = reportMapper.deleteReportById(goodsId);
-        return isDelectSuccess;
+    public int deleteReport(int goodsId) {
+        int isDeleteSuccess = reportMapper.deleteReportById(goodsId);
+        return isDeleteSuccess;
     }
 }

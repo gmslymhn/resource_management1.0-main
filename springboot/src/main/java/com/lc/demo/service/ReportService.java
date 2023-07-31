@@ -29,24 +29,24 @@ public interface ReportService {
     //    int updateReport(Report report);
 
     /**
-     * 查询：根据上报信息记录名查询记录
+     * 查询：根据上报人查询记录
      * @param reportName
      * @return
      */
     List<Report>  selectByReportName(String reportName);
 
     /**
-     * 查询：根据处理结果查询记录
-     * @param dipsoseName
+     * 查询：根据处理人查询记录
+     * @param disposeName
      */
-    List<Report>  selectByDisposeName(String dipsoseName);
+    List<Report>  selectByDisposeName(String disposeName);
 
     /**
      * 删除：删除记录信息
      * @param goodsId
      * @return
      */
-    int delecteReport(int goodsId);
+    int deleteReport(int goodsId);
 
 
 }
