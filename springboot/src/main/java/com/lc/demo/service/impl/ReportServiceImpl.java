@@ -1,7 +1,6 @@
 package com.lc.demo.service.impl;
 
 import com.lc.demo.bean.Report;
-import com.lc.demo.mapper.ReportMapper;
 import com.lc.demo.service.ReportService;
 import org.springframework.stereotype.Service;
 
@@ -12,33 +11,27 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<Report> getALLReport() {
-        List<Report> allReportList = reportMapper.selectAllReport();
-        return allReportList;
+        return null;
     }
 
     @Override
     public Report selectById(int goodsId) {
-        Report selectedReportById = reportMapper.selectReportById(goodsId);
-        return selectedReportById;
+        return null;
     }
 
-    //todo:service层：增添数据，未解决被增加数据 report实体对象的来源是：？   或是改变参数为具体属性
     @Override
     public int addReport(Report report) {
-        int isInsertSuccess = reportMapper.insertReport(report);
-        return isInsertSuccess;
+        return 0;
     }
 
     @Override
     public List<Report> selectByReportName(String reportName) {
-        List<Report> selectedReportsByReportName = reportMapper.selectReportByReportName(reportName);
-        return selectedReportsByReportName;
+        return null;
     }
 
     @Override
     public List<Report> selectByDisposeName(String dipsoseName) {
-        List<Report> selectedReportByDisposeName = reportMapper.selectReportByDisposeName(dipsoseName);
-        return selectedReportByDisposeName;
+        return null;
     }
 
     @Override

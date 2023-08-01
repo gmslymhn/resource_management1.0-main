@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="USE_RELEASE_OPTION" value="false" />
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -12,11 +10,8 @@
         <module name="springboot" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="demo" options="" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="resource_management1.0-main" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

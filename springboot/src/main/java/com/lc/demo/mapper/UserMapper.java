@@ -9,19 +9,6 @@ import javax.validation.constraints.Size;
 public interface UserMapper {
 
 
-//登陆    private int userId;
-//    private String userAccount;
-//    @Size(min=1,max = 10,message = "名字长度必须在1-10之间")
-//    private String userPassword;
-//    private String userName;
-//    private String userNumber;
-//    private int userSex;
-//    @Size(min = 11,max = 11,message = "请输入11位手机号码")
-//    private String userTele;
-//    private String userpost;
-//
-//    private int loginStatus;
-//    private int roleId;
     @Select("select * from user where account = #{userAccount} and password = #{userPassword}")
     @Results({
             @Result(property = "userId", column = "user_id"),

@@ -11,18 +11,10 @@ import java.util.List;
 
 @Mapper
 public interface ReportMapper {
-    /**
-     * 查询：查询所有物品损坏记录
-     * @return
-     */
+
     @Select("select * from report")
     List<Report> selectAllReport();
 
-    /**
-     * 查询：根据物品id查询记录
-     * @param goodsId
-     * @return
-     */
     @Select("select * from report where goods_id = #{goodsId}")
     Report selectReportById(int goodsId);
 
@@ -42,14 +34,8 @@ public interface ReportMapper {
     @Select("select * from report where dispose_name = #{disposeName}")
     List<Report> selectReportByDisposeName(String disposeName);
 
-    /**
-     * 添加：增加记录信息
-     * @param report
-     * @return
-     */
-    @Insert("insert into report(report_name,goods_id,goods_name,damage_description,reporting_time,process_time,goods_state,dispose_name) " +
-            "values" +
-            "(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName})")
+
+    @Insert("insert into class value(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName})")
     int insertReport(Report report);
 
     /**

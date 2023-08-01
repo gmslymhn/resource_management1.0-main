@@ -97,20 +97,19 @@ CREATE TABLE `report`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `user_id` int NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `account` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '账号',
-  `password` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '密码',
-  `name` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '姓名',
-  `student_number` bigint NOT NULL COMMENT '学号',
-  `gender` int NOT NULL COMMENT '性别',
-  `phone` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '电话号码',
-  `post` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '邮箱',
-  `register_time` timestamp NULL DEFAULT NULL COMMENT '注册时间',
-  `login_status` int NULL DEFAULT NULL COMMENT '登录状态',
-  `role_id` int NULL DEFAULT NULL COMMENT '角色id',
-  PRIMARY KEY (`user_id`, `student_number`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
-
+                         `user_id` int NOT NULL AUTO_INCREMENT COMMENT '用户id',
+                         `account` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '账号',
+                         `password` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '密码',
+                         `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '姓名',
+                         `student_number` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '学号',
+                         `sex` int NULL DEFAULT NULL COMMENT '性别',
+                         `phone` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '电话号码',
+                         `post` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '邮箱',
+                         `register_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '注册时间',
+                         `login_status` int NULL DEFAULT NULL COMMENT '登录状态',
+                         `role_id` int NOT NULL COMMENT '角色id管理或用户',
+                         PRIMARY KEY (`user_id`, `student_number`, `account`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 -- ----------------------------
 -- Records of user
 -- ----------------------------

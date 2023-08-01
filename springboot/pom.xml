@@ -38,11 +38,6 @@
             <version>3.3.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,6 +50,10 @@
             <version>8.0.11</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <!--引入druid-->
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
@@ -126,14 +125,19 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.10</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
         </dependency>
+
     </dependencies>
 
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.20</version>
+    </dependency>
     <build>
         <plugins>
             <plugin>
@@ -151,4 +155,6 @@
         </plugins>
     </build>
 
+
 </project>
+
