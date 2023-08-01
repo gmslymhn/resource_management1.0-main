@@ -7,12 +7,14 @@ import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.Assets_LogService;
 import com.lc.demo.service.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class Assets_LogServiceLmpl implements Assets_LogService {
-
+@Autowired
     private Assets_LogMapper assetsLogMapper;
     private AssetsMapper assetsMapper;
     private ReportService  reportService;

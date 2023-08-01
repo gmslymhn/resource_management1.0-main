@@ -6,15 +6,19 @@ import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.AssetsService;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+@Service
 
 public class AssetsServicelmpl  implements AssetsService {
-
+@Autowired
 private AssetsMapper assetsMapper;
 private Assets_LogMapper assetsLogMapper;
+
     @Override
     public List<Assets> selectAllAssets() {
         List<Assets> list=assetsMapper.all();
