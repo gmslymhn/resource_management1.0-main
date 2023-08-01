@@ -49,12 +49,5 @@ private Assets_LogMapper assetsLogMapper;
         return assetsMapper.newAssets().getTotalAssets();
     }
 
-    @Override
-    public int selectDisposableAssetsHavePass() {
-        if (assetsMapper.newAssets().getTotalAssets()==
-                assetsLogMapper.selectNewByAssetsLog().getAfterAssets()) {
-            return 1;
-        }
 
-    }
 }

@@ -1,10 +1,14 @@
-package com.lc.demo.controller.admin;
+package com.lc.demo.controller.adminAssets;
 
 import com.lc.demo.bean.Assets;
+import com.lc.demo.common.Result;
 import com.lc.demo.service.AssetsService;
-import common.Result;
+
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

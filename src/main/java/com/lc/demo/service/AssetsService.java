@@ -21,8 +21,7 @@ public interface AssetsService {
 
 
 
-    //修改验证 可以不写
-    int selectDisposableAssetsHavePass();
+
 
 
 

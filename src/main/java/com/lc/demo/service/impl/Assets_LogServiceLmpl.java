@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class Assets_LogServiceLmpl implements Assets_LogService {
+
 @Autowired
     private Assets_LogMapper assetsLogMapper;
     private AssetsMapper assetsMapper;

@@ -1,8 +1,9 @@
 package com.lc.demo.controller.user;
 
 import com.lc.demo.bean.Assets_Log;
+import com.lc.demo.common.Result;
 import com.lc.demo.service.Assets_LogService;
-import common.Result;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

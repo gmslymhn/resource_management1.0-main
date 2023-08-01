@@ -1,15 +1,12 @@
-package com.lc.demo.controller.admin;
+package com.lc.demo.controller.adminAssets;
 
 import com.lc.demo.bean.Assets_Log;
+import com.lc.demo.common.Result;
 import com.lc.demo.service.Assets_LogService;
-import com.mysql.cj.log.Log;
-import common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  * 资金日志管理
@@ -26,7 +23,7 @@ public class AssetsLogController {
      * @return
      */
     @GetMapping
-    public  Result<List<Assets_Log>> getAllAssets_Logs(){
+    public Result<List<Assets_Log>> getAllAssets_Logs(){
         List<Assets_Log> list =assetsLogService.selectAllAssets_Logs();
         return  Result.success(list);
     }
