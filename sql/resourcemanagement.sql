@@ -11,7 +11,7 @@
  Target Server Version : 80033 (8.0.33)
  File Encoding         : 65001
 
- Date: 18/07/2023 15:37:31
+ Date: 20/07/2023 17:29:05
 */
 
 SET NAMES utf8mb4;
@@ -28,6 +28,7 @@ CREATE TABLE `assets`  (
                          id                int auto_increment
                            primary key
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Records of assets
@@ -47,7 +48,6 @@ CREATE TABLE `assets_log`  (
                              before_assets     float        not null comment '花费前可支配资产',
                              afterwards_assets float        not null comment '花费后可支配资产'
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
-
 -- ----------------------------
 -- Records of assets_log
 -- ----------------------------
@@ -62,7 +62,7 @@ CREATE TABLE `goods`  (
   `goods_state` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NOT NULL COMMENT '物品状态（正常 损坏 处理中）',
   `goods_Image` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_croatian_ci NULL DEFAULT NULL COMMENT '物品图片',
   PRIMARY KEY (`goods_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of goods
@@ -73,6 +73,7 @@ CREATE TABLE `goods`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report`  (
+
                          sequence_id        int          not null comment '上报id',
                          report_name        varchar(255) not null comment '上报人',
                          goods_id           int          not null comment '损坏物品id',
@@ -86,6 +87,7 @@ CREATE TABLE `report`  (
 )
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
 
+
 -- ----------------------------
 -- Records of report
 -- ----------------------------
@@ -96,18 +98,18 @@ CREATE TABLE `report`  (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `user_id` int NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `account_number` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '账号',
+  `account` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '账号',
   `password` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '密码',
   `name` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '姓名',
   `student_number` bigint NOT NULL COMMENT '学号',
   `gender` int NOT NULL COMMENT '性别',
   `phone` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '电话号码',
   `post` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '邮箱',
-  `register_time` timestamp NOT NULL COMMENT '注册时间',
-  `login_status` int NOT NULL COMMENT '登录状态',
-  `role_id` int NOT NULL COMMENT '角色id',
+  `register_time` timestamp NULL DEFAULT NULL COMMENT '注册时间',
+  `login_status` int NULL DEFAULT NULL COMMENT '登录状态',
+  `role_id` int NULL DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`user_id`, `student_number`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user

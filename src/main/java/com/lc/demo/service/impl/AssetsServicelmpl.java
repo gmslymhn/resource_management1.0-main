@@ -55,6 +55,6 @@ private Assets_LogMapper assetsLogMapper;
                 assetsLogMapper.selectNewByAssetsLog().getAfterAssets()) {
             return 1;
         }
-             return 0;
+
     }
 }

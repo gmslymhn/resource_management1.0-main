@@ -76,5 +76,6 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     public List<Assets_Log> selectByName(String userName) {
         List<Assets_Log> list= (List<Assets_Log>) assetsLogMapper.selectLogByUserName(userName);
         return list;
+
     }
 }

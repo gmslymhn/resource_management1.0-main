@@ -60,4 +60,5 @@ private  int id;
         this.disposableAssets = disposableAssets;
         this.time = time;
     }
+
 }
