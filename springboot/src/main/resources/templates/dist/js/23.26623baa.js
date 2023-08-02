@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkresource"]=self["webpackChunkresource"]||[]).push([[23],{6023:function(e,t,n){n.r(t),n.d(t,{default:function(){return l}});var s=function(){var e=this,t=e._self._c;return t("div",[e._v(" TotalAssets ")])},u=[],r={name:"Content-TotalAssets",data(){return{}},mounted(){},methods:{}},a=r,o=n(1001),c=(0,o.Z)(a,s,u,!1,null,"657ac356",null),l=c.exports}}]);
-//# sourceMappingURL=23.26623baa.js.map

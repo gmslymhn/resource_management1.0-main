@@ -32,7 +32,7 @@ public class UserController {
         {
             if (user.getRoleId()==2){
                 session.setAttribute("loginUser",useraccount);
-                return "redirect:/admin/adminindex";
+                return "redirect:/admmain.html";
             }
             else{
                 session.setAttribute("loginUser",useraccount);
@@ -73,6 +73,22 @@ public class UserController {
         }
         return  "/register";
 
+    }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        session.invalidate();
+        return "redirect:/index.html";
+    }
+
+    @GetMapping(value = "/adm/toindex")
+    public String toadmindex(){
+        return "redirect:/admmain.html";
+    }
+
+    @GetMapping(value = "/user/toindex")
+    public String touserindex(){
+        return "redirect:/usermain.html";
     }
 
 

@@ -23,6 +23,11 @@ public class GoodsServicelmpl implements GoodsService {
 
 
     @Override
+    public List<Goods> getAllGoods() {
+        return goodsMapper.selectAllGoods();
+    }
+
+    @Override
     public GoodsResult getAllGoods(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectAllGoods());
@@ -30,10 +35,10 @@ public class GoodsServicelmpl implements GoodsService {
     }
 
     @Override
-    public GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName) {
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
-        return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
+    public List<Goods> selectGoodsByGoodsName(String goodsName) {
+        return goodsMapper.selectGoodsByGoodsName(goodsName);
+    }
+
 //=======
 //import com.lc.demo.bean.Goods;
 //import com.lc.demo.service.GoodsService;
@@ -56,7 +61,6 @@ public class GoodsServicelmpl implements GoodsService {
 //    public List<Goods> selectGoodsByGoodsId(Integer goodsId) {
 //        return null;
 //>>>>>>> Xiaojing-Yuan
-    }
 
     @Override
     public Goods selectGoodsById(int goodsId) {

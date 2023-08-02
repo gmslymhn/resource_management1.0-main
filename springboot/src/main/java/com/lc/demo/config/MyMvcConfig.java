@@ -27,10 +27,13 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("login");
-                registry.addViewController("/login.html").setViewName("login");
+                registry.addViewController("/index.html").setViewName("login");
                 registry.addViewController("/register.html").setViewName("register");
                 registry.addViewController("/admmain.html").setViewName("/adm/adminindex");
-                registry.addViewController("/usermain.html").setViewName("/suser/stuindex");
+                registry.addViewController("/usermain.html").setViewName("/user/userindex");
+                registry.addViewController("/goodsadmin.html").setViewName("/adm/goodslist");
+                registry.addViewController("/addgoods.html").setViewName("/adm/addgoods");
+
             }
 
             //注册拦截器

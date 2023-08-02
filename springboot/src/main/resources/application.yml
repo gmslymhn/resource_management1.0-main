@@ -1,9 +1,9 @@
 spring:
   datasource:
     username: root
-    password: yxj4195090049@mysql
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/resoursemanagement?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong&useAffectedRows=true
+    url: jdbc:mysql://localhost:3306/resourcemanagement?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Hongkong&useAffectedRows=true
     type: com.alibaba.druid.pool.DruidDataSource
     #   数据源其他配置
     initialSize: 5
