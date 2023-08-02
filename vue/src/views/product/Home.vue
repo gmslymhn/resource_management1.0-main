@@ -7,7 +7,7 @@
         <div><img src="@/assets/4.jpg" alt=""></div>
         <div><img src="@/assets/5.jpg" alt=""></div>
         <div><img src="@/assets/6.jpg" alt=""></div>
-        <div class="tyut">Welcome to TYUT</div>
+        <div class="tyut">Welcome to ReManage</div>
     </section>
   </div>
 </template>

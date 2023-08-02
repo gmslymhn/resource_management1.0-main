@@ -36,7 +36,6 @@
 
           <el-submenu index="2-2">
             <template slot="title">资金管理</template>
-            <el-menu-item index="checkItemsAdmin">查询物品</el-menu-item>
             <el-menu-item index="permission">审批</el-menu-item>
             <el-menu-item index="totalAssets">资产</el-menu-item>
           </el-submenu>

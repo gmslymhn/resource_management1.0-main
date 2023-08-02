@@ -81,7 +81,7 @@
 
       <!-- 提交按钮 -->
       <el-form-item class="button">
-        <el-button class="button1" type="warning" round @click="Register()">注册</el-button>
+        <el-button class="button1" type="warning" round @click="register()">注册</el-button>
         <el-button type="primary" round @click="toLogin">返回登录</el-button>
       </el-form-item>
     </el-form>
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import { register } from "@/api/register/register"
 export default {
   name: 'App-Register',
   data() {
@@ -145,29 +146,49 @@ export default {
     };
   },
   methods: {
+    async postRegister(userName,pass,peopleName,studentNum,email){
+      let res =  await register({useraccount: userName,password: pass,username: peopleName,usernumber: studentNum,userpost: email})
+      if(res.success){
+        this.registerForm = {}
+        this.$router.push({path:"/Login"})
+        this.$message({
+          showClose:true,
+          type:"success",
+          message:"注册成功，前往登录",
+        })
+      } else if(res.success === 999){
+        this.$message({
+          showClose: true,
+          message: '注册失败',
+          type: 'error'
+        });
+      }
+    },
+
     // 注册按钮
-    Register() {
-      this.axios.post("http://localhost:xxxx/user/register",this.registerForm).then((response) => {
-        let data = response.data
-        if(data.success){
-          this.registerForm = {}
-          this.$router.push({path:"/Login"})
-          this.$message({
-            showClose:true,
-            type:"success",
-            message:"注册成功，前往登录",
-          })
+    registerButton() {
+      // this.$refs.registerForm.validate(valid => { if (valid) { 
+
+      //  } })
+      this.$refs.registerForm.validate((valid) => {
+        if (valid) {
+          this.postRegister(this.registerForm.userName, this.registerForm.pass, this.registerForm.peopleName, this.registerForm.studentNum, this.registerForm.email)
+        }else {
+          console.log('error submit!!');
+          return false;
         }
-      })
-      
+      });
     },
 
     // 返回登录界面
     toLogin(){
-      this.$router.push({path:"/Login"})
+      this.$router.push({path:"/login"})
     }
-  }
-};
+
+
+  },
+
+}
 </script>
 
 <style scoped>

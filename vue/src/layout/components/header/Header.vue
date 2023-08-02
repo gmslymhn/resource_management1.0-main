@@ -1,9 +1,5 @@
 <template>
   <div class="header">
-    <!-- <div class="headerText">
-      <span>Re</span>
-      <span>Manage</span>
-    </div> -->
     <div class="headerImg">
       <img src="@/assets/logo.png" alt="LOGO">
     </div>
@@ -12,25 +8,32 @@
 
       <!-- 消息 -->
       <el-badge :value="200" :max="99" class="innerItem">
-        <el-button size="" icon="el-icon-message" class="innerItemButton"></el-button>
+        <el-button size="" icon="el-icon-message" class="innerItemButton" @click="message"></el-button>
       </el-badge>
 
       <!-- 头像 -->
-      <el-row class="demo-avatar demo-basic">
-        <el-col :span="12">
-          <div class="demo-basic--circle">
-            <div class="block">
-              <el-avatar :size="45" :src="circleUrl"></el-avatar>
+      <el-dropdown size="medium">
+        <el-row class="demo-avatar demo-basic">
+          <el-col :span="12">
+            <div class="demo-basic--circle">
+              <div class="block">
+                <el-avatar :size="45" :src="circleUrl"></el-avatar>
+              </div>
             </div>
-          </div>
-        </el-col>  
-      </el-row>
+          </el-col>  
+        </el-row>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="loginOut">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      
       
     </div>
   </div>
 </template>
 
 <script>
+import Cookie from "js-cookie"
 export default {
   name: 'Content-Header',
 
@@ -38,19 +41,20 @@ export default {
     return {
       // 头像地址
       circleUrl: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-
-      // 每个页面的标题
-      // title:["物品管理","物品损坏上报","申请购买物品","审批","总资产"]
     };
   },
-
-  mounted() {
-    //  let nowHash = window.location.hash
-     
-  },
-
   methods: {
-    
+    message(){
+      this.$router.push({path:"/zhuye/message"})
+    },
+    loginOut(){
+      // 清除cookie的token
+      Cookie.remove("token")
+      this.$router.replace("/")
+      // 清除vuex的token和role
+      this.$store.dispatch("clearToken")
+      this.$store.dispatch("clearRole")
+    }
   },
 };
 </script>
@@ -90,6 +94,13 @@ export default {
   .headerText span:nth-child(2){
     color: #6A5ACD	;
   } */
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
   .headerImg{
     width: 200px;
     height: 80px;

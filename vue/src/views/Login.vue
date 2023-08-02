@@ -4,6 +4,15 @@
       <h3 class="loginTitle">
         系统登录
       </h3>
+
+      <el-alert
+        v-if= isLoginFail
+        title="登陆失败"
+        type="error"
+        description="请检查账号密码是否正确"
+        show-icon>
+      </el-alert>
+
       <el-form-item label="">
         <el-input v-model="loginForm.loginName" autocomplete="off" placeholder="请输入账号" clearable></el-input>
       </el-form-item>
@@ -21,7 +30,7 @@
         </div>
       </div>
       <el-form-item class="button">
-        <el-button class="button1" type="primary" round @click="Login">登录</el-button>
+        <el-button class="button1" type="primary" round @click="LoginButton">登录</el-button>
         <el-button type="success" round @click="toRegister">注册</el-button>
       </el-form-item>
     </el-form>
@@ -29,6 +38,8 @@
 </template>
 
 <script>
+import Cookie from "js-cookie"
+import {login} from "@/api/login/login"
 export default {
   name: 'App-Login',
 
@@ -38,29 +49,39 @@ export default {
         loginName: '',
         loginPassword: '',
       },
-      checked: false
+      checked: false,
+      isLoginFail: false
     }
   },
   methods: {
-    // 登录
-    Login() {
-      // this.axios.post("http://localhost:xxxx/user/login",this.loginForm).then((response) => {
-      //   let data = response.data
-      //   if(data){
-      //     this.loginForm = {}
-      //     this.$router.push({path:"/zhuye"})
-      //     this.$message({
-      //       showClose:true,
-      //       type:"success",
-      //       message:"成功登录！喜欢您来",
-      //     })
-      //     console.log(data)
-      //   }
-      // }).catch(err => {
-      //   console.log(err);
-      // })
-      this.$router.push({path:"/zhuye"})
+    // 登录按钮
+    LoginButton() {
+      this.$router.replace("/admin");
+
+      login({useraccount: this.loginForm.loginName, password: this.loginForm.loginPassword})
+        .then((res) => {
+          if(res.code === 200){
+            // 请求成功后跳转到指定路由界面
+            Cookie.set("token",res.token);
+            this.$store.dispatch("setRole", res.role);
+            this.$store.dispatch("setToken", res.token);
+            this.$message({
+              showClose:true,
+              type:"success",
+              message:"成功登录！喜欢您来",
+            })
+            if(res.role === "admin"){
+              this.$router.replace("/admin");
+            } else if(res.role === "user") {
+              this.$router.replace("/user");
+            }
+          } else{
+            this.loginForm = {},
+            this.isLoginFail = true
+          }
+        })
     },
+
     // 注册
     toRegister() {
       this.$router.push({path:"/register"})
@@ -117,6 +138,10 @@ export default {
     font-weight: bolder;
     color: white;
     text-shadow: 2px 2px 4px #000000;
+  }
+  .el-alert{
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .tool {
     display: flex;
