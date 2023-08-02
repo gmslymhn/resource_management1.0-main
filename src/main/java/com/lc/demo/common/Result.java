@@ -1,6 +1,9 @@
-package common;
-import java.io.Serializable;
+package com.lc.demo.common;
+
 import lombok.Data;
+
+import java.io.Serializable;
+
 /**
  * 后端统一返回结果
  * @param <T>
@@ -20,6 +23,8 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> success(T object) {
         Result<T>
+
+
 
 
                 result = new Result<T>();

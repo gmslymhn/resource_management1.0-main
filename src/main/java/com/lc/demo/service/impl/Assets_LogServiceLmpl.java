@@ -1,8 +1,11 @@
 package com.lc.demo.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Assets;
 import com.lc.demo.bean.Assets_Log;
 import com.lc.demo.bean.Report;
+import com.lc.demo.common.AssetLogsPage;
 import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.Assets_LogService;
@@ -24,6 +27,13 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     public List<Assets_Log> selectAllAssets_Logs() {
         List<Assets_Log> list= assetsLogMapper.selectAllLogs();
         return list;
+    }
+
+    @Override
+    public AssetLogsPage selectAllAssets_Logs(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Assets_Log> pageInfo = new PageInfo<>(assetsLogMapper.selectAllLogs());
+        return AssetLogsPage.pagingAssetsLogResult(pageSize,pageInfo);
     }
 
     @Override
@@ -74,9 +84,12 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     }
 
     @Override
-    public List<Assets_Log> selectByName(String userName) {
-        List<Assets_Log> list= (List<Assets_Log>) assetsLogMapper.selectLogByUserName(userName);
-        return list;
+    public AssetLogsPage selectByName(String userName,int pageNum, int pageSize) {
+        List<Assets_Log> list=  assetsLogMapper.selectLogByUserName(userName);
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Assets_Log> pageInfo = new PageInfo<>(list);
+        return AssetLogsPage.pagingAssetsLogResult(pageSize,pageInfo);
+
 
     }
 }

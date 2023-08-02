@@ -1,7 +1,11 @@
 package com.lc.demo.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Assets;
 import com.lc.demo.bean.Assets_Log;
+import com.lc.demo.common.AssetLogsPage;
+import com.lc.demo.common.AssetsPage;
 import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.AssetsService;
@@ -25,6 +29,14 @@ private Assets_LogMapper assetsLogMapper;
         return list;
     }
 
+    @Override
+
+    public AssetsPage selectAllAssets(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Assets> list=assetsMapper.all();
+        PageInfo<Assets> pageInfo = new PageInfo<>(list);
+        return AssetsPage.pagingAssetsResult(pageSize,pageInfo);
+    }
     @Override
     public Assets selectNewAssets() {
         Assets assets = assetsMapper.newAssets();

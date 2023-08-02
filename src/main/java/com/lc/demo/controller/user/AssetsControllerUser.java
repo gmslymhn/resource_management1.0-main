@@ -1,11 +1,14 @@
 package com.lc.demo.controller.user;
 
 import com.lc.demo.bean.Assets;
+import com.lc.demo.common.AssetsPage;
 import com.lc.demo.common.Result;
 import com.lc.demo.service.AssetsService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,7 +19,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/userassets/assets")
 @Slf4j
-public class AssetsControllerUser {
+public class
+
+
+
+
+AssetsControllerUser {
+
+    @Autowired
 
     private AssetsService assetsService;
     /**
@@ -25,8 +35,8 @@ public class AssetsControllerUser {
      * @return
      */
     @GetMapping
-    public Result<List<Assets>> list ()     {
-        List<Assets> list = assetsService.selectAllAssets();
+    public Result<AssetsPage>  list (@RequestParam int pageNum, @RequestParam int pageSize)     {
+        AssetsPage list = assetsService.selectAllAssets(pageNum,pageSize);
         return Result.success(list);
     }
 
