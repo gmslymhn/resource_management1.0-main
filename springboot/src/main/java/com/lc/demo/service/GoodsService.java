@@ -3,8 +3,6 @@ package com.lc.demo.service;
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.utils.GoodsResult;
-import com.lc.demo.bean.Goods;
-
 import java.util.List;
 
 public interface GoodsService {
