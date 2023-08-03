@@ -3,7 +3,6 @@ package com.lc.demo.bean;
 
 import javax.validation.constraints.Size;
 
-
 public class User {
 
 

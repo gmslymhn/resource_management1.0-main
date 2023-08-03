@@ -1,6 +1,8 @@
 package com.lc.demo.controller;
 import com.lc.demo.bean.User;
 import com.lc.demo.service.UserService;
+import common.Result;
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 
+import java.security.MessageDigest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,60 +22,58 @@ import java.util.Map;
  * @description:注册登录
  */
 
-@Controller
+@RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
     @PostMapping(value = "/abc/login")
-    public String login(@RequestParam("useraccount") String useraccount,
-                        @RequestParam("password") String password, Map<String,Object> map, HttpSession session) {
+    public Result<Map<String,String>> login(@RequestParam("useraccount") String useraccount,
+                                @RequestParam("password") String password, Map<String,String> map, HttpSession session) {
         User user = userService.Login(useraccount,password);
         System.out.println(user);
-        if(user!=null)
-        {
-            if (user.getRoleId()==2){
-                session.setAttribute("loginUser",useraccount);
-                return "redirect:/admmain.html";
+        if(user!=null) {
+            String token = null;
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-1");
+                md.update(user.getUserAccount().getBytes("utf-8"));
+                byte[] digest = md.digest();
+                token = String.valueOf(Hex.encodeHex(digest));
+                map.put("account",user.getUserAccount());
+                map.put("token",token);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
             }
-            else{
-                session.setAttribute("loginUser",useraccount);
-                return "redirect:/user/userindex";
+            if (user.getRoleId() == 2) {
+                session.setAttribute("loginUser", useraccount);
+                return Result.success(map, "admin");
+            } else {
+                session.setAttribute("loginUser", useraccount);
+                return Result.success(map, "user");
             }
         }
         else
         {
-            map.put("msg","用户名或密码错误");
-            return  "login";
+            return Result.error("用户名或密码错误");
         }
     }
 
     @PostMapping(value = "/abc/register")//参数映射 必须传
-    public String register(@RequestParam("useraccount") String useraccount,
-                           @RequestParam("password") String password,
-                           @RequestParam("username") String username,
-                           @RequestParam("usernumber") String usernumber,
-                           @RequestParam("userpost") String userpost,Map<String,Object> map, HttpSession session){
-        User user = new User();
-        user.setUserNumber(usernumber);
-        user.setUserpost(userpost);
-        user.setUserAccount(useraccount);
-        user.setUserPassword(password);
-        user.setUserName(username);
+    public Result<User> register(@RequestBody User user, Map<String,Object> map, HttpSession session){
 
         System.out.println(user);
         if(userService.selectByAccount(user.getUserAccount())!=null){
-            map.put("msg","账号已存在");
+            return Result.error("账号已存在");
         }else{
             if(userService.selectByNumer(user.getUserNumber())!=null){
-                map.put("msg","学号已存在");
+                return Result.error("学号已存在");
             }
             else{
                 userService.addUser(user);
-                return "redirect:/login";
+                return Result.success(user,"user");
             }
         }
-        return  "/register";
 
     }
     @RequestMapping("/logout")

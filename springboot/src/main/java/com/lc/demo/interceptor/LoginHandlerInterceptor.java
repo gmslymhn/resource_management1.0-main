@@ -12,9 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginHandlerInterceptor implements HandlerInterceptor {
     //目标方法执行之前
+
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("loginUser");
+        System.out.println("添加跨域支持");
+        //添加跨域CORS
+        response.addHeader("Access-Control-Max-Age", "1800");//30 min
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,Content-Type,token");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
         if(user == null){
             //未登陆，返回登陆页面
             request.setAttribute("msg","没有权限请先登陆");

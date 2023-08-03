@@ -45,34 +45,33 @@
 <body>
 <!--引入抽取的topbar-->
 <!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
-<div th:replace="commons/admbar::topbar"></div>
+<div th:replace="commons/userbar::topbar"></div>
 <div class="container-fluid">
   <div class="row">
     <!--引入侧边栏-->
-    <div th:replace="commons/admbar::#sidebar(activeUri='goods')"></div>
+    <div th:replace="commons/userbar::#sidebar(activeUri='goods')"></div>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       <h2>
-        <a class="btn btn-info" href="emp" th:href="@{/adm/goodsadd}">物品添加</a>
-        <a style="float: right" class="btn btn-outline-secondary" href="" th:href="@{/adm/toallgoods/1}">查看所有物品</a>
+        <a style="float: right" class="btn btn-outline-secondary" href="" th:href="@{/user/toallgoods/1}">查看所有物品</a>
       </h2>
-      <form method="get" th:action="@{/adm/selectById}" >
+      <form method="get" th:action="@{/user/selectById}" >
         <div class="input-group mb-3">
           <label>物品 ID ：</label>
           <input type="text" class="form-control"  name="goodsId" placeholder="请输入物品id" aria-label="请输入物品id" aria-describedby="button-addon2">
           <div class="input-group-append" >
-            <button  class="btn btn-outline-secondary" type="submit" id="button-addon2">按照 ID 查询</button>
+            <button  class="btn btn-outline-secondary" type="submit" id="button-addon1">按照 ID 查询</button>
           </div>
         </div>
       </form>
 
-      <form method="get" th:action="@{/adm/selectByName/1}">
+      <form method="get" th:action="@{/user/selectByName/1}">
         <div class="input-group mb-3">
           <label>物品名称：</label>
           <input type="text" class="form-control"  name="goodsName" placeholder="请输入物品名称" aria-label="请输入物品名称" aria-describedby="button-addon2">
           <div class="input-group-append" >
             <button type="submit" class="btn btn-outline-secondary" id="button-addon2">按照名称查询</button>
-        </div>
+          </div>
       </form>
 
 
@@ -94,9 +93,7 @@
             <td th:text="${goods.goodsImage}"></td>
             <td th:text="${goods.goodsState}"></td>
             <td>
-              <a class="btn btn-sm btn-primary" th:href="@{/adm/goods/}+${goods.goodsId}">上报</a>
-              <a class="btn btn-sm btn-primary" th:href="@{/adm/goods/}+${goods.goodsId}">编辑</a>
-              <button th:attr="del_uri=@{/adm/goods/}+${goods.goodsId}" class="btn btn-sm btn-danger deleteBtn">删除</button>
+              <a class="btn btn-sm btn-primary" th:href="@{/user/goods/}+${goods.goodsId}">上报</a>
             </td>
           </tr>
           </tbody>
@@ -106,20 +103,20 @@
       <!--分页信息-->
       <nav aria-label="Page navigation example" >
         <ul class="pagination justify-content-center"  >
-          <li class="page-item"><a class="page-link" href="#" th:href="@{/adm/toallgoods/1}">首页</a></li>
+          <li class="page-item"><a class="page-link" href="#" th:href="@{'/user/selectByName/1?className='+${goodsName}}">首页</a></li>
           <li class="page-item" th:classappend="${pageInfo.hasPreviousPage}?'':' disabled'">
-            <a class="page-link" href="#" th:href="@{/adm/toallgoods/}+${pageInfo.pageNum-1}" tabindex="-1" aria-disabled="true">上一页</a>
+            <a class="page-link" href="#" th:href="@{'/user/selectByName/'+${pageInfo.pageNum-1}+'?className='+${goodsName}}" tabindex="-1" aria-disabled="true">上一页</a>
           </li>
 
           <li class="page-item"  th:each="page_Num:${pageInfo.navigatepageNums}" >
-            <a class="page-link"  th:text="${page_Num}" th:href="@{/adm/toallgoods/}+${page_Num}"  th:if="${page_Num}==${pageInfo.pageNum}" th:style="'font-weight:bold;background: #6faed9;'">1</a>
-            <a class="page-link"  th:text="${page_Num}" th:href="@{/adm/toallgoods/}+${page_Num}"  th:if="${page_Num}!=${pageInfo.pageNum}" >1</a>
+            <a class="page-link"  th:text="${page_Num}" th:href="@{'/user/selectByClass/'+${page_Num}+'?className='+${className}}"  th:if="${page_Num}==${pageInfo.pageNum}" th:style="'font-weight:bold;background: #6faed9;'">1</a>
+            <a class="page-link"  th:text="${page_Num}" th:href="@{'/user/selectByClass/'+${page_Num}+'?className='+${className}}"  th:if="${page_Num}!=${pageInfo.pageNum}" >1</a>
           </li>
 
           <li class="page-item" th:classappend="${pageInfo.hasNextPage}?'':' disabled'">
-            <a class="page-link" href="#" th:href="@{/adm/toallgoods/}+${pageInfo.pageNum+1}">下一页</a>
+            <a class="page-link" href="#" th:href="@{'/user/selectByName/'+${pageInfo.pageNum+1}+'?className='+${goodsName}}">下一页</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#" th:href="@{/adm/toallgoods/}+${pageInfo.pages}">末页</a></li>
+          <li class="page-item"><a class="page-link" href="#" th:href="@{'/user/selectByName/'+${pageInfo.pages}+'?className='+${goodsName}}">末页</a></li>
         </ul>
       </nav>
 

@@ -27,6 +27,11 @@ server:
   tomcat:
     uri-encoding: utf-8
 
+token:
+  privateKey: 'fdasfgdsagaxgsregdfdjyghjfhebfdgwe45ygrfbsdfshfdsag'
+  yangToken: 1000000
+  oldToken: 3000000000
+
 pagehelper:
   helperDialect: mysql
   reasonable: true

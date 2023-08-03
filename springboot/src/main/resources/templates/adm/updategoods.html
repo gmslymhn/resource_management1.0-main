@@ -61,6 +61,7 @@
 
         <input type="hidden" name="_method" value="put" />
 
+
         <div class="form-group">
           <label>物品 ID </label>
           <input name="goodsId" type="text" class="form-control" placeholder="不建议修改id" th:value="${goods!=null}?${goods.goodsId}">
@@ -71,13 +72,20 @@
         </div>
 
         <div class="form-group">
-          <label>物品状态</label>
-          <input name="goodsState" type="text" class="form-control" placeholder="请输入密码" th:value="${goods!=null}?${goods.goodsState}">
+          <label>状态</label><br/>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="goodsState" value="未损坏" th:checked="${goods!=null}?${goods.goodsState eq '未损坏'}">
+            <label class="form-check-label">未损坏</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="goodsState" value="已损坏" th:checked="${goods!=null}?${goods.goodsState eq '已损坏'}">
+            <label class="form-check-label">已损坏</label>
+          </div>
         </div>
 
         <div class="form-group">
           <label>物品图片</label>
-          <input name="goodsState" type="text" class="form-control" placeholder="图片" th:value="${goods!=null}?${goods.goodsImage}">
+          <input name="goodsImage" type="text" class="form-control" placeholder="图片" th:value="${goods!=null}?${goods.goodsImage}">
         </div>
         <button type="submit" class="btn btn-primary" >修改</button>
       </form>

@@ -4,6 +4,7 @@ import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 public class Report {
 
+    private  int sequenceId;
     private String reportName;
 
     private int goodsId;
@@ -32,6 +33,12 @@ public class Report {
         this.processTime = processTime;
         this.goodsState = goodsState;
         this.disposeName = disposeName;
+    }
+    public int getSequenceId(){
+        return sequenceId;
+    }
+    public void setSequenceId(String SequenceId){
+        this.sequenceId = sequenceId;
     }
     public String getReportName() {
         return reportName;
@@ -93,5 +100,6 @@ public class Report {
                 ", disposeName=" + disposeName + '}';
     }
 }
+
 
 
