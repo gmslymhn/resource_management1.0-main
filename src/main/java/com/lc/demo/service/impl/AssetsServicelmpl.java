@@ -19,11 +19,14 @@ import java.util.List;
 @Service
 
 public class AssetsServicelmpl  implements AssetsService {
-@Autowired
-private AssetsMapper assetsMapper;
-private Assets_LogMapper assetsLogMapper;
+
+    @Autowired
+    private AssetsMapper assetsMapper;
+    @Autowired
+    private Assets_LogMapper assetsLogMapper;
 
     @Override
+
     public List<Assets> selectAllAssets() {
         List<Assets> list=assetsMapper.all();
         return list;

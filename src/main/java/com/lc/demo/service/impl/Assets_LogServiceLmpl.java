@@ -20,7 +20,9 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
 
 @Autowired
     private Assets_LogMapper assetsLogMapper;
+@Autowired
     private AssetsMapper assetsMapper;
+@Autowired
     private ReportService  reportService;
 
     @Override
