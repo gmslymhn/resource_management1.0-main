@@ -25,10 +25,10 @@ public interface AssetsMapper {
     @Select("select * from assets WHERE time = (SELECT MAX(time) FROM assets)")
     Assets newAssets();
 
-    @Insert("insert into assets (total_assets,disposable_assets,time)" +
+    @Insert("insert into assets (total_assets,disposable_assets,time,description,percentage)" +
             "VALUES" +
-            "(#{totalAssets},#{disposableAssets},#{time})")
-    int insert(float total, float disposable, LocalDateTime now);
+            "(#{totalAssets},#{disposableAssets},#{time},#{description},#{percentage})")
+    int insert(float total, float disposable, LocalDateTime now,String description,float percentage);
 
 
 

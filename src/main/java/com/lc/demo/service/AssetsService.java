@@ -18,9 +18,11 @@ public interface AssetsService {
 
     float   selectNewDisposableAssets();
 
-     int   updateAssetsPercentage(float percentage);
+     void    updateAssetsPercentage(float percentage,String description);
 
-    float   selectNewTotalAssets();
+     void updateTotalAssets(float totalAssets,String description) ;
+
+        float   selectNewTotalAssets();
 
 
 

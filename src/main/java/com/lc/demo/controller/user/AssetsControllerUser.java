@@ -31,7 +31,8 @@ AssetsControllerUser {
     private AssetsService assetsService;
     /**
      * 查询所有assets
-     * @param
+     * @param pageNum
+     * @param  pageSize
      * @return
      */
     @GetMapping

@@ -53,12 +53,19 @@ public class AssetsServicelmpl  implements AssetsService {
     }
 
     @Override
-    public int updateAssetsPercentage(float percentage) {
+    public void updateAssetsPercentage(float percentage,String description) {
         float total =assetsMapper.newAssets().getTotalAssets();
-        assetsMapper.insert(total,total*percentage, LocalDateTime.now()) ;
-        return 0;
+        assetsMapper.insert(total,total*percentage, LocalDateTime.now(),description,percentage) ;
+
     }
 
+
+    public void updateTotalAssets(float totalAssets,String description) {
+
+        float percentage =assetsMapper.newAssets().getPercentage();
+        assetsMapper.insert(totalAssets,totalAssets*percentage, LocalDateTime.now(),description,percentage) ;
+
+    }
     @Override
     public float selectNewTotalAssets() {
         return assetsMapper.newAssets().getTotalAssets();

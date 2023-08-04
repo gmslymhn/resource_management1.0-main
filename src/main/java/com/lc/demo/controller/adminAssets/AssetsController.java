@@ -5,6 +5,7 @@ import com.lc.demo.common.AssetsPage;
 import com.lc.demo.common.Result;
 import com.lc.demo.service.AssetsService;
 
+import com.lc.demo.service.impl.AssetsServicelmpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,19 +24,35 @@ public class AssetsController {
     private AssetsService assetsService;
 
     /**
-     * 修改可用资产的百分比
-     * @param
+     * 修改总资产
+     * @param totalAssets
+     * @param description
      * @return
      */
     @PutMapping("/update")
-    public Result<String> updateAssetsPercentage(float percentage){
-        log.info("修改可用资产的百分比:{}",percentage);
-        assetsService.updateAssetsPercentage(percentage);
+    public Result<String> updateTotalAssets(float totalAssets,String description){
+        log.info("修改总资产:{}",totalAssets);
+        assetsService.updateTotalAssets(totalAssets, description);
         return Result.success();
 }
+
+
+    /**
+     * 修改可用资产的百分比
+     * @param percentage
+     * @param description
+     * @return
+     */
+    @PutMapping("/update")
+    public Result<String> updateAssetsPercentage(float percentage,String description){
+        log.info("修改可用资产的百分比:{}",percentage);
+        assetsService.updateAssetsPercentage(percentage, description);
+        return Result.success();
+    }
 /**
  * 查询所有assets
- * @param
+ * @param pageNum
+ * @param  pageSize
  * @return
  */
     @GetMapping
@@ -54,5 +71,6 @@ public class AssetsController {
         Assets assets =assetsService.selectNewAssets();
         return Result.success(assets);
     }
+
 
 }

@@ -24,9 +24,8 @@ public class AssetsLogControllerUser {
 
     /**
      * 查询所有
-     *
-     * @param
-     * @return
+     * @param pageNum
+     * @param  pageSize
      */
     @GetMapping
     public Result<AssetLogsPage> getAllAssets_Logs(@RequestParam int pageNum, @RequestParam int pageSize){

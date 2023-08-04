@@ -23,7 +23,8 @@ public class AssetsLogController {
 
     /**
      * 查询所有
-     * @param
+     * @param pageNum
+     * @param  pageSize
      * @return
      */
     @GetMapping
