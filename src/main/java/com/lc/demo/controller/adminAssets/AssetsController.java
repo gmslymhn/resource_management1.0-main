@@ -29,7 +29,7 @@ public class AssetsController {
      * @param description
      * @return
      */
-    @PutMapping("/update")
+    @PutMapping("/update/total")
     public Result<String> updateTotalAssets(float totalAssets,String description){
         log.info("修改总资产:{}",totalAssets);
         assetsService.updateTotalAssets(totalAssets, description);
@@ -43,7 +43,7 @@ public class AssetsController {
      * @param description
      * @return
      */
-    @PutMapping("/update")
+    @PutMapping("/update/percentage")
     public Result<String> updateAssetsPercentage(float percentage,String description){
         log.info("修改可用资产的百分比:{}",percentage);
         assetsService.updateAssetsPercentage(percentage, description);

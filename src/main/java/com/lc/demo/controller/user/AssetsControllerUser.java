@@ -46,7 +46,7 @@ AssetsControllerUser {
      * @param
      * @return
      */
-    @GetMapping("new")
+    @GetMapping("/new")
     public Result<Assets>  newList ()     {
         Assets assets =assetsService.selectNewAssets();
         return Result.success(assets);
