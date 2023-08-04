@@ -1,7 +1,6 @@
 package com.lc.demo.mapper;
 
 import com.lc.demo.bean.Report;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,11 +11,20 @@ import java.util.List;
 @Mapper
 public interface ReportMapper {
 
+    /**
+     * 查询：所有记录
+     * @return
+     */
     @Select("select * from report")
     List<Report> selectAllReport();
 
-    @Select("select * from report where goods_id = #{goodsId}")
-    Report selectReportById(int goodsId);
+    /**
+     * 查询：根据id查询记录
+     * @param sequenceId
+     * @return
+     */
+    @Select("select * from report where sequence_id = #{sequenceId}")
+    Report selectReportById(int sequenceId);
 
     /**
      * 查询：根据上报人记录名查询记录
@@ -35,21 +43,23 @@ public interface ReportMapper {
     List<Report> selectReportByDisposeName(String disposeName);
 
 
-    @Insert("insert into class value(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName})")
+    /**
+     * 添加上报信息
+     * @param report
+     * @return
+     */
+    @Insert("insert into report (report_name,goods_id,goods_name,damage_description,goods_state )" +
+            "VALUES" +
+            "(#{reportName},#{goodsId},#{goodsName},#{damageDescription}),1")
     int insertReport(Report report);
 
     /**
-     * todo：删除数据是否需要判断数据id是否存在
-     *      情境1.用户手动输入id，需要判断，那么如何判断->查询？
-     *      情况2.用户勾选数据框进行删除，确认存在无需判断
-     *      假定为情况2
      * 删除：删除记录信息
-     * @param goodsId
-     * @return 返回整形数值为1.删除成功
-     *         返回整形数值为0.删除失败
+     * @param sequenceId
+     * @return
      */
-    @Delete("delete from report where goods_id = #{goodsId}")
-    int deleteReportById(int goodsId);
+    @Delete("delete from report where sequence_id = #{sequenceId}")
+    int deleteReportById(int sequenceId);
 
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
  * @author 22932
  */
 @RestController
-@RequestMapping("/user/usegoods")
+@RequestMapping("/user/useGoods")
 public class UseGoodsController {
 
     @Autowired
