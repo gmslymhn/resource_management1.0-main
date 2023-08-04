@@ -38,7 +38,6 @@ public class Report {
         this.goodsState = goodsState;
         this.disposeName = disposeName;
     }
-
     public String getReportName() {
         return reportName;
     }
@@ -111,5 +110,6 @@ public class Report {
                 '}';
     }
 }
+
 
 

@@ -101,10 +101,7 @@ public class AdmGoodsController {
      * @param pageNum 页码
      * @return
      */
-    @PostMapping("/selectGoodsByGoodsName")
-        public GoodsResult selectGoodsByGoodsName(@RequestParam int pageNum, @RequestParam  int pageSize,@RequestParam  String goodsName){
-        return goodsService.selectGoodsByGoodsName(pageNum,pageSize,goodsName);
-    }
+
 
 
 
