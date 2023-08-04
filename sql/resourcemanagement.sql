@@ -22,11 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `assets`;
 CREATE TABLE `assets`  (
-                         total_assets      float    not null comment '总资产',
-                         disposable_assets float    not null comment '可支配资产',
-                         time              datetime not null comment '最后一次修改时间',
-                         id                int auto_increment
-                           primary key
+                           total_assets      float        not null comment '总资产',
+                           disposable_assets float        not null comment '可支配资产',
+                           time              datetime     not null comment '最后一次修改时间',
+                           id                int auto_increment
+                               primary key,
+                           description       varchar(255) null comment '描述'
+                           percentage        float        not null comment '百分比'
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
 
 
