@@ -35,13 +35,12 @@ public interface ReportMapper {
     List<Report> selectReportByReportName(String reportName);
 
     /**
-     * 查询：根据处理人查询记录
+     * 根据处理人查询上报信息
      * @param disposeName
-     * @return
+     * @return Report集合
      */
     @Select("select * from report where dispose_name = #{disposeName}")
     List<Report> selectReportByDisposeName(String disposeName);
-
 
     /**
      * 添加上报信息
