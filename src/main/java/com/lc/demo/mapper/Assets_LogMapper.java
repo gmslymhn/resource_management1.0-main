@@ -72,12 +72,12 @@ public interface Assets_LogMapper {
      * @param assetsLog
      */
 @Update("UPDATE assets_log SET " +
-        "ser_name = #{userName}," +
+        "user_name = #{userName}," +
         " description = #{description}, " +
         "change_assets = #{changeAssets}," +
         " process_time = #{processTime}," +
         " before_assets = #{beforeAssets}, " +
-        "after_assets = #{afterAssets} " +
+        "afterwards_assets = #{afterAssets} " +
         "WHERE assets_log_id = #{assetsLogId} " )
     void update(Assets_Log assetsLog);
 

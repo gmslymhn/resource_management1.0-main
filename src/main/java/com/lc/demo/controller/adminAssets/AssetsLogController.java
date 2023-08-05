@@ -64,7 +64,7 @@ public class AssetsLogController {
      */
     @PutMapping("/update")
     public Result  update(@RequestParam  int id ,@RequestParam String description){
-        log.info("修改信息:{}",description);
+        log.info("修改信息:{}，{}",id,description);
         assetsLogService.update(id,description);
         return Result.success();
     }

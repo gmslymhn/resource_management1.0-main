@@ -24,13 +24,14 @@ public class AssetsLogControllerUser {
 
     /**
      * 查询所有
+     *
      * @param pageNum
-     * @param  pageSize
+     * @param pageSize
      */
     @GetMapping
-    public Result<AssetLogsPage> getAllAssets_Logs(@RequestParam int pageNum, @RequestParam int pageSize){
-        AssetLogsPage list =  assetsLogService.selectAllAssets_Logs(pageNum,pageSize);
-        return  Result.success(list);
+    public Result<AssetLogsPage> getAllAssets_Logs(@RequestParam int pageNum, @RequestParam int pageSize) {
+        AssetLogsPage list = assetsLogService.selectAllAssets_Logs(pageNum, pageSize);
+        return Result.success(list);
     }
 
     /**
@@ -40,7 +41,7 @@ public class AssetsLogControllerUser {
      * @return
      */
     @GetMapping("/{assetsLogId}")
-    public Result selectById(@PathVariable int assetsLogId) {
+    public Result selectById(@RequestParam int assetsLogId) {
         log.info("根据id查询:{}", assetsLogId);
         Assets_Log assetsLog = assetsLogService.selectById(assetsLogId);
         return Result.success(assetsLog);
@@ -53,9 +54,10 @@ public class AssetsLogControllerUser {
      * @return
      */
     @GetMapping("/{userName}")
-    public Result<AssetLogsPage> selectByName(@PathVariable String userName, @RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<AssetLogsPage> selectByName(@RequestParam String userName, @RequestParam int pageNum, @RequestParam int pageSize) {
         log.info("根据name查询:{}", userName);
         AssetLogsPage list = assetsLogService.selectByName(userName, pageNum, pageSize);
         return Result.success(list);
+
     }
 }
