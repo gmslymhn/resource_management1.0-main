@@ -2,6 +2,8 @@ package com.lc.demo.bean;
 
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
+import java.util.Date;
+
 public class Assets_Log {
 
     private  int assetsLogId;
@@ -9,7 +11,7 @@ public class Assets_Log {
     private String userName;
     private String dascription;
     private float changeAssets;
-    private DateTimeLiteralExpression.DateTime processTime;
+    private Date processTime;
     private float beforeAssets;
     private float afterAssets;
 
@@ -17,7 +19,7 @@ public class Assets_Log {
     public Assets_Log() {
     }
 
-    public Assets_Log(int assetsLogId, String userName, String dascription, float changeAssets, DateTimeLiteralExpression.DateTime processTime, float beforeAssets, float afterAssets) {
+    public Assets_Log(int assetsLogId, String userName, String dascription, float changeAssets, Date processTime, float beforeAssets, float afterAssets) {
         this.assetsLogId = assetsLogId;
         this.userName = userName;
         this.dascription = dascription;
@@ -60,11 +62,11 @@ public class Assets_Log {
     }
 
 
-    public DateTimeLiteralExpression.DateTime getProcessTime() {
+    public Date getProcessTime() {
         return processTime;
     }
 
-    public void setProcessTime(DateTimeLiteralExpression.DateTime processTime) {
+    public void setProcessTime(Date processTime) {
         this.processTime = processTime;
     }
 

@@ -3,7 +3,6 @@ package com.lc.demo.controller.admin;
 import com.lc.demo.bean.Report;
 import com.lc.demo.service.ReportService;
 import common.ReportsResult;
-import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,7 +70,7 @@ public class ReportController {
      * @return
      */
     @GetMapping("/deleteReport")
-    public ResponseEntity<Void> deleteReport(@RequestParam int sequenceId) {
+    public ResponseEntity<Void> deleteReport(@RequestParam Integer sequenceId) {
         if( reportService.deleteReport(sequenceId) == 1){
             return ResponseEntity.ok().build();
         }else {

@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.mapper.GoodsMapper;
 import com.lc.demo.service.GoodsService;
-import com.lc.demo.utils.GoodsResult;
+import common.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,17 +30,14 @@ public class GoodsServicelmpl implements GoodsService {
         return GoodsResult.pagingGoodsResult(pageSize,pageInfo);
     }
     @Override
-    public List<Goods> selectGoodsByGoodsName(String goodsName) {
-        return goodsMapper.selectGoodsByGoodsName(goodsName);
-    }
-    @Override
-    public Goods selectGoodsById(int goodsId) {
-        return goodsMapper.selectGoodsById(goodsId);
-    }
     public GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
         return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
+    }
+    @Override
+    public Goods selectGoodsById(int goodsId) {
+        return goodsMapper.selectGoodsById(goodsId);
     }
     @Override
     public int addGoods(Goods goods) {

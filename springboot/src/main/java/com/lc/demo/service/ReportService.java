@@ -2,11 +2,16 @@ package com.lc.demo.service;
 
 import com.lc.demo.bean.Report;
 import common.ReportsResult;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 public interface ReportService {
+    
+    /**
+     * 查询：所有记录
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    ReportsResult getALLReport(int pageNum, int pageSize);
 
     /**
      * 查询：所有记录
@@ -32,6 +37,8 @@ public interface ReportService {
     int addReport(Report report);
 
 
+
+
     /**
      * 查询：根据上报人查询记录
      * @param pageNum
@@ -55,7 +62,8 @@ public interface ReportService {
      * @param sequenceId
      * @return
      */
-    int deleteReport(int sequenceId);
+    int deleteReport(Integer sequenceId);
+
 
 
 }

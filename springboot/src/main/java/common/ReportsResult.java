@@ -10,7 +10,6 @@ public class ReportsResult {
 
     public ReportsResult() {
     }
-    
 
     public PageInfo<Report> getData() {
         return data;

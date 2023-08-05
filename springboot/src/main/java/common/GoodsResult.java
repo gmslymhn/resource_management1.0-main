@@ -11,15 +11,11 @@
  * <version> 版本号
  * <desc> 版本描述
  */
-package com.lc.demo.utils;
+package common;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 /**
  * @ClassName: Result

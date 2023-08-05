@@ -2,17 +2,14 @@ package com.lc.demo.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lc.demo.bean.Goods;
 import com.lc.demo.bean.Report;
 import com.lc.demo.mapper.GoodsMapper;
 import com.lc.demo.mapper.ReportMapper;
 import com.lc.demo.service.ReportService;
-import com.lc.demo.utils.GoodsResult;
 import common.ReportsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class ReportServiceImpl implements ReportService {
     @Autowired
@@ -49,7 +46,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public int deleteReport(int sequenceId) {
+    public int deleteReport(Integer sequenceId) {
         return reportMapper.deleteReportById(sequenceId);
     }
     @Override
