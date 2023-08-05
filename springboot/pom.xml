@@ -136,6 +136,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
         </dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>6.1.25</version>
+        </dependency>
 
     </dependencies>
 

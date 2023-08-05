@@ -11,7 +11,7 @@ public interface Assets_LogService {
      * @return
      */
     List<Assets_Log> selectAllAssets_Logs();
-    
+
     /**
      * 删除
      * @param   assetsLogId
@@ -25,7 +25,7 @@ public interface Assets_LogService {
      * @param  description
      * @return
      */
-     void addAssets_Log(int  id,float change_assets,String description ) ;
+     void addAssets_Log(int  id) ;
     /**
      * 修改信息
      * @param assetsLog

@@ -25,6 +25,8 @@ public class AdminApplyController {
     private UserService userService;
     @Autowired
     private ApplyAssetsService applyAssetsService;
+//    @Autowired
+//    private
 
     @PostMapping("/getAllApply")
     public ApplyResult getAllApply(@RequestParam int pageNum, @RequestParam int pageSize){
@@ -32,6 +34,7 @@ public class AdminApplyController {
     }
     @PostMapping("/selectByApplyId")
     public ApplyAssets selectByApplyId(@RequestParam int applyId){
+        System.out.println(applyAssetsService.selectApplyById(applyId).getDisposeTime());
         return applyAssetsService.selectApplyById(applyId);
     }
     @PostMapping("/selectByApplyName1")
@@ -47,15 +50,24 @@ public class AdminApplyController {
         User user = userService.selectByAccount(applyAssets.getApplyName());
         applyAssets.setApplyNameId(user.getUserId());
         applyAssets.setApplyName(user.getUserName());
+        applyAssets.setApplyState("未处理");
         return applyAssetsService.addApplyAssets(applyAssets);
     }
     @PostMapping("/updateApply")
     public  int updateApplyAssets(@RequestBody ApplyAssets applyAssets){
+        System.out.println(applyAssets);
         ApplyAssets applyAssets1 = applyAssetsService.selectApplyById(applyAssets.getApplyId());
-        if((applyAssets1.getApplyState())=="未处理"){
+        if((applyAssets1.getApplyState()).equals("未处理")){
             applyAssets1.setApplyAssets(applyAssets.getApplyAssets());
+            applyAssets1.setDisposeNameId(applyAssets.getDisposeNameId());
+            applyAssets1.setDisposeName(applyAssets.getDisposeName());
+            System.out.println(applyAssets.getApplyState());
+            applyAssets1.setApplyState(applyAssets.getApplyState());
             applyAssetsService.deleteApplyById(applyAssets.getApplyId());
             applyAssetsService.addApplyAssets(applyAssets1);
+            if(applyAssets1.getApplyState().equals("已同意")){
+
+            }
         }else{
             return 0;
         }

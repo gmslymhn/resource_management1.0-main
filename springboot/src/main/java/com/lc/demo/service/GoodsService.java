@@ -6,8 +6,6 @@ import common.GoodsResult;
 import java.util.List;
 
 public interface GoodsService {
-    List<Goods> getAllGoods();
-
 
     /**
      * 展示所有物品
@@ -20,7 +18,6 @@ public interface GoodsService {
      * @param goodsName 物品名称
      * @return 模糊查找出的物品集合
      */
-
     GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName);
 
     /**
@@ -28,7 +25,7 @@ public interface GoodsService {
      * @param goodsId 物品id
      * @return id查找出的物品
      */
-    Goods selectGoodsById(int goodsId);
+    GoodsResult selectGoodsById(int goodsId);
 
     /**
      * 添加物品
