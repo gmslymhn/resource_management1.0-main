@@ -11,23 +11,16 @@ import java.util.List;
 
 @Mapper
 public interface ReportMapper {
-    /**
-     * 查询：查询所有物品损坏记录
-     * @return
-     */
+
+
     @Select("select * from report")
     List<Report> selectAllReport();
 
-    /**
-     * 查询：根据物品id查询记录
-     * @param goodsId
-     * @return
-     */
     @Select("select * from report where goods_id = #{goodsId}")
     Report selectReportById(int goodsId);
 
     /**
-     * 查询：根据上报信息记录名查询记录
+     * 查询：根据上报人记录名查询记录
      * @param reportName
      * @return
      */
@@ -38,7 +31,7 @@ public interface ReportMapper {
     @Select("select * from report where report_name = #{goodsState}")
     List<Report> selectReportByState(int goodsState);
     /**
-     * 查询：根据处理结果查询记录
+     * 查询：根据处理人查询记录
      * @param disposeName
      * @return
      */
@@ -65,7 +58,9 @@ public interface ReportMapper {
      * @return 返回整形数值为1.删除成功
      *         返回整形数值为0.删除失败
      */
+
     @Delete("delect from report where goods_id = #{goodsId}")
+
     int deleteReportById(int goodsId);
 
 

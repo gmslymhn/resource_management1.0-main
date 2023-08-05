@@ -18,7 +18,6 @@ public class Goods {
     @NotBlank(message = "图片不能为空")
     private String goodsImage;
 
-
     public Goods() {
     }
 
