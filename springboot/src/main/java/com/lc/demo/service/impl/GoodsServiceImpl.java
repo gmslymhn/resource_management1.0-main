@@ -14,7 +14,7 @@ import java.util.List;
  * @author 22932
  */
 @Service
-public class GoodsServicelmpl implements GoodsService {
+public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
