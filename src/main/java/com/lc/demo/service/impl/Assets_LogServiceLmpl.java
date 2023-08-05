@@ -74,8 +74,11 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     assetsLog.setAfterAssets(assets.getTotalAssets()-applyAssets.getApplyAssets());
 
     assetsLogMapper.insertAssetsLog(assetsLog);
+
+
+
     float disposableAssets =(assets.getTotalAssets()-applyAssets.getApplyAssets())*assets.getPercentage();
-    assetsService.insertAssets(assets.getTotalAssets()-applyAssets.getApplyAssets(),disposableAssets,assets.getPercentage(),assets.getDescription());
+    assetsService.insertAssets(assets.getTotalAssets()-applyAssets.getApplyAssets(),disposableAssets,assets.getPercentage(),applyAssets.getDisposeDescription());
     }
 
     @Override
