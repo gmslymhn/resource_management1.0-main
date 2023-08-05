@@ -40,6 +40,7 @@ public class UserController {
                 byte[] digest = md.digest();
                 token = String.valueOf(Hex.encodeHex(digest));
                 map.put("account",user.getUserAccount());
+                map.put("id", String.valueOf(user.getUserId()));
                 map.put("name",user.getUserName());
                 map.put("token",token);
             } catch (Exception e) {

@@ -28,13 +28,17 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
 
     @Override
     public List<ApplyAssets> selectAllApplyAssets() {
-        return applyAssetsMapper.selectAllApplyAssets();
+        List<ApplyAssets> list1 = applyAssetsMapper.selectApplyByState("未处理");
+        List<ApplyAssets> list2 = applyAssetsMapper.selectApplyByState("已处理");
+        List<ApplyAssets> list = list1;
+        list.addAll(list2);
+        return list;
     }
 
     @Override
     public ApplyResult getAllApplyAssets(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<ApplyAssets> pageInfo = new PageInfo<>(applyAssetsMapper.selectAllApplyAssets());
+        PageInfo<ApplyAssets> pageInfo = new PageInfo<>(selectAllApplyAssets());
         return ApplyResult.pagingApplyResult(pageSize,pageInfo);
     }
 

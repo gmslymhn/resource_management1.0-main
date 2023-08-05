@@ -4,42 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="更新">
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/ApplyAssets.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdminApplyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/ReportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/ReportControllerUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ApplyAssetsMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/ApplyAssetsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/common/ApplyResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/common/ReportsResult.java" afterDir="false" />
+    <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="数据库统一修正">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/sql/resourcemanagement.sql" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/sql/resourcemanagement.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets_Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets_Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/GoodsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/GoodsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Goods.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Goods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/ReportControllerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/ReportControllerUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ReportMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/GoodsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/ReportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/GoodsServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/GoodsServicelmpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServicelmpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/utils/GoodsResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/test/java/com/lc/demo/test/report/ReportTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/test/java/com/lc/demo/test/report/ReportTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Report.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Report.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/ReportMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/ReportMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/UserMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/GoodsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/GoodsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/ReportService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/ReportService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/GoodsServicelmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/GoodsServicelmpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServicelmpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/UserServicelmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/UserServicelmpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +197,7 @@
       <workItem from="1691073387940" duration="23000" />
       <workItem from="1691074821762" duration="176000" />
       <workItem from="1691077556317" duration="8510000" />
-      <workItem from="1691146899344" duration="26153000" />
+      <workItem from="1691146899344" duration="38636000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>
@@ -294,7 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1690608077808</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="数据库统一修正">
+      <created>1691215804632</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1691215804632</updated>
+    </task>
+    <task id="LOCAL-00012" summary="数据库统一修正">
+      <created>1691215960357</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1691215960357</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +302,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新" />
+    <MESSAGE value="数据库统一修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据库统一修正" />
   </component>
 </project>

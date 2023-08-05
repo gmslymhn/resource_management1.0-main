@@ -1,26 +1,21 @@
-package com.lc.demo.controller.admin;
+package com.lc.demo.controller.user;
 
 import com.lc.demo.bean.ApplyAssets;
-import com.lc.demo.bean.Report;
 import com.lc.demo.bean.User;
 import com.lc.demo.service.ApplyAssetsService;
 import com.lc.demo.service.UserService;
 import common.ApplyResult;
-import common.GoodsResult;
-import common.ReportsResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * @author gmslymhn
- * @date 2023-08-04 23:39
+ * @date 2023-08-05 15:50
  * @description:资金申请
  */
 @RestController
-@RequestMapping("/admin/admapply")
-public class AdminApplyController {
+@RequestMapping("/user/userapply")
+public class UserApplyControlller {
     @Autowired
     private UserService userService;
     @Autowired
@@ -49,21 +44,10 @@ public class AdminApplyController {
         applyAssets.setApplyName(user.getUserName());
         return applyAssetsService.addApplyAssets(applyAssets);
     }
-    @PostMapping("/updateApply")
-    public  int updateApplyAssets(@RequestBody ApplyAssets applyAssets){
-        ApplyAssets applyAssets1 = applyAssetsService.selectApplyById(applyAssets.getApplyId());
-        if((applyAssets1.getApplyState())=="未处理"){
-            applyAssets1.setApplyAssets(applyAssets.getApplyAssets());
-            applyAssetsService.deleteApplyById(applyAssets.getApplyId());
-            applyAssetsService.addApplyAssets(applyAssets1);
-        }else{
-            return 0;
-        }
-        return 1;
-    }
-    @PostMapping("/deleteApply")
-    public int deleteApplyById (@RequestParam Integer applyId){
-        return applyAssetsService.deleteApplyById(applyId);
-    }
+
+
+
+
 
 }
+
