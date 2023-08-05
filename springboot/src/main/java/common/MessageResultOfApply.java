@@ -15,10 +15,8 @@ public class MessageResultOfApply {
      *
      */
     private PageInfo<ApplyAssets> data;
-    /**
-     *
-     */
-    private int totalPages;
+
+    //private int totalPages;
     /**
      *
      */
@@ -35,13 +33,13 @@ public class MessageResultOfApply {
         this.data = data;
     }
 
-    public int getTotalPages() {
-        return totalPages;
-    }
+//    public int getTotalPages() {
+//        return totalPages;
+//    }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
+//    public void setTotalPages(int totalPages) {
+//        this.totalPages = totalPages;
+//    }
 
     public ResponseEntity<Void> getResponseEntity() {
         return responseEntity;
@@ -57,17 +55,18 @@ public class MessageResultOfApply {
         MessageResultOfApply messageResultOfApply = new MessageResultOfApply();
 
         // 获取总记录数和总页码
-        long total = pageInfo.getTotal();
-        int totalPages = (int) Math.ceil((double) total / pageSize);
+        //long totalMessage = pageInfo.getTotal();
+
+        int totalPages = (int) Math.ceil((double) pageInfo.getTotal() / pageSize);
 
         if (pageInfo != null) {
             messageResultOfApply.setResponseEntity(ResponseEntity.ok().build());
         } else {
             messageResultOfApply.setResponseEntity(ResponseEntity.notFound().build());
         }
+        pageInfo.setPages(totalPages);
         messageResultOfApply.setData(pageInfo);
-        messageResultOfApply.setTotalPages(totalPages);
+        //messageResultOfApply.setTotalPages(totalPages);
         return messageResultOfApply;
     }
-
 }

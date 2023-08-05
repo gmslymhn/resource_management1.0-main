@@ -1,7 +1,6 @@
 package common;
 
 import com.github.pagehelper.PageInfo;
-import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Report;
 import org.springframework.http.ResponseEntity;
 
@@ -14,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 public class MessageResultOfReport {
    private PageInfo<Report> data;
 
-   private int totalPages;
+//   private int totalPages;
 
    private ResponseEntity<Void> responseEntity;
 
@@ -29,13 +28,13 @@ public class MessageResultOfReport {
       this.data = data;
    }
 
-   public int getTotalPages() {
-      return totalPages;
-   }
+//   public int getTotalPages() {
+//      return totalPages;
+//   }
 
-   public void setTotalPages(int totalPages) {
-      this.totalPages = totalPages;
-   }
+//   public void setTotalPages(int totalPages) {
+//      this.totalPages = totalPages;
+//   }
 
    public ResponseEntity<Void> getResponseEntity() {
       return responseEntity;
@@ -51,16 +50,17 @@ public class MessageResultOfReport {
       MessageResultOfReport messageResultOfReport = new MessageResultOfReport();
 
       // 获取总记录数和总页码
-      long total = pageInfo.getTotal();
-      int totalPages = (int) Math.ceil((double) total / pageSize);
+      //long total = pageInfo.getTotal();
+      int totalPages = (int) Math.ceil((double) pageInfo.getTotal()/ pageSize);
 
       if (pageInfo != null) {
          messageResultOfReport.setResponseEntity(ResponseEntity.ok().build());
       } else {
          messageResultOfReport.setResponseEntity(ResponseEntity.notFound().build());
       }
+      pageInfo.setPages(totalPages);
       messageResultOfReport.setData(pageInfo);
-      messageResultOfReport.setTotalPages(totalPages);
+//      messageResultOfReport.setTotalPages(totalPages);
       return messageResultOfReport;
    }
 }

@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="更新">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/MessageRemindingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/MessageRemindingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/MessageRemindingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/MessageRemindingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfApply.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfApply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfReport.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
