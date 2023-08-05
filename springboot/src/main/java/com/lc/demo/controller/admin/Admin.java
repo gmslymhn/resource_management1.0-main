@@ -120,16 +120,5 @@ public class Admin {
         return "adm/goodsbyid";
     }
 
-    //根据名称查询物品
-    @GetMapping(value = "/adm/selectByName/{pn}")
-    public String selectStuByClass(@PathVariable("pn") Integer pn,@Param("goodsName") String goodsName,Model model)
-    {
-        PageHelper.startPage(pn, 6);
-        List<Goods> goods = goodsService.selectGoodsByGoodsName(goodsName);
-        PageInfo<Goods> page = new PageInfo<Goods>(goods, 5);
-        model.addAttribute("pageInfo",page);
-        model.addAttribute("goodsName",goodsName);
-        return "adm/goodsbyname";
-    }
 
 }

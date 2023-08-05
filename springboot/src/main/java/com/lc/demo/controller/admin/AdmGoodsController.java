@@ -3,7 +3,7 @@ package com.lc.demo.controller.admin;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
 import com.lc.demo.service.ImageService;
-import com.lc.demo.utils.GoodsResult;
+import common.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,11 +39,15 @@ public class AdmGoodsController {
     /**
      * 添加物品
      * @param uploadImage
-     * @param goods
+     * @param goodsName
+     * @param goodsState
      * @return
      */
     @PostMapping("/addGoods")
-    public ResponseEntity<Void> addGoods(@RequestParam MultipartFile uploadImage, @RequestBody Goods goods){
+    public ResponseEntity<Void> addGoods(@RequestParam MultipartFile uploadImage, @RequestParam String goodsName,@RequestParam String goodsState){
+        Goods goods = new Goods();
+        goods.setGoodsName(goodsName);
+        goods.setGoodsState(goodsState);
         imageService.saveGoodsImage(uploadImage,goods);
         goodsService.addGoods(goods);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -52,12 +56,18 @@ public class AdmGoodsController {
     /**
      * 更新物品
      * @param uploadImage
-     * @param goods
+     * @param goodsId
+     * @param goodsName
+     * @param goodsState
      * @return
      */
     @PostMapping("/updateGoods")
-    public ResponseEntity<Void> updateGoods(@RequestParam MultipartFile uploadImage,@RequestBody Goods goods){
-        imageService.saveGoodsImage( uploadImage,goods);
+    public ResponseEntity<Void> updateGoods(@RequestParam MultipartFile uploadImage,@RequestParam int goodsId,@RequestParam String goodsName,@RequestParam String goodsState){
+        Goods goods = new Goods();
+        goods.setGoodsName(goodsName);
+        goods.setGoodsState(goodsState);
+        goods.setGoodsId(goodsId);
+        imageService.saveGoodsImage(uploadImage,goods);
         if(goodsService.updateGoods(goods) == 1){
             return ResponseEntity.ok().build();
         }else {
@@ -101,10 +111,9 @@ public class AdmGoodsController {
      * @param pageNum 页码
      * @return
      */
-
-
-
-
-
+    @PostMapping("/selectGoodsByGoodsName")
+    public GoodsResult selectGoodsByGoodsName(@RequestParam int pageNum, @RequestParam  int pageSize,@RequestParam  String goodsName){
+        return goodsService.selectGoodsByGoodsName(pageNum,pageSize,goodsName);
+    }
 
 }

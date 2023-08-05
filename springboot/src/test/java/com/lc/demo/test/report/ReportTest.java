@@ -31,12 +31,7 @@ public class ReportTest {
 
      //Date time0 = new java.sql.Date(new java.util.Date().getTime());
 //todo:测试：DateTimeLiteralExpression.DateTime 如何进行测试，可以与mysql中datatime进行匹配？
-      DateTimeLiteralExpression.DateTime time = DateTimeLiteralExpression.DateTime.TIME;
-
-      System.out.println(time);
-      Report testReport = new Report("1号椅子损坏",0,"1号椅子","1号椅于2023.07.27椅背裂开",time,time,0,"已申报未处理");
-
-      reportsMapper.insertReport(testReport);
+//      Date time = new Date;
    }
    @Test
    public void selectAllReportTest(){

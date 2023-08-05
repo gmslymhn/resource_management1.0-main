@@ -1,13 +1,10 @@
 package com.lc.demo.controller.user;
 
-import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
-import com.lc.demo.utils.GoodsResult;
+import common.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author 22932
@@ -18,7 +15,6 @@ public class UseGoodsController {
 
     @Autowired
     private GoodsService goodsService;
-
     /**
      * 得到一个全部物品的List
      * @param pageNum
@@ -28,9 +24,7 @@ public class UseGoodsController {
     @GetMapping("/getAllGoods")
     public GoodsResult getAllGoods(@RequestParam int pageNum, @RequestParam int pageSize){
         return goodsService.getAllGoods(pageNum,pageSize);
-
     }
-
     /**
      * 按id筛选物品
      * @param goodsId
@@ -47,5 +41,11 @@ public class UseGoodsController {
      * @param pageNum 页码
      * @return
      */
+
+    @PostMapping("/selectGoodsByGoodsName")
+    public GoodsResult selectGoodsByGoodsName(@RequestParam int pageNum, @RequestParam int pageSize,@RequestParam String goodsName){
+        return goodsService.selectGoodsByGoodsName(pageNum,pageSize,goodsName);
+    }
+
 
 }

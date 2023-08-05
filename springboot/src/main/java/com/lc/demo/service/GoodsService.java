@@ -1,9 +1,7 @@
 package com.lc.demo.service;
 
-import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
-import com.lc.demo.utils.GoodsResult;
-import com.lc.demo.bean.Goods;
+import common.GoodsResult;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public interface GoodsService {
      * @return 模糊查找出的物品集合
      */
 
-   List<Goods> selectGoodsByGoodsName(String goodsName);
+    GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName);
 
     /**
      * 按id查找

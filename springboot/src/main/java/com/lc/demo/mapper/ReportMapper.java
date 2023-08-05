@@ -34,6 +34,9 @@ public interface ReportMapper {
     @Select("select * from report where report_name = #{reportName}")
     List<Report> selectReportByReportName(String reportName);
 
+    //展示界面未处理在已处理之上
+    @Select("select * from report where report_name = #{goodsState}")
+    List<Report> selectReportByState(int goodsState);
     /**
      * 查询：根据处理结果查询记录
      * @param disposeName
@@ -47,9 +50,9 @@ public interface ReportMapper {
      * @param report
      * @return
      */
-    @Insert("insert into report(report_name,goods_id,goods_name,damage_description,reporting_time,process_time,goods_state,dispose_name) " +
+    @Insert("insert into report(report_name,goods_id,goods_name,damage_description,reporting_time,process_time,goods_state,dispose_name,apply_assets) " +
             "values" +
-            "(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName})")
+            "(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName},#{applyAssets})")
     int insertReport(Report report);
 
     /**
