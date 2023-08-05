@@ -82,7 +82,7 @@ CREATE TABLE `report`  (
                          reporting_time     TIMESTAMP    not null DEFAULT CURRENT_TIMESTAMP comment '上报时间',
                          process_time       TIMESTAMP    not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '处理时间',
                          goods_state        int          not null comment '未处理1    已处理已同意2   已处理但未同意3',
-                         dispose_name       varchar(255) not null comment '处理人',
+                         dispose_name       varchar(255)          comment '处理人',
                          primary key (goods_id, sequence_id)
 )
  ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_croatian_ci ROW_FORMAT = Dynamic;
