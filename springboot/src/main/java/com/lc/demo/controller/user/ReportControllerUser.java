@@ -2,81 +2,70 @@ package com.lc.demo.controller.user;
 
 import com.lc.demo.bean.Report;
 import com.lc.demo.service.ReportService;
+import common.ReportsResult;
 import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * (用户)物品损坏上报
+ * 物品损坏上报
  */
-
 @RestController
-@RequestMapping("/user/userreport")
+@RequestMapping("/user/useReport")
 public class ReportControllerUser {
     @Autowired
     private ReportService reportService;
 
     /**
-     * 查询：查询全部损坏记录信息记录
+     * 查询所有上报信息
+     * @param pageNum
+     * @param pageSize
      * @return
      */
     @GetMapping("/getALLReport")
-    public Result<List<Report>> getALLReport() {
-        return  Result.success(reportService.getALLReport());
+    public ReportsResult getALLReport(@RequestParam int pageNum, @RequestParam int pageSize) {
+        return reportService.getALLReport(pageNum, pageSize);
     }
 
-
     /**
-     * 查询：根据物品id查询物品损坏信息记录
-     * @param goodsId
-     * @return
-     */
-    @GetMapping("/selectById")
-    public Result<List<Report>> selectById(@RequestParam int goodsId) {
-        return  Result.success(reportService.selectById(goodsId));
-    }
-
-
-    /**
-     * 查询：根据上报人名称查询物品损坏信息记录
+     * 根据上报人查询上报信息
+     * @param pageNum
+     * @param pageSize
      * @param reportName
      * @return
      */
     @GetMapping("/selectByReportName")
-    public Result<List<Report>> selectByReportName(@RequestParam String reportName) {
-        return Result.success(reportService.selectByReportName(reportName));
-    }
-
-
-    /**
-     * 查询：根据处理人名称查询物品损坏信息记录
-     * @param disposeName
-     * @return
-     */
-    @GetMapping("/selectByDisposeName")
-    public Result<List<Report>> selectByDisposeName(@RequestParam String disposeName) {
-        return Result.success(reportService.selectByDisposeName(disposeName));
+    public ReportsResult selectByReportName(@RequestParam int pageNum, @RequestParam int pageSize,@RequestParam String reportName) {
+        return reportService.selectByReportName(pageNum, pageSize,reportName);
     }
 
     /**
-     * 增加：上报物品损坏信息
+     * 添加上报信息
      * @param report
      * @return
      */
     @PostMapping("/addReport")
-    public Result addReport(@RequestBody Report report) {
-        return Result.success(reportService.addReport(report));
+    public ResponseEntity<Integer> addReport(@RequestBody Report report) {
+        reportService.addReport(report);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     /**
-     * 删除：根据上报id删除物品损坏信息
-     * @param goodsId
+     * 根据id删除
+     * @param sequenceId
      * @return
      */
     @GetMapping("/deleteReport")
-    public Result deleteReport(@RequestParam int goodsId) {
-        return Result.success(reportService.deleteReport(goodsId));
+    public ResponseEntity<Void> deleteReport(@RequestParam int sequenceId) {
+        if( reportService.deleteReport(sequenceId) == 1){
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

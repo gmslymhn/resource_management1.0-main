@@ -12,31 +12,26 @@ import java.util.List;
 @Mapper
 public interface ReportMapper {
 
-    /**
-     * 查询：查询全部损坏记录信息记录
-     * @return
-     */
+
     @Select("select * from report")
     List<Report> selectAllReport();
 
-    /**
-     * 查询：根据物品id查询物品损坏信息记录
-     * @param goodsId
-     * @return
-     */
     @Select("select * from report where goods_id = #{goodsId}")
-    List<Report> selectReportById(int goodsId);
+    Report selectReportById(int goodsId);
 
     /**
-     * 查询：根据上报人名称查询物品损坏信息记录
+     * 查询：根据上报人记录名查询记录
      * @param reportName
      * @return
      */
     @Select("select * from report where report_name = #{reportName}")
     List<Report> selectReportByReportName(String reportName);
 
+    //展示界面未处理在已处理之上
+    @Select("select * from report where report_name = #{goodsState}")
+    List<Report> selectReportByState(int goodsState);
     /**
-     * 查询：根据处理人名称查询物品损坏信息记录
+     * 查询：根据处理人查询记录
      * @param disposeName
      * @return
      */
@@ -44,21 +39,29 @@ public interface ReportMapper {
     List<Report> selectReportByDisposeName(String disposeName);
 
     /**
-     * 增加：上报物品损坏信息
+     * 添加：增加记录信息
      * @param report
-     * @return  返回整形数值为1.上报成功
-     *          返回整形数值为0.上报失败
+     * @return
      */
-    @Insert("insert into class value(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName})")
+    @Insert("insert into report(report_name,goods_id,goods_name,damage_description,reporting_time,process_time,goods_state,dispose_name,apply_assets) " +
+            "values" +
+            "(#{reportName},#{goodsId},#{goodsName},#{damageDescription},#{reportTime},#{processTime},#{goodsState},#{disposeName},#{applyAssets})")
     int insertReport(Report report);
 
     /**
-     * 删除：根据上报id删除物品损坏信息
-     * @param sequenceId
+     * todo：删除数据是否需要判断数据id是否存在
+     *      情境1.用户手动输入id，需要判断，那么如何判断->查询？
+     *      情况2.用户勾选数据框进行删除，确认存在无需判断
+     *      假定为情况2
+     * 删除：删除记录信息
+     * @param goodsId
      * @return 返回整形数值为1.删除成功
      *         返回整形数值为0.删除失败
      */
-    @Delete("delect from report where sequence_id = #{sequenceId}")
-    int deleteReportById(int sequenceId);
+
+    @Delete("delect from report where goods_id = #{goodsId}")
+
+    int deleteReportById(int goodsId);
+
 
 }

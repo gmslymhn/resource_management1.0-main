@@ -1,56 +1,56 @@
 package com.lc.demo.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Report;
+import com.lc.demo.mapper.GoodsMapper;
 import com.lc.demo.mapper.ReportMapper;
 import com.lc.demo.service.ReportService;
+import common.ReportsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 public class ReportServiceImpl implements ReportService {
     @Autowired
     private ReportMapper reportMapper;
-    private final Integer pageSize = 5;
-    @Override
-    public List<Report> getALLReport(Integer pageNum) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Report> allReport = reportMapper.selectAllReport();
-        return allReport;
-    }
-
-    @Override
-    public List<Report> selectById(Integer pageNum,int goodId) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Report> selectedReportById = reportMapper.selectReportById(goodId);
-        return selectedReportById;
-    }
+    @Autowired
+    private GoodsMapper goodsMapper;
 
 
     @Override
-    public List<Report> selectByReportName(Integer pageNum,String reportName) {
+    public ReportsResult getALLReport(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Report> selectedReportByReportName = reportMapper.selectReportByReportName(reportName);
-        return selectedReportByReportName;
-    }
-
-    @Override
-    public List<Report> selectByDisposeName(Integer pageNum,String dipsoseName) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Report> selectedReportByDisposeName = reportMapper.selectReportByDisposeName(dipsoseName);
-        return selectedReportByDisposeName;
+        PageInfo<Report> pageInfo = new PageInfo<>(reportMapper.selectAllReport());
+        return ReportsResult.pagingReportsResult(pageNum, pageInfo);
     }
 
     @Override
     public int addReport(Report report) {
-        int isAddSuccess = reportMapper.insertReport(report);
-        return isAddSuccess;
+        report.setGoodsName(String.valueOf(goodsMapper.selectGoodsById(report.getGoodsId())));
+        return reportMapper.insertReport(report);
     }
 
     @Override
-    public int deleteReport(int goodsId) {
-        int isDeleteSuccess = reportMapper.deleteReportById(goodsId);
-        return isDeleteSuccess;
+    public ReportsResult selectByReportName(int pageNum, int pageSize, String reportName) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Report> pageInfo = new PageInfo<>(reportMapper.selectReportByReportName(reportName));
+        return ReportsResult.pagingReportsResult(pageNum, pageInfo);
+    }
+
+    @Override
+    public ReportsResult selectByDisposeName(int pageNum, int pageSize, String disposeName) {
+        PageHelper.startPage(pageNum,pageSize);
+        PageInfo<Report> pageInfo = new PageInfo<>(reportMapper.selectReportByDisposeName(disposeName));
+        return ReportsResult.pagingReportsResult(pageNum, pageInfo);
+    }
+
+    @Override
+    public int deleteReport(Integer sequenceId) {
+        return reportMapper.deleteReportById(sequenceId);
+    }
+    @Override
+    public Report selectById(int sequenceId) {
+        return reportMapper.selectReportById(sequenceId);
     }
 }

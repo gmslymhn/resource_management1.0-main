@@ -1,51 +1,58 @@
 package com.lc.demo.service;
 
 import com.lc.demo.bean.Report;
-
-import java.util.List;
+import common.ReportsResult;
 
 public interface ReportService {
+    
     /**
-     * 查询：查询全部损坏记录信息记录
+     * 查询：所有记录
+     * @param pageNum
+     * @param pageSize
      * @return
      */
-    List<Report> getALLReport(Integer pageNum);
+    ReportsResult getALLReport(int pageNum, int pageSize);
 
     /**
-     * 查询：根据物品id查询物品损坏信息记录
-     * @param goodsId
+     * 查询：根据id查询
+     * @param sequenceId
      * @return
      */
-    List<Report> selectById(Integer pageNum,int goodsId);
+    Report selectById(int sequenceId);
+
+    /**
+     * 添加：上报信息
+     * @param report
+     * @return
+     */
+
+    int addReport(Report report);
+
+
 
 
     /**
-     * 查询：根据上报人名称查询物品损坏信息记录
+     * 查询：根据上报人查询记录
      * @param reportName
      * @return
      */
-    List<Report>  selectByReportName(Integer pageNum,String reportName);
+    ReportsResult  selectByReportName(int pageNum, int pageSize,String reportName);
 
     /**
-     * 查询：根据处理人名称查询物品损坏信息记录
+     * 查询：根据处理人查询记录
+     * @param pageNum
+     * @param pageSize
      * @param disposeName
+     * @return
      */
-    List<Report>  selectByDisposeName(Integer pageNum,String disposeName);
+    ReportsResult  selectByDisposeName(int pageNum, int pageSize,String disposeName);
 
     /**
-     * 增加：上报物品损坏信息
-     * @param report
-     * @return  返回整形数值为1.上报成功
-     *          返回整形数值为0.上报失败
-     */
-    int addReport(Report report);
-    /**
-     * 删除：根据上报id删除物品损坏信息
+     * 删除：删除记录信息
      * @param sequenceId
-     * @return  返回整形数值为1.删除成功
-     *          返回整形数值为0.删除失败
+     * @return
      */
-    int deleteReport(int sequenceId);
+    int deleteReport(Integer sequenceId);
 
 
 

@@ -30,7 +30,7 @@
 
     <update id="SynchronizeData" >
 
-                UPDATE assets
+                UPDATE assetss
                 SET total_asstes = (SELECT afterwards_assets FROM  assets_log ),
                     time = (SELECT process_time FROM  assets_log );
 
