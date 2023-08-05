@@ -47,26 +47,25 @@ public class AssetsLogController {
 
     /**
      * 添加
-     * @param  id
-     * @param change_assets
-     * @param  description
+     * @param  applyId
      * @return
      */
     @PostMapping
-    public Result addAssets_Log(int  id,float change_assets,String description ) {
-        log.info("新增：{},{},{}",id,change_assets,description );
-        assetsLogService.addAssets_Log(id,change_assets,description);
+    public Result addAssets_Log(int  applyId ) {
+        log.info("新增：{}",applyId );
+        assetsLogService.addAssets_Log(applyId);
         return  Result.success();
 }
 
     /**
      * 修改信息
-     * @param assetsLog
+     * @param id
+     *  @param description
      */
-    @PutMapping
-    public Result  update(@RequestBody Assets_Log assetsLog){
-        log.info("修改信息:{}",assetsLog);
-        assetsLogService.update(assetsLog);
+    @PutMapping("/update")
+    public Result  update(@RequestParam  int id ,@RequestParam String description){
+        log.info("修改信息:{}",description);
+        assetsLogService.update(id,description);
         return Result.success();
     }
 
@@ -78,7 +77,7 @@ public class AssetsLogController {
      * @return
      */
     @GetMapping("/{assetsLogId}")
-    public Result<Assets_Log> selectById(@PathVariable int assetsLogId){
+    public Result<Assets_Log> selectById(@RequestParam int assetsLogId){
         log.info("根据日志id查询:{}",assetsLogId);
         Assets_Log assetsLog =assetsLogService.selectById(assetsLogId);
                 return Result.success(assetsLog);
@@ -90,7 +89,7 @@ public class AssetsLogController {
      * @return
      */
     @GetMapping("/{userName}")
-    public Result<AssetLogsPage> selectByName(@PathVariable String userName,@RequestParam int pageNum, @RequestParam int pageSize) {
+    public Result<AssetLogsPage> selectByName(@RequestParam String userName,@RequestParam int pageNum, @RequestParam int pageSize) {
         log.info("根据name查询:{}",userName);
         AssetLogsPage list =assetsLogService.selectByName(userName,pageNum,pageSize);
         return Result.success(list);

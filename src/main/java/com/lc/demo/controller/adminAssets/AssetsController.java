@@ -16,6 +16,7 @@ import java.util.List;
  * 资金管理
  */
 @RestController
+@ResponseBody
 @RequestMapping("/admin/admassets/assets")
 @Slf4j
 public class AssetsController {
@@ -30,11 +31,24 @@ public class AssetsController {
      * @return
      */
     @PutMapping("/update/total")
-    public Result<String> updateTotalAssets(float totalAssets,String description){
+    public Result<String> updateTotalAssets(Float totalAssets,String description){
         log.info("修改总资产:{}",totalAssets);
         assetsService.updateTotalAssets(totalAssets, description);
         return Result.success();
 }
+
+
+    /**
+     * 修改总资产
+     * @param description
+     * @return
+     */
+//    @PutMapping("/update/total")
+//    public Result<String> updateDescription(String description){
+//        log.info("修改描述:{}",description);
+//        assetsService.updateTotalAssets( description);
+//        return Result.success();
+//    }
 
 
     /**

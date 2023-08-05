@@ -1,10 +1,7 @@
 package com.lc.demo.mapper;
 
 import com.lc.demo.bean.Assets;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,13 +19,17 @@ public interface AssetsMapper {
 
     @Select("select * from assets")
     List<Assets> all();
-    @Select("select * from assets WHERE time = (SELECT MAX(time) FROM assets)")
+    @Select("select * from assets WHERE id = (SELECT MAX(id) FROM assets)")
     Assets newAssets();
 
     @Insert("insert into assets (total_assets,disposable_assets,time,description,percentage)" +
             "VALUES" +
             "(#{totalAssets},#{disposableAssets},#{time},#{description},#{percentage})")
-    int insert(float total, float disposable, LocalDateTime now,String description,float percentage);
+    int insert(@Param("totalAssets") float total,
+               @Param("disposableAssets") float disposable,
+               @Param("time") LocalDateTime now,
+               @Param("description") String description,
+               @Param("percentage") float percentage);;
 
 
 

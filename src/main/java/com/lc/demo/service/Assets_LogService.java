@@ -26,18 +26,17 @@ public interface Assets_LogService {
     
     /**
      * 添加
-     * @param  id
-     * @param change_assets
-     * @param  description
+     * @param  applyId
      * @return
      */
-     void addAssets_Log(int  id,float change_assets,String description ) ;
+     void addAssets_Log(int  applyId ) ;
 
     /**
      * 修改信息
-     * @param assetsLog
+     * @param id
+     * @param description
      */
-    int  update(Assets_Log assetsLog);
+    int  update(int id ,String description);
     
     
     /**

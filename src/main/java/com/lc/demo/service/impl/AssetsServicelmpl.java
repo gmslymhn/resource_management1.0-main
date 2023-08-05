@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 @Service
 
@@ -43,7 +44,7 @@ public class AssetsServicelmpl  implements AssetsService {
     @Override
     public Assets selectNewAssets() {
         Assets assets = assetsMapper.newAssets();
-        return null;
+        return assets;
     }
 
     @Override
@@ -52,20 +53,36 @@ public class AssetsServicelmpl  implements AssetsService {
         return newDisposableAssets;
     }
 
-    @Override
+//    @Override
+//    public void updateAssetsPercentage(float percentage,String description) {
+//        float total =assetsMapper.newAssets().getTotalAssets();
+//        assetsMapper.insert(total,total*percentage, LocalDateTime.now(),description,percentage) ;
+//
+//    }
+
     public void updateAssetsPercentage(float percentage,String description) {
         float total =assetsMapper.newAssets().getTotalAssets();
         assetsMapper.insert(total,total*percentage, LocalDateTime.now(),description,percentage) ;
 
     }
 
+    public void updateTotalAssets(Float totalAssets,String description) {
 
-    public void updateTotalAssets(float totalAssets,String description) {
+        if (totalAssets == null) {
+            // 处理totalAssets为空的情况
+            throw new IllegalArgumentException("总资产不能为空。");
+        }
 
-        float percentage =assetsMapper.newAssets().getPercentage();
-        assetsMapper.insert(totalAssets,totalAssets*percentage, LocalDateTime.now(),description,percentage) ;
-
+        float percentage = assetsMapper.newAssets().getPercentage();
+        assetsMapper.insert(totalAssets, totalAssets * percentage, LocalDateTime.now(), description, percentage);
     }
+
+    @Override
+    public void insertAssets( float totalAssets, float disposableAssets, float percentage, String description) {
+        assetsMapper.insert(totalAssets,disposableAssets,LocalDateTime.now(),description,percentage);
+    }
+
+
     @Override
     public float selectNewTotalAssets() {
         return assetsMapper.newAssets().getTotalAssets();

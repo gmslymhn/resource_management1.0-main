@@ -1,0 +1,22 @@
+<!--&lt;!&ndash; resources/com/lc/demo/mapper/Assets_LogMapper.xml &ndash;&gt;-->
+
+<!--<!DOCTYPE mapper-->
+<!--        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+
+<!--<mapper namespace="com.lc.demo.mapper.Assets_LogMapper">-->
+
+<!--    <update id="update" parameterType="Assets_Log">-->
+<!--        UPDATE assets_log-->
+<!--        <set>-->
+<!--            <if test="userName != null">user_name = #{userName},</if>-->
+<!--            <if test="description != null">description = #{description},</if>-->
+<!--            <if test="changeAssets != null">change_assets = #{changeAssets},</if>-->
+<!--            <if test="processTime != null">process_time = #{processTime},</if>-->
+<!--            <if test="beforeAssets != null">before_assets = #{beforeAssets},</if>-->
+<!--            <if test="afterAssets != null">after_assets = #{afterAssets}</if>-->
+<!--        </set>-->
+<!--        WHERE assets_log_id = #{assetsLogId}-->
+<!--    </update>-->
+
+<!--</mapper>-->

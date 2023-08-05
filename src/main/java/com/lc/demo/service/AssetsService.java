@@ -5,6 +5,7 @@ import com.lc.demo.common.AssetLogsPage;
 import com.lc.demo.common.AssetsPage;
 
 
+import java.util.Date;
 import java.util.List;
 
 public interface AssetsService {
@@ -20,9 +21,12 @@ public interface AssetsService {
 
      void    updateAssetsPercentage(float percentage,String description);
 
-     void updateTotalAssets(float totalAssets,String description) ;
+     void updateTotalAssets(Float totalAssets,String description) ;
 
-        float   selectNewTotalAssets();
+     void insertAssets(  float totalAssets, float disposableAssets, float percentage, String description);
+
+        float   selectNewTotalAssets() ;
+
 
 
 
