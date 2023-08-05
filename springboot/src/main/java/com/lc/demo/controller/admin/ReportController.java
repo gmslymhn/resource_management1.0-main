@@ -1,5 +1,6 @@
 package com.lc.demo.controller.admin;
 
+import com.github.pagehelper.PageHelper;
 import com.lc.demo.bean.Report;
 import com.lc.demo.service.ReportService;
 import common.Result;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 物品损坏上报
+ * (管理员)物品损坏上报
  */
 @RestController
 @RequestMapping("/admin/admReport")
@@ -19,7 +20,7 @@ public class ReportController {
     private ReportService reportService;
 
     /**
-     * 查询所有上报信息
+     * 查询：查询全部损坏记录信息记录
      * @return
      */
     @GetMapping("/getALLReport")
@@ -29,18 +30,18 @@ public class ReportController {
 
 
     /**
-     * 根据id查询上报信息
+     * 查询：根据物品id查询物品损坏信息记录
      * @param goodsId
      * @return
      */
     @GetMapping("/selectById")
-    public Result<Report> selectById(@RequestParam int goodsId) {
+    public Result<List<Report>> selectById(@RequestParam int goodsId) {
         return  Result.success(reportService.selectById(goodsId));
     }
 
 
     /**
-     * 根据上报人查询上报信息
+     * 查询：根据上报人名称查询物品损坏信息记录
      * @param reportName
      * @return
      */
@@ -51,7 +52,7 @@ public class ReportController {
 
 
     /**
-     * 根据处理人查询信息
+     * 查询：根据处理人名称查询物品损坏信息记录
      * @param disposeName
      * @return
      */
@@ -61,7 +62,7 @@ public class ReportController {
     }
 
     /**
-     * 添加上报信息
+     * 增加：上报物品损坏信息
      * @param report
      * @return
      */
@@ -71,7 +72,7 @@ public class ReportController {
     }
 
     /**
-     * 根据id删除
+     * 删除：根据上报id删除物品损坏信息
       * @param goodsId
      * @return
      */

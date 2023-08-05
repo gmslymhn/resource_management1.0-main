@@ -2,6 +2,8 @@ package com.lc.demo.bean;
 
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
+import java.sql.Date;
+
 public class Report {
 
     private  int sequenceId;
@@ -12,9 +14,9 @@ public class Report {
     private String goodsName;
 
     private String damageDescription;
-
-    private DateTimeLiteralExpression.DateTime reportTime;
-
+    @TableField(fill = FieldFill.INSERT)
+    private Date reportTime;
+    @TableField(fill = FieldFill.UPTATE)
     private DateTimeLiteralExpression.DateTime processTime;
 
     private int goodsState;

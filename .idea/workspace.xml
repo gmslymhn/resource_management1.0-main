@@ -55,8 +55,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -104,6 +105,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lc.demo.controller.user" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.DemoApplication (2)">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="resource_management1.0-main" />
@@ -145,6 +151,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.DemoApplication (2)" />
+      <item itemvalue="Spring Boot.DemoApplication" />
+      <item itemvalue="Spring Boot.DemoApplication (1)" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.DemoApplication (1)" />
