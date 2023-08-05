@@ -23,14 +23,12 @@ public class MessageRemindingServiceImpl implements MessageRemindingService {
     private final int pageSize = 7;
     @Override
     public int selectUnprocessedReportNum() {
-        int unprocessedReportNum = messageRemindingMapper.selectUnprocessedReportNum();
-        return unprocessedReportNum;
+        return messageRemindingMapper.selectUnprocessedReportNum();
     }
 
     @Override
     public int selectUnprocessedApplyAssetsNum() {
-        int unprocessedApplyAssetsNum = messageRemindingMapper.selectUnprocessedApplyAssetsNum();
-        return unprocessedApplyAssetsNum;
+        return messageRemindingMapper.selectUnprocessedApplyAssetsNum();
     }
 
     @Override
@@ -43,27 +41,23 @@ public class MessageRemindingServiceImpl implements MessageRemindingService {
     public MessageResultOfReport selectReportByGoodsState(int pageNum) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Report> pageInfo = new PageInfo<>(messageRemindingMapper.selectReportByGoodsState());
-        MessageResultOfReport messageResultOfReport = MessageResultOfReport.pagingMessageResult(pageSize, pageInfo);
-        return messageResultOfReport;
+        return MessageResultOfReport.pagingMessageResult(pageSize, pageInfo);
     }
     @Override
     public MessageResultOfApply selectApplyByApplyState(int pageNum) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<ApplyAssets> pageInfo = new PageInfo<>(messageRemindingMapper.selectApplyByApplyState());
-        MessageResultOfApply messageResultOfApply = MessageResultOfApply.pagingMessageResult(pageSize, pageInfo);
-        return messageResultOfApply;
+        return MessageResultOfApply.pagingMessageResult(pageSize, pageInfo);
     }
 
 
     @Override
     public int updateReportBySequenceId(Report report) {
-        int updated = messageRemindingMapper.updateReportBySequenceId(report);
-        return updated;
+        return messageRemindingMapper.updateReportBySequenceId(report);
     }
 
     @Override
     public int updateApplyAssetsByApplyId(ApplyAssets applyAssets) {
-        int updated = messageRemindingMapper.updateApplyAssetsByApplyId(applyAssets);
-        return updated;
+        return messageRemindingMapper.updateApplyAssetsByApplyId(applyAssets);
     }
 }

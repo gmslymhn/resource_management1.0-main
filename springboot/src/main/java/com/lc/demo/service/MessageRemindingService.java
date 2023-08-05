@@ -30,7 +30,7 @@ public interface MessageRemindingService {
 
     /**
      * 获取各个未处理表相加后的总值
-     * @return
+     * @return 各个未处理表信息相加后的总条数
      */
     int getMessageQuantity();
 
@@ -48,13 +48,13 @@ public interface MessageRemindingService {
 
     /**
      * 更新：根据上报id更新4个处理信息属性(上报信息状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
-     * @return 更行行数
+     * @return 更新行数
      */
     int updateReportBySequenceId(Report report);
 
     /**
      * 更新：根据申请id更新4+1个处理信息属性(申请状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
-     * @return 更行行数
+     * @return 更新行数
      */
     int updateApplyAssetsByApplyId(ApplyAssets applyAssets);
 

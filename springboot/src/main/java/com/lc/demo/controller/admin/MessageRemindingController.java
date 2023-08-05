@@ -25,11 +25,11 @@ public class MessageRemindingController {
      * @return 未处理上报信息条数
      */
     @GetMapping("/getUnprocessedReportNum")
-     public Result selectUnprocessedReportNum(){
+     public Result<Integer> selectUnprocessedReportNum(){
         int unprocessedReportNum = messageRemindingService.selectUnprocessedReportNum();
 
         return Result.success(unprocessedReportNum);
-    };
+    }
 
     /**
      * 不传入参数，
@@ -37,18 +37,18 @@ public class MessageRemindingController {
      * @return 未处理申请信息条数
      */
     @GetMapping("/getUnprocessedApplyAssetsNum")
-    public Result selectUnprocessedApplyAssetsNum(){
+    public Result<Integer> selectUnprocessedApplyAssetsNum(){
         int unprocessedApplyAssetsNum = messageRemindingService.selectUnprocessedApplyAssetsNum();
         return Result.success(unprocessedApplyAssetsNum);
 
-    };
+    }
 
     /**
      * 获取各个未处理表相加后的总值
-     * @return
+     * @return 各个未处理表信息相加后的总条数
      */
     @GetMapping("/getMessageQuantity")
-    public Result getMessageQuantity() {
+    public Result<Integer> getMessageQuantity() {
         int messageQuantity = messageRemindingService.getMessageQuantity();
         return Result.success(messageQuantity);
     }
@@ -58,23 +58,26 @@ public class MessageRemindingController {
      * @return 未处理上报信息list包装类
      */
     @GetMapping("/getUnprocessedReport")
-    MessageResultOfReport selectReportByGoodsState(@RequestParam int pageNum){
+    public MessageResultOfReport selectReportByGoodsState(@RequestParam int pageNum){
         return messageRemindingService.selectReportByGoodsState(pageNum);
-    };
+    }
 
     /**传入 int 型参数页面序号pageNum，
      * 查询：查询未处理申请资金信息列表
      * @return 未处理申请资金list包装类
      */
     @GetMapping("/getUnprocessedApply")
-    MessageResultOfApply selectApplyByApplyState(@RequestParam int pageNum){
+    public MessageResultOfApply selectApplyByApplyState(@RequestParam int pageNum){
         return messageRemindingService.selectApplyByApplyState(pageNum);
-    };
-    @PostMapping("/UpdateProcessedReport")
+    }
+
+
     /**
+     *
      * 更新：根据上报id更新4个处理信息属性(上报信息状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
      * @return 更行行数
      */
+    @PostMapping("/UpdateProcessedReport")
     public ResponseEntity<Void> updateReportBySequenceId(@RequestParam int sequenceId, @RequestParam String goodsState, @RequestParam int disposeNameId, @RequestParam String disposeName, @RequestParam String disposeDescription){
         Report report = new Report();
         report.setSequenceId(sequenceId);
@@ -87,8 +90,7 @@ public class MessageRemindingController {
         }else {
             return ResponseEntity.notFound().build();
         }
-
-    };
+    }
     /**
      * 更新：根据申请id更新4+1个处理信息属性(申请状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
      * @return 更行行数
@@ -106,5 +108,5 @@ public class MessageRemindingController {
         }else {
             return ResponseEntity.notFound().build();
         }
-    };
+    }
 }
