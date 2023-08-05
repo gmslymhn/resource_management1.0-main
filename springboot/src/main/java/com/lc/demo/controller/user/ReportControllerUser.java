@@ -61,9 +61,9 @@ public class ReportControllerUser {
      * @return
      */
     @GetMapping("/deleteReport")
-    public ResponseEntity<Void> deleteReport(@RequestParam int sequenceId) {
+    public ResponseEntity<Integer> deleteReport(@RequestParam int sequenceId) {
         if( reportService.deleteReport(sequenceId) == 1){
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(this.reportService.deleteReport(sequenceId));
         }else {
             return ResponseEntity.notFound().build();
         }

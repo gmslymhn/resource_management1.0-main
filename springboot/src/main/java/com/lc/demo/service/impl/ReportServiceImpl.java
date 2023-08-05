@@ -10,6 +10,9 @@ import common.ReportsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ReportServiceImpl implements ReportService {
     @Autowired
@@ -21,13 +24,19 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public ReportsResult getALLReport(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<Report> pageInfo = new PageInfo<>(reportMapper.selectAllReport());
+        List<Report> list = reportMapper.selectReportByState("未处理");
+        list.addAll(reportMapper.selectReportByState("已处理"));
+        PageInfo<Report> pageInfo = new PageInfo<>(list);
         return ReportsResult.pagingReportsResult(pageNum, pageInfo);
     }
 
     @Override
     public int addReport(Report report) {
-        report.setGoodsName(String.valueOf(goodsMapper.selectGoodsById(report.getGoodsId())));
+        report.setGoodsName(goodsMapper.selectGoodsById(report.getGoodsId()).getGoodsName());
+        report.setGoodsState("未处理");
+        report.setDisposeNameId(0);
+        report.setDisposeName("无");
+        report.setDisposeDescription("无");
         return reportMapper.insertReport(report);
     }
 
@@ -44,9 +53,8 @@ public class ReportServiceImpl implements ReportService {
         PageInfo<Report> pageInfo = new PageInfo<>(reportMapper.selectReportByDisposeName(disposeName));
         return ReportsResult.pagingReportsResult(pageNum, pageInfo);
     }
-
     @Override
-    public int deleteReport(Integer sequenceId) {
+    public int deleteReport(int sequenceId) {
         return reportMapper.deleteReportById(sequenceId);
     }
     @Override

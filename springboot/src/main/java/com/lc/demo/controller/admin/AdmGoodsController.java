@@ -82,7 +82,6 @@ public class AdmGoodsController {
      */
     @GetMapping("/deleteGoods")
     public ResponseEntity<Void>  deleteGoods(@RequestParam Integer goodsId){
-
         if( goodsService.deleteGoods(goodsId) == 1){
             return ResponseEntity.ok().build();
         }else {
