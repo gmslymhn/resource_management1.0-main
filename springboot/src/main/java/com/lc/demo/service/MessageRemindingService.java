@@ -1,5 +1,7 @@
 package com.lc.demo.service;
 
+import com.lc.demo.bean.ApplyAssets;
+import com.lc.demo.bean.Report;
 import common.MessageResultOfApply;
 import common.MessageResultOfReport;
 
@@ -48,12 +50,12 @@ public interface MessageRemindingService {
      * 更新：根据上报id更新4个处理信息属性(上报信息状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
      * @return 更行行数
      */
-    int updateReportBySequenceId();
+    int updateReportBySequenceId(Report report);
 
     /**
      * 更新：根据申请id更新4+1个处理信息属性(申请状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
      * @return 更行行数
      */
-    int updateApplyAssetsByApplyId();
+    int updateApplyAssetsByApplyId(ApplyAssets applyAssets);
 
 }

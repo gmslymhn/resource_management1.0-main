@@ -82,7 +82,7 @@ public class MessageRemindingController {
         report.setDisposeNameId(disposeNameId);
         report.setDisposeName(disposeName);
         report.setDisposeDescription(disposeDescription);
-        if(messageRemindingService.updateApplyAssetsByApplyId()==1){
+        if(messageRemindingService.updateReportBySequenceId(report)==1){
             return ResponseEntity.ok().build();
         }else {
             return ResponseEntity.notFound().build();
@@ -101,7 +101,7 @@ public class MessageRemindingController {
         applyAssets.setDisposeNameId(disposeNameId);
         applyAssets.setDisposeName(disposeName);
         applyAssets.setDisposeDescription(disposeDescription);
-        if(messageRemindingService.updateApplyAssetsByApplyId()==1){
+        if(messageRemindingService.updateApplyAssetsByApplyId(applyAssets)==1){
             return ResponseEntity.ok().build();
         }else {
             return ResponseEntity.notFound().build();

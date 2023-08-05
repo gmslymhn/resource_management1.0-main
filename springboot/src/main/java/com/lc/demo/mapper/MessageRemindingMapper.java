@@ -54,7 +54,7 @@ public interface MessageRemindingMapper {
     @Update("UPDATE report SET goods_state = #{goodState},dispose_name_id = #{disposeNameId},dispose_name = #{disposeName}, " +
             "dispose_description = #{disposeDescription}" +
             "WHERE sequence_id = #{sequenceId}")
-    int updateReportBySequenceId();
+    int updateReportBySequenceId(Report report);
 
     /**todo：Y：这里曾有个不必要的todo，现在留作快速找到Mapper页面
      * 更新：根据申请id更新4+1个处理信息属性(申请状态，处理人id，处理人姓名，处理结果描述，处理时间自动更新)
@@ -63,5 +63,5 @@ public interface MessageRemindingMapper {
     @Update("UPDATE apply_assets set apply_state = #{applyState},dispose_name_id = #{disposeNameId}, dispose_name = #{disposeName}," +
             "apply_description = #{applyDescription} " +
             "WHERE apply_id = #{applyId}")
-    int updateApplyAssetsByApplyId();
+    int updateApplyAssetsByApplyId(ApplyAssets applyAssets);
 }

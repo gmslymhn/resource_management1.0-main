@@ -56,14 +56,14 @@ public class MessageRemindingServiceImpl implements MessageRemindingService {
 
 
     @Override
-    public int updateReportBySequenceId() {
-        int updated = messageRemindingMapper.updateReportBySequenceId();
+    public int updateReportBySequenceId(Report report) {
+        int updated = messageRemindingMapper.updateReportBySequenceId(report);
         return updated;
     }
 
     @Override
-    public int updateApplyAssetsByApplyId() {
-        int updated = messageRemindingMapper.updateApplyAssetsByApplyId();
+    public int updateApplyAssetsByApplyId(ApplyAssets applyAssets) {
+        int updated = messageRemindingMapper.updateApplyAssetsByApplyId(applyAssets);
         return updated;
     }
 }
