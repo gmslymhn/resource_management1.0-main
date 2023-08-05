@@ -2,8 +2,11 @@ package com.lc.demo.bean;
 
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
+import java.util.Date;
+
 public class Report {
 
+    private  int sequenceId;
     private String reportName;
 
     private int goodsId;
@@ -12,18 +15,32 @@ public class Report {
 
     private String damageDescription;
 
-    private DateTimeLiteralExpression.DateTime reportTime;
+    private Date reportTime;
 
-    private DateTimeLiteralExpression.DateTime processTime;
+    private Date processTime;
 
     private int goodsState;
 
     private String disposeName;
 
+    private float applyAssets;
+
+    public void setSequenceId(int sequenceId) {
+        this.sequenceId = sequenceId;
+    }
+
+    public float getApplyAssets() {
+        return applyAssets;
+    }
+
+    public void setApplyAssets(float applyAssets) {
+        this.applyAssets = applyAssets;
+    }
+
     public Report() {
 
     }
-    public Report(String reportName, int goodsId, String goodsName, String damageDescription, DateTimeLiteralExpression.DateTime reportTime, DateTimeLiteralExpression.DateTime processTime, int goodsState, String disposeName) {
+    public Report(String reportName, int goodsId, String goodsName, String damageDescription, Date reportTime, Date processTime, int goodsState, String disposeName) {
         this.reportName = reportName;
         this.goodsId = goodsId;
         this.goodsName = goodsName;
@@ -32,6 +49,12 @@ public class Report {
         this.processTime = processTime;
         this.goodsState = goodsState;
         this.disposeName = disposeName;
+    }
+    public int getSequenceId(){
+        return sequenceId;
+    }
+    public void setSequenceId(String SequenceId){
+        this.sequenceId = sequenceId;
     }
     public String getReportName() {
         return reportName;
@@ -57,16 +80,16 @@ public class Report {
     public void setDamageDescription(String damageDescription) {
         this.damageDescription = damageDescription;
     }
-    public DateTimeLiteralExpression.DateTime getReportTime() {
+    public Date getReportTime() {
         return reportTime;
     }
-    public void setReportTime(DateTimeLiteralExpression.DateTime reportTime) {
+    public void setReportTime(Date reportTime) {
         this.reportTime = reportTime;
     }
-    public DateTimeLiteralExpression.DateTime getProcessTime() {
+    public Date getProcessTime() {
         return processTime;
     }
-    public void setProcessTime(DateTimeLiteralExpression.DateTime processTime) {
+    public void setProcessTime(Date processTime) {
         this.processTime = processTime;
     }
     public int getGoodsState() {
@@ -93,5 +116,6 @@ public class Report {
                 ", disposeName=" + disposeName + '}';
     }
 }
+
 
 

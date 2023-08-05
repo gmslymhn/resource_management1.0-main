@@ -18,8 +18,6 @@ public interface Assets_LogService {
      * @return
      */
     int deleteByAssets_Log(int assetsLogId);
-    
-    
     /**
      * 添加
      * @param  id
@@ -28,14 +26,11 @@ public interface Assets_LogService {
      * @return
      */
      void addAssets_Log(int  id,float change_assets,String description ) ;
-
     /**
      * 修改信息
      * @param assetsLog
      */
     int  update(Assets_Log assetsLog);
-    
-    
     /**
      * 根据id查询
      * @param assetsLogId
@@ -48,6 +43,5 @@ public interface Assets_LogService {
      * @return
      */
     List<Assets_Log>  selectByName(String userName);
-
 
 }

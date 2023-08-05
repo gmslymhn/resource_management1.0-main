@@ -2,14 +2,11 @@ package com.lc.demo.controller.admin;
 
 import com.lc.demo.bean.Assets_Log;
 import com.lc.demo.service.Assets_LogService;
-import com.mysql.cj.log.Log;
 import common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  * 资金日志管理

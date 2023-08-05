@@ -1,24 +1,59 @@
 package com.lc.demo.service;
 
 import com.lc.demo.bean.Report;
-
-import java.util.List;
+import common.ReportsResult;
 
 public interface ReportService {
+    
+    /**
+     * 查询：所有记录
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    ReportsResult getALLReport(int pageNum, int pageSize);
 
-    List<Report> getALLReport();
+    /**
+     * 查询：根据id查询
+     * @param sequenceId
+     * @return
+     */
+    Report selectById(int sequenceId);
 
-    Report selectById(int goodsId);
+    /**
+     * 添加：上报信息
+     * @param report
+     * @return
+     */
 
     int addReport(Report report);
 
-    //    int updateReport(Report report);
-    List<Report>  selectByReportName(String reportName);
-
-    List<Report>  selectByDisposeName(String dipsoseName);
 
 
-    int delecteReport(int goodsId);
+
+    /**
+     * 查询：根据上报人查询记录
+     * @param reportName
+     * @return
+     */
+    ReportsResult  selectByReportName(int pageNum, int pageSize,String reportName);
+
+    /**
+     * 查询：根据处理人查询记录
+     * @param pageNum
+     * @param pageSize
+     * @param disposeName
+     * @return
+     */
+    ReportsResult  selectByDisposeName(int pageNum, int pageSize,String disposeName);
+
+    /**
+     * 删除：删除记录信息
+     * @param sequenceId
+     * @return
+     */
+    int deleteReport(Integer sequenceId);
+
 
 
 }

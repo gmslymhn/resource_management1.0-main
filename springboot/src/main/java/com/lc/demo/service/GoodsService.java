@@ -1,12 +1,13 @@
 package com.lc.demo.service;
 
-import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Goods;
-import com.lc.demo.utils.GoodsResult;
+import common.GoodsResult;
 
 import java.util.List;
 
 public interface GoodsService {
+    List<Goods> getAllGoods();
+
 
     /**
      * 展示所有物品
@@ -19,6 +20,7 @@ public interface GoodsService {
      * @param goodsName 物品名称
      * @return 模糊查找出的物品集合
      */
+
     GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName);
 
     /**

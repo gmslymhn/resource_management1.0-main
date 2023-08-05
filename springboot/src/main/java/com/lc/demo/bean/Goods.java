@@ -1,6 +1,9 @@
 package com.lc.demo.bean;
 
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author: 22932
@@ -8,8 +11,11 @@ package com.lc.demo.bean;
 
 public class Goods {
     private Integer goodsId;
+    @NotBlank(message = "名称不能为空")
     private String goodsName;
+    @NotNull(message = "状态不能为空")
     private String goodsState;
+    @NotBlank(message = "图片不能为空")
     private String goodsImage;
 
     public Goods() {
@@ -21,7 +27,6 @@ public class Goods {
         this.goodsState = goodsstate;
         this.goodsImage = goodsImage;
     }
-
 
     public String getGoodsName() {
         return goodsName;
