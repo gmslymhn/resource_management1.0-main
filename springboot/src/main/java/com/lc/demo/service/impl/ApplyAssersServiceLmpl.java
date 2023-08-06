@@ -68,13 +68,21 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
     public ApplyResult selectApplyByName2(int pageNum, int pageSize, String disposeName) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<ApplyAssets> pageInfo = new PageInfo<>(applyAssetsMapper.selectApplyByName2(disposeName));
-        return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
     @Override
     public ApplyResult selectApplyByState(int pageNum, int pageSize, String applyState) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<ApplyAssets> pageInfo = new PageInfo<>(applyAssetsMapper.selectApplyByState(applyState));
-        return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
     @Override
     public int addApplyAssets(ApplyAssets applyAssets) {

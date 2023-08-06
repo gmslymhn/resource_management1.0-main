@@ -49,9 +49,10 @@ public class UserController {
             }
             if (user.getRoleId() == 2) {
                 session.setAttribute("loginUser", useraccount);
+                session.setAttribute("User", "admin");
                 return Result.success(map, "admin");
             } else {
-                session.setAttribute("loginUser", useraccount);
+                session.setAttribute("User", "admin");
                 return Result.success(map, "user");
             }
         }

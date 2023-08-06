@@ -6,6 +6,7 @@ import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Report;
 import com.lc.demo.mapper.MessageRemindingMapper;
 import com.lc.demo.service.MessageRemindingService;
+import common.GoodsResult;
 import common.MessageResultOfApply;
 import common.MessageResultOfReport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,21 @@ public class MessageRemindingServiceImpl implements MessageRemindingService {
     public MessageResultOfReport selectReportByGoodsState(int pageNum) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Report> pageInfo = new PageInfo<>(messageRemindingMapper.selectReportByGoodsState());
-        return MessageResultOfReport.pagingMessageResult(pageSize, pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return MessageResultOfReport.pagingMessageResult(pageSize, pageInfo);
+        }else{
+            return null;
+        }
     }
     @Override
     public MessageResultOfApply selectApplyByApplyState(int pageNum) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<ApplyAssets> pageInfo = new PageInfo<>(messageRemindingMapper.selectApplyByApplyState());
-        return MessageResultOfApply.pagingMessageResult(pageSize, pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return MessageResultOfApply.pagingMessageResult(pageSize, pageInfo);
+        }else{
+            return null;
+        }
     }
 
 

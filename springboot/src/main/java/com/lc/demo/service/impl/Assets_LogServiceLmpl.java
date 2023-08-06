@@ -12,6 +12,7 @@ import com.lc.demo.service.ApplyAssetsService;
 import com.lc.demo.service.AssetsService;
 import com.lc.demo.service.Assets_LogService;
 import com.lc.demo.service.ReportService;
+import common.ApplyResult;
 import common.AssetLogsPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,11 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     public AssetLogsPage selectAllAssets_Logs(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Assets_Log> pageInfo = new PageInfo<>(assetsLogMapper.selectAllLogs());
-        return AssetLogsPage.pagingAssetsLogResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return AssetLogsPage.pagingAssetsLogResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -102,8 +107,10 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
         List<Assets_Log> list=  assetsLogMapper.selectLogByUserName(userName);
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Assets_Log> pageInfo = new PageInfo<>(list);
-        return AssetLogsPage.pagingAssetsLogResult(pageSize,pageInfo);
-
-
+        if(pageInfo.getTotal() != 0) {
+            return AssetLogsPage.pagingAssetsLogResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
 }

@@ -2,9 +2,7 @@ package com.lc.demo.mapper;
 
 import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Report;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 

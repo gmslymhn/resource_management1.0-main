@@ -7,6 +7,7 @@ import com.lc.demo.bean.Assets_Log;
 import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.AssetsService;
+import common.AssetLogsPage;
 import common.AssetsPage;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,11 @@ public class AssetsServicelmpl  implements AssetsService {
         PageHelper.startPage(pageNum,pageSize);
         List<Assets> list=assetsMapper.all();
         PageInfo<Assets> pageInfo = new PageInfo<>(list);
-        return AssetsPage.pagingAssetsResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return AssetsPage.pagingAssetsResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
     @Override
     public Assets selectNewAssets() {

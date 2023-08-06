@@ -4,70 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="资金申请实现">
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/MessageRemindingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/MessageRemindingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/common/AssetLogsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/common/AssetsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfApply.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfReport.java" afterDir="false" />
+    <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="资源管理系统后端集合初版">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets_Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets_Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/config/MyMvcConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/config/MyMvcConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdminApplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdminApplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AssetsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AssetsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AssetsLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AssetsLogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/AssetsControllerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/AssetsControllerUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/AssetsLogControllerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/AssetsLogControllerUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/ReportControllerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/ReportControllerUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/AssetsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/AssetsMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/Assets_LogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/Assets_LogMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ReportMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/AssetsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/AssetsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/Assets_LogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/Assets_LogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/interceptor/LoginHandlerInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/interceptor/LoginHandlerInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/AssetsServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/AssetsServicelmpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/Assets_LogServiceLmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/Assets_LogServiceLmpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/GoodsServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/GoodsServicelmpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/test/java/com/lc/demo/test/report/ReportTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Assets.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Assets.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Assets_Log.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Assets_Log.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Report.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/bean/Report.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/config/MyMvcConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/config/MyMvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/config/MyMvcConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdmGoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdmGoodsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdminApplyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdminApplyController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AssetsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AssetsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AssetsLogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AssetsLogController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/ReportController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/AssetsControllerUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/AssetsControllerUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/AssetsLogControllerUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/AssetsLogControllerUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/ReportControllerUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/ReportControllerUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/UseGoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/UseGoodsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/AssetsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/AssetsMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/Assets_LogMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/Assets_LogMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/ReportMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/ReportMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/AssetsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/AssetsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/Assets_LogService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/Assets_LogService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/GoodsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/GoodsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/ReportService.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/ReportService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/619c22bc-b0e2-48a7-8ad3-ffbd747c60f6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/8bbd468b-f4b3-455d-b9bb-0390372104e2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/a7db9b74-1411-429e-b848-27585e2b2a7f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/b3accbdf-f228-49f4-a8d3-b10042a774ff.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/bb0a3926-b5b8-46db-a673-dd30f4173ed3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/css/dashboard.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/css/signin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/Chart.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/feather.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/jquery-3.2.1.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/popper.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/addgoods.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/adminindex.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/goodsbyid.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/goodsbyname.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/goodslist.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/updategoods.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/commons/admbar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/commons/userbar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/goodsbyid.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/goodsbyname.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/goodslist.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/userindex.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ApplyAssersServiceLmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ApplyAssersServiceLmpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/AssetsServicelmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/AssetsServicelmpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/Assets_LogServiceLmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/Assets_LogServiceLmpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/GoodsServicelmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/GoodsServicelmpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/MessageRemindingServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/MessageRemindingServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/common/GoodsResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/common/GoodsResult.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +241,7 @@
       <workItem from="1691077556317" duration="8510000" />
       <workItem from="1691146899344" duration="38636000" />
       <workItem from="1691229660304" duration="10299000" />
-      <workItem from="1691316240037" duration="9450000" />
+      <workItem from="1691316240037" duration="14948000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>
@@ -345,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691229687320</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="资源管理系统后端集合初版">
+      <created>1691332855560</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1691332855560</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,6 +361,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新" />
     <MESSAGE value="数据库统一修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="数据库统一修正" />
+    <MESSAGE value="资源管理系统后端集合初版" />
+    <option name="LAST_COMMIT_MESSAGE" value="资源管理系统后端集合初版" />
   </component>
 </project>
