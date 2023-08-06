@@ -19,6 +19,8 @@ import java.util.List;
 public class ReportControllerUser {
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private UseGoodsController goodsService;
 
     /**
      * 查询所有上报信息
@@ -45,13 +47,24 @@ public class ReportControllerUser {
 
     /**
      * 添加上报信息
-     * @param report
+     * @param
      * @return
      */
-    @PostMapping("/addReport")
-    public ResponseEntity<Integer> addReport(@RequestBody Report report) {
-        reportService.addReport(report);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @GetMapping("/addReport")
+    public ResponseEntity<Integer> addReport(@RequestParam int reportNameId,@RequestParam String reportName,
+                                             @RequestParam int goodsId,@RequestParam String damageDescription) {
+        if(goodsService.selectGoodsById(goodsId)!=null){
+            Report report = new Report();
+            report.setReportNameId(reportNameId);
+            report.setReportName(reportName);
+            report.setGoodsId(goodsId);
+            report.setDamageDescription(damageDescription);
+            reportService.addReport(report);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        else {
+            return new ResponseEntity<>(0, HttpStatus.OK);
+        }
     }
 
 

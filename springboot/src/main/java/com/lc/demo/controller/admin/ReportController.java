@@ -1,9 +1,9 @@
 package com.lc.demo.controller.admin;
 
 import com.lc.demo.bean.Report;
+import com.lc.demo.service.GoodsService;
 import com.lc.demo.service.ReportService;
 import common.ReportsResult;
-import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class ReportController {
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private GoodsService goodsService;
 
     /**
      * 查询所有上报信息
@@ -56,13 +58,24 @@ public class ReportController {
 
     /**
      * 添加上报信息
-     * @param report
+     * @param
      * @return
      */
-    @PostMapping("/addReport")
-    public ResponseEntity<Void> addReport(@RequestBody Report report) {
-        reportService.addReport(report);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @GetMapping("/addReport")
+    public ResponseEntity<Integer> addReport(@RequestParam int reportNameId,@RequestParam String reportName,
+                                          @RequestParam int goodsId,@RequestParam String damageDescription) {
+        if(goodsService.selectGoodsById(goodsId)!=null){
+            Report report = new Report();
+            report.setReportNameId(reportNameId);
+            report.setReportName(reportName);
+            report.setGoodsId(goodsId);
+            report.setDamageDescription(damageDescription);
+            reportService.addReport(report);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        else {
+            return new ResponseEntity<>(0, HttpStatus.OK);
+        }
     }
 
     /**

@@ -25,6 +25,7 @@ public interface GoodsService {
 
     /**
      * 按id查找
+     *
      * @param goodsId 物品id
      * @return id查找出的物品
      */
