@@ -36,11 +36,14 @@ AssetsControllerUser {
      * @return
      */
     @GetMapping
-    public Result<AssetsPage>  list (@RequestParam int pageNum, @RequestParam int pageSize)     {
-        AssetsPage list = assetsService.selectAllAssets(pageNum,pageSize);
-        return Result.success(list);
+    public Result<AssetsPage>  list (@RequestParam int pageNum, @RequestParam int pageSize) {
+        AssetsPage list = assetsService.selectAllAssets(pageNum, pageSize);
+        if (list == null) {
+            return Result.error("查询错误");
+        } else {
+            return Result.success(list);
+        }
     }
-
     /**
      * 查询new_assets
      * @param
@@ -49,8 +52,11 @@ AssetsControllerUser {
     @GetMapping("/new")
     public Result<Assets>  newList ()     {
         Assets assets =assetsService.selectNewAssets();
-        return Result.success(assets);
-    }
+        if (assets == null) {
+            return Result.error("查询错误");
+        }else {
+            return Result.success(assets);
+        }}
 
 
 

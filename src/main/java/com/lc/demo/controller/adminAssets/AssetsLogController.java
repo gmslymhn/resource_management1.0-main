@@ -30,7 +30,12 @@ public class AssetsLogController {
     @GetMapping
     public Result<AssetLogsPage> getAllAssets_Logs(@RequestParam int pageNum, @RequestParam int pageSize){
         AssetLogsPage list =  assetsLogService.selectAllAssets_Logs(pageNum,pageSize);
-        return  Result.success(list);
+        if (list == null) {
+            return Result.error("查询错误");
+        } else {
+            return Result.success(list);
+        }
+
     }
 
     /**
@@ -42,7 +47,11 @@ public class AssetsLogController {
      public Result deleteByAssets_Log(int assetsLogId){
         log.info("删除：{}", assetsLogId);
         assetsLogService.deleteByAssets_Log(assetsLogId);
-        return Result.success();
+        if (assetsLogService.selectById(assetsLogId)==null){
+        return Result.success();}
+        else {
+            return Result.error("删除失败");
+        }
     }
 
     /**
@@ -66,8 +75,11 @@ public class AssetsLogController {
     public Result  update(@RequestParam  int id ,@RequestParam String description){
         log.info("修改信息:{}，{}",id,description);
         assetsLogService.update(id,description);
+        if (assetsLogService.selectById(id).getDescription() ==description){
+            return Result.error("修改失败");
+        }else {
         return Result.success();
-    }
+    }}
 
 
 
@@ -80,7 +92,11 @@ public class AssetsLogController {
     public Result<Assets_Log> selectById(@RequestParam int assetsLogId){
         log.info("根据日志id查询:{}",assetsLogId);
         Assets_Log assetsLog =assetsLogService.selectById(assetsLogId);
-                return Result.success(assetsLog);
+        if (assetsLog == null) {
+            return Result.error("查询错误或日志id不存在");
+        } else {
+            return Result.success(assetsLog);
+        }
     }
 
     /**
@@ -92,7 +108,12 @@ public class AssetsLogController {
     public Result<AssetLogsPage> selectByName(@RequestParam String userName,@RequestParam int pageNum, @RequestParam int pageSize) {
         log.info("根据name查询:{}",userName);
         AssetLogsPage list =assetsLogService.selectByName(userName,pageNum,pageSize);
-        return Result.success(list);
+        if (list == null) {
+            return Result.error("查询错误或日志id不存在");
+        } else {
+            return Result.success(list);
+        }
+
 
     }
 
