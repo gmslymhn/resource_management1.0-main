@@ -21,17 +21,15 @@
       </el-form-item>
       <div class="tool">
         <div>
-          <el-checkbox v-model="checked" @change="remenber" class="remeberPassword">
-            记住密码
-          </el-checkbox>
+          
         </div>
         <div>
           <span class="forgetPassword" @click="open2">忘记密码？</span>
         </div>
       </div>
       <el-form-item class="button">
-        <el-button class="button1" type="primary" round @click="LoginButton">登录</el-button>
-        <el-button type="success" round @click="toRegister">注册</el-button>
+        <el-button class="button1" type="danger" round @click="LoginButton">登录</el-button>
+        <el-button type="info" round @click="toRegister">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -131,8 +129,7 @@ export default {
     transform: translate(-50%);
     margin-left: 50%;
     padding: 80px 100px;
-    background-color:rgba(255,255,255,0.15);
-    box-shadow: 5px 5px 10px rgb(85, 238, 71);
+    box-shadow: 5px 5px 10px rgb(179, 86, 86);
     border-radius: 20px;
   }
   .loginTitle {

@@ -42,16 +42,7 @@
 
       </el-submenu>
 
-      <!-- 云端资源管理 -->
-      <el-submenu index="3">
-        <template slot="title">
-          <i class="el-icon-cloudy"></i>
-          <span>云端资源管理</span>
-        </template>
-
-        <el-menu-item index="3-1">代码片段管理</el-menu-item>
-        <el-menu-item index="3-2">考试资源管建</el-menu-item>
-      </el-submenu>
+    
 
       <div class="information">
         <span class="informationRole">{{this.role}} : {{this.name}}</span>
@@ -73,7 +64,7 @@ export default {
 
   data() {
     return {
-      openeds: ["home","2","3"],
+      openeds: ["home","2","3","2-1","2-2"],
     };
   },
   methods: {

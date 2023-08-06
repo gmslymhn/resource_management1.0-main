@@ -1,4 +1,4 @@
-import requests from "@/api/requests";
+import requests from "@/utils/requests";
 
 const url="admassets"
 

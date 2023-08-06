@@ -1,7 +1,6 @@
 // 对API进行统一管理
-import requests from "@/api/requests";
-
-const url = "/user/useReport"
+import requests from "@/utils/requests";
+import qs from 'qs'
 
 // report类
 // int sequenceId;													        需要传int类型的上报信息id
@@ -14,6 +13,7 @@ const url = "/user/useReport"
 // int goodsState;													        状态
 // String disposeName;												      需要传String类型的处理人 
 
+const url = "/user/useReport"
 
 // 获取上报信息
 /**
@@ -49,14 +49,17 @@ export const searchByReportNameFunc = ({pageNum,pageSize,reportName}) => {
 // 提交损坏物品
 /**
  * @URL /user/useReport/addReport
- * @method post
+ * @method get
  * @param report类
  */
 export const damageReported = ({items}) => {
-  return requests.post(url + "/addReport", {
-    report: items
-  }, {
-    headers:{'Content-Type': 'application/json'}
+  return requests.get(url + "/addReport",{
+    params:{
+      reportNameId: items.reportNameId,
+      reportName: items.reportName,
+      goodsId: items.goodsId,
+      damageDescription: items.damageDescription
+    }
   });
 }
 

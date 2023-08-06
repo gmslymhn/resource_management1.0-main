@@ -1,4 +1,4 @@
 // 对API进行统一管理
-import requests from "@/api/requests";
+import requests from "@/utils/requests";
 
 const url = "/logout"

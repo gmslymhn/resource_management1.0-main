@@ -222,8 +222,7 @@ export default {
     transform: translate(-50%);
     margin-left: 50%;
     padding: 80px 100px;
-    background-color:rgba(255,255,255,0.15);
-    box-shadow: 5px 5px 10px rgb(85, 238, 71);
+    box-shadow: 5px 5px 10px rgb(179, 86, 86);
     border-radius: 20px;
   }
   .registerTitle {

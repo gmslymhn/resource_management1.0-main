@@ -1,7 +1,18 @@
 // 对API进行统一管理
-import requests from "@/api/requests";
+import requests from "@/utils/requests";
+import qs from 'qs'
 
 const url = "/admin/messageReminding"
+
+// ### [查询]未处理资金申请消息条数
+/**
+ * @URL /admin/messageReminding/getUnprocessedApplyAssetsNum
+ * @method get
+ * @param 
+ */
+export const unprocessedApplyAssetsNum = () => {
+  return requests.get(url + "/getUnprocessedApplyAssetsNum")
+}
 
 // 查询未(待)处理资金申请记录
 /**
@@ -25,13 +36,13 @@ export const unprocessedApply = ({pageNum}) => {
  * @param applyId,disposeName,disposeResult
  */
 export const updateProcessedApply = ({applyId,disposeName,disposeNameId,applyState,disposeDescription}) => {
-  return requests.post(url + "/UpdateProcessedApply",{
+  return requests.post(url + "/UpdateProcessedApply",qs.stringify({
     applyId: applyId,
-    disposeName: disposeName,
-    disposeNameId: disposeNameId,
     applyState: applyState,
-    disposeDescription: disposeDescription
-  }, {
-    headers:{'Content-Type': 'application/json'}
+    disposeNameId: disposeNameId,
+    disposeName: disposeName,
+    disposeDescription: disposeDescription,
+  }), {
+    headers:{'Content-Type': 'application/x-www-form-urlencoded'}
   })
 }

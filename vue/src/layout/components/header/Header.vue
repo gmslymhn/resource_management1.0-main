@@ -7,7 +7,7 @@
     <div class="headerInner">
 
       <!-- 消息 -->
-      <el-badge :value="messageNum" :max="99" class="innerItem" v-if="shenfen === 'admin'">
+      <el-badge :value="allMessage" :max="99" class="innerItem" v-if="shenfen === 'admin'">
         <el-button size="" icon="el-icon-message" class="innerItemButton" @click="message"></el-button>
       </el-badge>
 
@@ -33,11 +33,11 @@
 </template>
 
 <script>
+import { messageQuantity } from "@/api/message/message"
 import Cookie from "js-cookie"
 // 节流
 import { throttle } from 'lodash-es';
-// 消息查询
-import { messageQuantity } from "@/api/message/message"
+
 export default {
   name: 'Content-Header',
 
@@ -48,7 +48,7 @@ export default {
       // 身份
       shenfen: '',
       // 消息有几条
-      messageNum: '',
+      allMessage: '',
     };
   },
   methods: {
@@ -62,33 +62,24 @@ export default {
       this.$store.dispatch("login/clearRole")
       this.$store.dispatch("login/clearAccount")
       this.$store.dispatch("login/clearName")
+      this.$store.dispatch("login/clearId")
+
       // 清除cookie的token
       Cookie.remove("token")
       // 回到登录界面
       this.$router.replace("/")
     },
 
-    // 消息查询
-    async getMessageQuantity(){
-      let res = await messageQuantity();
-      console.log("消息查询操作-----", res);
-      this.messageNum = res.data;
-      if(this.messageNum){
-        this.$notify.info({
-          title: '消息',
-          message: '您有待审批消息'
-        });
-      }
-    }
+    
   },
   mounted() {
     this.shenfen = this.$store.state.login.role
     console.log("身份是:",this.$store.state.login.role);
-
-    // 消息查询
-    if(this.shenfen === "admin"){
-      this.getMessageQuantity()
-    }
+    messageQuantity().then( res => {
+      console.log("messageQuantity",res);
+      this.$store.dispatch("message/setAllMessage",res.data.data)
+    })
+    this.allMessage = this.$store.state.message.allMessage
   },
 };
 </script>
@@ -102,33 +93,11 @@ export default {
     width: 100%;
     height: 80px;
     border-bottom: 3px #6b6c78 solid;
-    /* background-image: linear-gradient(to top, #fbc8d4e5 0%, #9795f0e5 100%); */
-    /* background-color: #bd837f; */
-    /* background-image: linear-gradient(to top, #e4a29de5 0%, #bd837fe5 100%); */
-    /* background-color: rgba(0,0,0,0.8); */
+
     background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 10%, #6b6c78 100%, rgba(255, 255, 255, 0) 150%);
     display: flex;
     justify-content: space-between;
   }
-  /* .headerText{
-    width: 200px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .headerText span{
-    font-family: "Microsoft YaHei";
-    font-size: 2rem;
-    display: inline-block;
-    font-weight: bold;
-  }
-  .headerText span:nth-child(1){
-    color: wheat;
-  }
-  .headerText span:nth-child(2){
-    color: #6A5ACD	;
-  } */
   .el-dropdown-link {
     cursor: pointer;
     color: #409EFF;

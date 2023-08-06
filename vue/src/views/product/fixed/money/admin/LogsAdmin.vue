@@ -1,233 +1,276 @@
 <template>
   <div class="damageReported">
-    
     <div class="itemsText">
-      <p class="itemsTextP">物品审批上报</p>
+      <p class="itemsTextP">资金日志</p>
     </div>
-
-    <!-- 上报页面 -->
-    <div class="damageReportedInner">
-      <el-form :model="items" :rules="rules" ref="items" class="demo-ruleForm">
-        <el-form-item label="物品id(请输入数字)" prop="goodsId">
-          <el-input v-model.number="items.goodsId"></el-input>
-        </el-form-item>
-        <el-form-item label="物品名称" prop="goodsName">
-          <el-input v-model="items.goodsName"></el-input>
-        </el-form-item>
-        <el-form-item label="上报描述" prop="goodsProblem">
-          <el-input type="textarea" v-model="items.goodsProblem"></el-input>
-        </el-form-item>
-      </el-form>
-
-      <div slot="footer" class="damageReportedButton">
-        <el-button type="primary" @click="submitForm()">上 报</el-button>
-        <el-button type="success" round class="reportedList" @click="reportedList()">上报列表</el-button>
-      </div>
+    <div id="totalAsstes1">总资产：{{ totalAssets + "￥" }}</div>
+    <div id="totalAsstes2">可支配资产：{{ disposableAssets + "￥" }}</div>
+    <div id="button_search">
+      <el-radio v-model="radio" label="1">通过id查询日志</el-radio>
+      <el-radio v-model="radio" label="2">通过用户姓名查询日志</el-radio>
+      <br />
+      <el-input
+        v-model="logsFind"
+        placeholder="请输入内容"
+        style="width: 330px"
+      ></el-input>
     </div>
-
-
-    <!-- 上报列表弹窗 -->
-    <el-dialog title="上报列表" :visible.sync="dialogFormVisible" :append-to-body="true" class="itemsDialog">
-
-      <template>
-        <el-button @click="clearFilter">重置过滤器</el-button>
-        <el-table
-          ref="filterTable"
-          :data="tableData"
-          style="width: 100%">
-          <el-table-column
-            prop="date"
-            label="日期"
-            sortable
-            width="180"
-            column-key="date"
-          >
-          </el-table-column>
-          <el-table-column
-            prop="people"
-            label="上报人"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="id"
-            label="物品id"
+    <el-row style="position: absolute; left: 60%; top: 240px">
+      <el-button type="danger" round @click="findAllLogs"
+        >查询所有日志</el-button
+      >
+    </el-row>
+    <div id="tabledata">
+      <el-table :data="newTableData" border style="width: 100%">
+        <el-table-column fixed prop="assetsLogId" label="日志id" width="150">
+        </el-table-column>
+        <el-table-column prop="userName" label="用户姓名" width="120">
+        </el-table-column>
+        <el-table-column prop="beforeAssets" label="已有资产" width="120">
+        </el-table-column>
+        <el-table-column prop="changeAssets" label="消耗资产" width="120">
+        </el-table-column>
+        <el-table-column prop="afterAssets" label="花费后资产" width="120">
+        </el-table-column>
+        <el-table-column prop="description" label="描述" width="300">
+        </el-table-column>
+        <el-table-column prop="processTime" label="处理时间" width="180">
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" width="100">
+          <template slot-scope="scope">
+            <el-button @click="handleClick1(scope.row)" type="text" size="small"
+              >删除</el-button
             >
-          </el-table-column>
-          <el-table-column
-            prop="name"
-            label="物品名称"
-            :formatter="formatter">
-          </el-table-column>
-          <el-table-column
-            prop="tag"
-            label="标签"
-            width="100"
-            :filters="[{ text: '未处理', value: '未处理' }, { text: '未同意', value: '未同意' }, { text: '已同理未处理', value: '已同理未处理' }, { text: '已处理', value: '已处理' }]"
-            :filter-method="filterTag"
-            filter-placement="bottom-end">
-            <template slot-scope="scope">
-              <el-tag
-                :type="tagColor(scope)"
-                disable-transitions>{{scope.row.tag}}</el-tag>
-            </template>
-          </el-table-column>
-        </el-table>
-      </template>
-
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">关 闭</el-button>
-      </div>
-    </el-dialog>
-
+            <el-button @click="handleClick2(scope.row)" type="text" size="small"
+              >修改</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
 <script>
-import dayjs from "dayjs"
-import { damageReported } from "@/api/damage/damageAdmin.js"
+import dayjs from "dayjs";
+import axios from "axios";
 export default {
-  name: 'Content-DamageReported',
+  name: "Content-DamageReported",
 
   data() {
     return {
-      // 列表
-      tableData: [{
-        date: '2023-07-02 03:29:33',
-        people: '王小虎',
-        name: '物品名字',
-        id: 1,
-        tag: '未处理'
-      }, {
-        date: '2023-07-04 03:29:33',
-        people: '王小虎',
-        name: '物品名字',
-        id: 1,
-        tag: '未同意'
-      }, {
-        date: '2023-07-01 03:29:33',
-        people: '王小虎',
-        name: '物品名字',
-        id: 1,
-        tag: '已同理未处理'
-      }, {
-        date: '2023-07-03 03:29:33',
-        people: '王小虎',
-        name: '物品名字',
-        id: 1,
-        tag: '已处理'
-      }],
-      // 损坏物品信息
-      items: {
-        goodsPeople:'',     // 上报人：用户自己
-        goodsId: '',        // 上报物品id
-        goodsName: '',      // 上报物品名称
-        goodsProblem: '',   // 上报损坏描述
-        goodsTime: '',      // 上报时间
-
-        // 上报列表
-        goodsTag: '',     // 处理状态
-      },
-      // 控制弹窗
-      dialogFormVisible: false,
-      // 添加物品规则
-      rules: {
-        goodsId: [
-          { required: true, message: '请输入物品id', trigger: 'blur' },
-        ],
-        goodsName: [
-          { required: true, message: '请输入物品名称', trigger: 'blur' },
-        ],
-        goodsProblem: [
-          { required: true, message: '请输入损坏描述', trigger: 'blur' }
-        ],
-      },
+      totalAssets: "",
+      disposableAssets: "",
+      radio: "1",
+      logsFind: "",
+      newTableData: [],
+      tableData: [],
     };
   },
+  watch: {
+    logsFind(newval) {
+      switch (this.radio) {
+        case "1":
+          this.newTableData = this.tableData.filter((item) => {
+            return item.assetsLogId == newval;
+          });
+          break;
+        case "2":
+          this.newTableData = this.tableData.filter((item) => {
+            return item.userName == newval;
+          });
+          break;
+      }
+    },
+  },
   methods: {
-    // 上报提交接口
-    async postDamageReported(items){
-      let res = await damageReported({items})
-      console.log("上报提交-----",res.data);
+    //处理删除
+    handleClick1(row) {
+      console.log(row);
+      const result = confirm("确认删除吗");
+      //删除日志
+      if (result) {
+        axios({
+          url: "http://localhost:8080/admin/admassets/assetslog/{assetsLogId}",
+          method: "delete",
+          params: {
+            assetsLogId: row.assetsLogId,
+          },
+        })
+          .then(() => {
+            alert("删除成功！请重新查询日志");
+          })
+          .catch(() => {
+            alert("请求失败，请稍后重试");
+          });
+      }
     },
-    // 上报提交
-    submitForm(items) {
-      this.$refs.items.validate((valid) => {
-        if (valid) {
-          console.log("validate-----",this.$refs.items);
-          this.goodsTime = dayjs(Date.now()).format("YYYY-MM-DD HH:mm:ss");
-          this.postDamageReported(this.items)
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
+    //处理修改
+    handleClick2(row) {
+      console.log(row);
+      //修改日志的描述  传过去id 和描述  修改日志的描述内容 其他不可以修改
+      const description = prompt("请输入修改的日志描述");
+      axios({
+        method: "put",
+        url: "http://localhost:8080/admin/admassets/assetslog/update",
+        params: {
+          id: row.assetsLogId,
+          description,
+        },
+      })
+        .then(() => {
+          alert("修改成功！请重新查询日志");
+        })
+        .catch(() => {
+          alert("请求失败，请稍后重试");
+        });
+    },
+    //查询所有日志
+    findAllLogs() {
+      // 查询现在所有的日志
+      axios({
+        url: "http://localhost:8080/admin/admassets/assetslog",
+        method: "get",
+        params: {
+          pageNum: 1,
+          pageSize: 1000000,
+        },
+      })
+        .then((response) => {
+          this.tableData = response.data.data.data.list;
+          this.newTableData = response.data.data.data.list;
+          this.tableData.forEach((e) => {
+            e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+          });
+          this.newTableData.forEach((e) => {
+            e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+          });
+        })
+        .catch(() => {
+          alert("请求失败，请稍后重试");
+        });
+      //查询最新日志
+      axios
+        .get("http://localhost:8080/admin/admassets/assets/new")
+        .then((response) => {
+          this.totalAssets = response.data.data.totalAssets;
+          this.disposableAssets = response.data.data.disposableAssets;
+        });
+    },
+  },
+  mounted() {
+    //根据id查询日志
+    // axios({
+    //   url: "http://localhost:8080/admin/admassets/assetslog/{assetsLogId}",
+    //   method: "get",
+    //   params: {
+    //     assetsLogId: 12,
+    //   },
+    // }).then((response) => {
+    //   console.log(response);
+    // });
+    //根据申报人姓名查询
+    // axios({
+    //   url:'http://localhost:8080/admin/admassets/assetslog/{userName}',
+    //   method:'get',
+    //   params:{
+    //     userName:"iukkiu",
+    //     pageNum:1,
+    //     pageSize:5
+    //   }
+    // }).then(response=>{
+    //   console.log(response)
+    // })
+  },
+  created() {
+    //获取总资产和可支配资产
+    axios
+      .get("http://localhost:8080/admin/admassets/assets/new")
+      .then((response) => {
+        this.totalAssets = response.data.data.totalAssets;
+        this.disposableAssets = response.data.data.disposableAssets;
       });
-    },
-    // 上报列表弹窗展开
-    reportedList(){
-      this.dialogFormVisible = true
-    },
-    // 上报列表函数
-    formatter(row, column) {
-      return row.name;
-    },
-    filterTag(value, row) {
-      return row.tag === value;
-    },
-    clearFilter() {
-      this.$refs.filterTable.clearFilter();
-    },
-    // 状态颜色判断
-    tagColor(scope){
-      if(scope.row.tag === "未处理"){
-        return "info"
-      } else if(scope.row.tag === "未同意"){
-        return "danger"
-      } else if(scope.row.tag === "已同理未处理"){
-        return "warning"
-      } else if(scope.row.tag === "已处理"){
-        return "success"
-      } 
-    },
-
-
-  }
+    // 查询现在所有的日志
+    axios({
+      url: "http://localhost:8080/admin/admassets/assetslog",
+      method: "get",
+      params: {
+        pageNum: 1,
+        pageSize: 1000000,
+      },
+    })
+      .then((response) => {
+        this.tableData = response.data.data.data.list;
+        this.newTableData = response.data.data.data.list;
+        this.tableData.forEach((e) => {
+          e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+        });
+        this.newTableData.forEach((e) => {
+          e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+        });
+      })
+      .catch(() => {
+        alert("请求失败，请稍后重试");
+      });
+  },
 };
 </script>
 
 <style scoped>
-  .damageReported{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.6);
-  }
-  .itemsText{
-    font-size: 38px;
-    margin-bottom: 20px;
-    padding-top: 2px;
-    padding-bottom: 3px;
-    background-color: #e0dbdb;
-    font-weight: bold;
-    color: gray;
-    text-align: center;
-    position: fixed;
-    width: 100%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    z-index: 1;
-  }
-  .damageReportedInner{
-    width: 60%;
-    height: 100%;
-    font-size: 25px;
-    margin: 60px auto;
-  }
-  .reportedList{
-    position: fixed;
-    right: 20%;
-  }
-  .dialog-footer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+#button_search {
+  position: absolute;
+  left: 25%;
+  top: 220px;
+}
+.damageReported {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.itemsText {
+  font-size: 38px;
+  margin-bottom: 20px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  background-color: #e0dbdb;
+  font-weight: bold;
+  color: gray;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  z-index: 1;
+}
+#tabledata {
+  position: absolute;
+  width: 80%;
+  margin: 40px auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  top: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#totalAsstes1 {
+  line-height: 50px;
+  width: 250px;
+  height: 50px;
+  border: 1px solid black;
+  position: absolute;
+  left: 30%;
+  top: 100px;
+  border-radius: 10px;
+}
+#totalAsstes2 {
+  border-radius: 10px;
+  line-height: 50px;
+  width: 250px;
+  height: 50px;
+  border: 1px solid black;
+  position: absolute;
+  left: 60%;
+  top: 100px;
+}
 </style>

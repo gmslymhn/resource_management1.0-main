@@ -46,10 +46,15 @@ export default {
 
 <style scoped>
   .pagination{
+    height: 50px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+
+    background-color: rgba(255, 255, 255, 0.815) !important;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
   }
 </style>

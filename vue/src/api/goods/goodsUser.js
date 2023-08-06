@@ -1,6 +1,6 @@
 // 对API进行统一管理
-import requests from "@/api/requests";
-
+import requests from "@/utils/requests";
+import qs from 'qs'
 
 // Vuex里在action中
 // async userLogin({commit},data){
@@ -21,32 +21,34 @@ const url = "/user/usegoods"
 
 // 展示物品
 /**
- * @URL /user/usegoods/getAllGoods 
- * @method get
+ * @URL /user/usegoods/getAllGoods
+ * @method post
  * @param 页码pageNum,当前页码有几个pageSize
  */
 export const itemsList = ({pageNum,pageSize}) => {
-  return requests.get(url + "/getAllGoods",{
-    params: {
+  return requests.post(url + "/getAllGoods",qs.stringify({
       pageNum: pageNum,
       pageSize: pageSize
-    }
-  })
+  }),{
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+  },{
+    responseType: 'arraybuffer',
+  });
 }
 
-// 增加物品
+// 根据物品id查询上报信息
 /**
- * @URL /user/usegoods/updateGoods
- * @method post
- * @param 第一个参数uploadImage是用input获取的文件，第二个参数名字是goods，他是一个Goods类
+ * @URL /user/usegoods/selectGoodsById
+ * @method get
+ * @param goodsId
  */
-export const itemsEdit = ({submitFormURL, formData}) => {
-  return requests.post(url + `/${submitFormURL}`, {
-    data: {
-      formData: formData
-    }
-  }, {
-    headers: { "Content-type": "multipart/form-data" }
+export const searchByGoodsIdFunc = ({goodsId}) => {
+  return requests.post(url + "/selectGoodsById",qs.stringify({
+    goodsId,
+  }),{
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+  },{
+    responseType: 'arraybuffer',
   });
 }
 
@@ -57,11 +59,13 @@ export const itemsEdit = ({submitFormURL, formData}) => {
  * @param pageNum,pageSize,goodsName
  */
 export const searchByGoodsNameFunc = ({pageNum,pageSize,goodsName}) => {
-  return requests.post(url + "/selectGoodsByGoodsName",{
-      pageNum: pageNum,
-      pageSize: pageSize,
-      goodsName: goodsName,
-  }, {
-    headers: { "Content-type": "multipart/form-data" }
+  return requests.post(url + "/selectGoodsByGoodsName",qs.stringify({
+      pageNum,
+      pageSize,
+      goodsName,
+  }),{
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+  },{
+    responseType: 'arraybuffer',
   });
-} 
+}

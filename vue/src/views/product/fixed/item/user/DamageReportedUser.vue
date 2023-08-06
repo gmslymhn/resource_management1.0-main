@@ -19,7 +19,8 @@
             size="mini"
             placeholder="上报人搜索(回车)"
             @keyup.enter.native="searchByReportNameFuncButton"/>
-
+          <!-- 查看全部按钮 -->
+          <el-button class="seeAll" type="primary" round @click="seeAll">查看全部</el-button>
         </div>
         
         <!-- 表格 -->
@@ -30,40 +31,52 @@
           style="width: 100%">
           <!-- 上报信息id -->
           <el-table-column
+            width="100px"
             align='center'
             prop="sequenceId"
             label="上报信息id">
           </el-table-column>
           <!-- 上报时间 -->
           <el-table-column
+            width="160px"
             align='center'
             prop="reportTime"
             label="上报时间"
             sortable
-            width="160"
             column-key="reportTime">
           </el-table-column>
           <!-- 上报人 -->
           <el-table-column
+            width="100px"
             align='center'
             prop="reportName"
             label="上报人">
           </el-table-column>
           <!-- 物品id -->
           <el-table-column
+            width="100px"
             align='center'
             prop="goodsId"
             label="物品id">
           </el-table-column>
           <!-- 物品名称 -->
           <el-table-column
+            width="100px"
             align='center'
             prop="goodsName"
             label="物品名称"
             :formatter="formatter">
           </el-table-column>
+          <!-- 损坏描述 -->
+          <el-table-column
+
+            align='center'
+            prop="damageDescription"
+            label="损坏描述">
+          </el-table-column>
           <!-- 状态 -->
           <el-table-column
+            width="100px"
             align='center'
             prop="goodsState"
             label="状态"
@@ -78,15 +91,16 @@
           </el-table-column>
           <!-- 处理时间 -->
           <el-table-column
+            width="160px"
             align='center'
             prop="processTime"
             label="处理时间"
             sortable
-            width="160"
             column-key="processTime">
           </el-table-column>
           <!-- 处理人 -->
           <el-table-column
+            width="100px"
             align='center'
             prop="disposeName"
             label="处理人">
@@ -102,10 +116,6 @@
           </el-table-column>
         </el-table>
       </template>
-
-      <div slot="footer" class="damageReportedButton">
-        <el-button type="success" round class="reportedListButton" @click="reportedListButton">上报损坏物品</el-button>
-      </div>
 
     </div>
 
@@ -150,7 +160,10 @@
 import { debounce } from 'lodash-es';
 // 分页
 import Pagination from '@/components/pagination/Pagination';
+import getMessageQuantity from "@/utils/getMessageQuantity";
 import { reportList,searchByReportNameFunc,damageReported,deleteGoods } from "@/api/damage/damageUser.js"
+// 时间戳处理
+import dayjs from 'dayjs';
 export default {
   name: 'Content-DamageReported',
   components:{Pagination,},
@@ -330,7 +343,7 @@ export default {
       searchByReportName: '',
       // 关于页码
       // 总共条数
-      total: 100,
+      total: 0,
       // 页码数量
       totalPages: 10,
       // 当前页码有几个
@@ -360,16 +373,34 @@ export default {
     async getReportList(pageNum,pageSize){
       let res = await reportList({pageNum: pageNum,pageSize: pageSize})
       console.log("上报列表数据-----",res)
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.data.pages
+      if(res.data){
+        this.tableData = [...res.data.data.list]
+        this.total = res.data.data.total
+        this.totalPages = res.data.data.pages
+        this.tableData.forEach( e => {
+          e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+        this.tableData.forEach( e => {
+          e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+      }
     },
 
     // 上报提交接口
     async postDamageReported(items){
       let res = await damageReported({items: items})
       console.log("上报提交-----",res);
+      if(res.status === 200){
+        this.$message({
+          type: 'success',
+          message: '提交成功咯!',
+        })
+        this.dialogFormVisible = false
+        this.items.goodsId = ""
+        this.items.damageDescription = ""
+        // 重新获取列表
+        this.getReportList(1,this.pageSize)
+      }
     },
 
     // 上报人搜索接口
@@ -378,6 +409,14 @@ export default {
       console.log("上报人搜索数据-----",res);
       // 列表赋值
       this.tableData = [...res.data.data.list]
+      this.total = res.data.data.total
+      this.totalPages = res.data.data.pages
+      this.tableData.forEach( e => {
+        e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
+      })
+      this.tableData.forEach( e => {
+        e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+      })
     },
 
     // 删除数据接口
@@ -387,7 +426,7 @@ export default {
       if(res.status === 200){
         this.$message({
           type: 'success',
-          message: '删除成功!',
+          message: '删除成功咯!',
         })
         // 重新获取列表
         this.getReportList(1,this.pageSize)
@@ -404,11 +443,17 @@ export default {
             this.userSearchSelf = false
           }
       }
-      
     }, 300),
 
+    // 查看全部
+    seeAll(){
+      this.getReportList(1,this.pageSize)
+      this.searchByReportName = ''
+      this.searchByDisposeName = ''
+    },
+
     // 上报提交操作
-    submitForm(items){
+    submitForm(){
       this.$refs.items.validate((valid) => {
         if (valid) {
           console.log("上报提交按钮-----",this.items);
@@ -467,12 +512,14 @@ export default {
         return "success"
       } 
     },
+
   },
   created() {
     // 获取上报列表数据操作
     this.getReportList(this.pageNum,this.pageSize)
   },
   mounted() {
+    getMessageQuantity(this)
     this.items.reportName = this.$store.state.login.name
     this.items.reportNameId = Number(this.$store.state.login.id)
   },
@@ -484,8 +531,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: rgba(255, 255, 255, 0.6);
-    overflow-y: scroll;
+    
   }
   .itemsText{
     font-size: 38px;
@@ -507,8 +553,7 @@ export default {
     right: 1%;
   }
   .damageReportedInner{
-    width: 80%;
-    /* height: 100%; */
+    width: 90%;
     font-size: 25px;
     margin: 80px auto;
   }
@@ -516,6 +561,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 100px;
     margin-bottom: 10px;
   }
   .damageReportedInnerHeader >>> .el-input{
@@ -544,8 +590,5 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .pagination{
-    background-color: rgba(255, 255, 255, 0.815) !important;
   }
 </style>

@@ -1,5 +1,5 @@
 // 对API进行统一管理
-import requests from "@/api/requests";
+import requests from "@/utils/requests";
 import qs from 'qs'
 
 // Vuex里在action中
@@ -25,27 +25,15 @@ const url = "/admin/admgoods"
  * @method post
  * @param 页码pageNum,当前页码有几个pageSize
  */
-// export const itemsList = ({pageNum,pageSize}) => {
-//   return requests.post(url + "/getAllGoods",
-//   new URLSearchParams({
-//       pageNum: 1,
-//       pageSize: 1
-//     }), {
-//     headers:{'Content-Type': 'x-www-form-urlencoded'}
-//   })
-// }
-
 export const itemsList = ({pageNum,pageSize}) => {
-  return requests.post(url + "/getAllGoods",{
-      pageNum: 1,
-      pageSize: 1
-    }
-  , {
-    headers: { 'Content-Type': 'application/json'}
-  }).catch(error => {
-    console.error('请求错误:', error);
-  })
-      
+  return requests.post(url + "/getAllGoods",qs.stringify({
+      pageNum,
+      pageSize
+  }),{
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+  },{
+    responseType: 'arraybuffer',
+  });
 }
 
 // 增加物品
@@ -56,21 +44,15 @@ export const itemsList = ({pageNum,pageSize}) => {
  */
 export const itemsAdd = ({formData}) => {
   return requests.post(url + "/addGoods", {
-    data:{
       uploadImage: formData.get("uploadImage"),
       goodsName: formData.get("goodsName"),
+      goodsQuantity: formData.get("goodsQuantity"),
       goodsState: formData.get("goodsState"),
-    }
-  }, {
+    }, {
       headers: { "Content-type": "multipart/form-data" }
-    });
+  });
 }
 
-// export const itemsAdd = ({formData}) => {
-//   return requests.post(url + "/addGoods", {formData}, {
-//       headers: { "Content-type": "multipart/form-data" }
-//     });
-// }
 
 // 修改物品
 /**
@@ -80,11 +62,13 @@ export const itemsAdd = ({formData}) => {
  */
 export const itemsEdit = ({formData}) => {
   return requests.post(url + "/updateGoods", {
-      uploadImage: formData.goodsImage,
-      goodsId: formData.goodsId,
-      goodsName: formData.goodsName,
-      goodsState: formData.goodsState,
-    });
+    uploadImage: formData.get("uploadImage"),
+    goodsId: formData.get("goodsId"),
+    goodsName: formData.get("goodsName"),
+    goodsState: formData.get("goodsState"),
+  }, {
+    headers: { "Content-type": "multipart/form-data" }
+  });
 }
 
 // 根据物品名查询上报信息
@@ -94,12 +78,33 @@ export const itemsEdit = ({formData}) => {
  * @param pageNum,pageSize,goodsName
  */
 export const searchByGoodsNameFunc = ({pageNum,pageSize,goodsName}) => {
-  return requests.get(url + "/selectGoodsByGoodsName",{
-      pageNum: pageNum,
-      pageSize: pageSize,
-      goodsName: goodsName,
+  return requests.post(url + "/selectGoodsByGoodsName",qs.stringify({
+      pageNum,
+      pageSize,
+      goodsName,
+  }),{
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+  },{
+    responseType: 'arraybuffer',
   });
 }
+
+// 根据物品id查询上报信息
+/**
+ * @URL /admin/admgoods/selectGoodsById
+ * @method get
+ * @param goodsId
+ */
+export const searchByGoodsIdFunc = ({goodsId}) => {
+  return requests.post(url + "/selectGoodsById",qs.stringify({
+    goodsId,
+  }),{
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+  },{
+    responseType: 'arraybuffer',
+  });
+}
+
 
 // 删除物品
 /**
@@ -110,7 +115,7 @@ export const searchByGoodsNameFunc = ({pageNum,pageSize,goodsName}) => {
 export const itemsRemove = ({goodsId}) => {
   return requests.get(url + "/deleteGoods",{
     params: {
-      goodsId: goodsId
+      goodsId
     }
-  })
+  });
 }

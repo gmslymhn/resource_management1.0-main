@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-    <section id="sec">
+  <div class="home">
+    <!-- <section id="sec">
         <div><img src="@/assets/1.jpg" alt=""></div>
         <div><img src="@/assets/2.jpg" alt=""></div>
         <div><img src="@/assets/3.jpg" alt=""></div>
@@ -8,8 +8,12 @@
         <div><img src="@/assets/5.jpg" alt=""></div>
         <div><img src="@/assets/6.jpg" alt=""></div>
         <div class="tyut">Welcome to ReManage</div>
-    </section>
+    </section> -->
     <div id="selab"><img src="@/assets/selab.png"></div>
+    <div class="title">
+      <p>Welcome to ReManage</p>
+      <p>年轻人的次世代资源管理系统</p>
+    </div>
   </div>
 </template>
 
@@ -22,41 +26,71 @@ export default {
       
     };
   },
+
+  created() {
+    this.$store.dispatch("style/setContent2Style","background-color: transparent !important")
+  },
+  beforeDestroy() {
+    this.$store.dispatch("style/clearContent2Style")
+  },
 };
 </script>
 
 <style scoped>
-* {
-    margin: 0;
-    padding: 0;
+@font-face {
+    font-family:AaBlack;
+    src:url('@/assets/font/ttf/Aa厚底黑.ttf')
+  }
+.home{
+    background-color: transparent !important;
+    width: 100%;
+    height: calc( 100vh - 80px );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-#sec{
-    position: absolute;
-    top: 390px;
+#selab{
+  max-width: 40%;
+  margin-top: 30px;
+  margin-left: 30px;
+  /* height: 30%; */
 }
 #selab img{
-    left: 22%;
-    top: 0;
-    position: absolute;
-    width: 600px;
+  width: 100%;
+  object-fit: contain;
 }
-.main{
-    background-color: transparent;
-    width: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
+.title{
+  font-family: "AaBlack";
+  margin-bottom: 50px;
+  margin-left: 50px;
+  font-size: 4.5em;
+  line-height: 2;
+  font-style: italic;
+  color: #ec9bad;
+
+  cursor: pointer;
+  text-shadow:
+    1px 2px 0px #b37fb8,
+    2px 3px 0px #b17cae,
+    3px 4px 0px #8f6c92,
+    4px 5px 0px #976d8d,
+    5px 6px 10px rgba(231, 126, 209, 0.6);
+}
+
+/* #sec{
+    position: absolute;
+    top: 390px;
 }
 section {
     position: absolute;
     left: 32%;
     width: 300px;
     height: 200px;
-    cursor: pointer;
+    cursor: pointer; */
     /* 很关键，preserve-3d是物体看起来有3d效果 */
-    transform-style: preserve-3d;
-    animation: rotate 20s linear infinite;
-}
+    /* transform-style: preserve-3d;
+    animation: rotate 20s linear infinite; */
+/* }
 .tyut{
     position: absolute;
     color: white;
@@ -71,22 +105,22 @@ section div {
     text-align: center;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100%; */
     /* 用来实现倒影效果 */
-    -webkit-box-reflect:bottom 15px
+    /* -webkit-box-reflect:bottom 15px
     -webkit-linear-gradient(transparent 10%,rgba(255,255,255,.3));
 }           
 
 section div img {
     width: 300px;
     height: 200px;
-}
+} */
 
-section div:nth-child(1) {
+/* section div:nth-child(1) {
     transform: translateZ(300px);
-}
+} */
 
-section div:nth-child(2) {
+/* section div:nth-child(2) {
     transform: rotateY(60deg) translateZ(300px);
 }
 
@@ -104,13 +138,13 @@ section div:nth-child(5) {
 
 section div:nth-child(6) {
     transform: rotateY(300deg) translateZ(300px);
-}
-@keyframes rotate{
+} */
+/* @keyframes rotate{
     0%{
         transform: rotateY(0);
     }
     100%{
         transform: rotateY(360deg);
     }
-}
+} */
 </style>

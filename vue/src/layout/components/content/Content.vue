@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content2">
     <!-- 侧栏 -->
     <div class="menu">
       <Menu></Menu>
@@ -17,37 +17,38 @@
 import Menu from "./components/menu/Menu.vue"
 export default {
   name: 'Layout-Content',
-  components:{Menu},
+  components:{ Menu },
   data() {
     return {
-      
+      contentActive:''
     };
   },
-
-  mounted() {
+  methods: {
     
   },
 
-  methods: {
-    
+  created() {
+    this.contentActive = this.$store.state.style
   },
 };
 </script>
 
 <style scoped>
-  .content{
-    margin-top: 80px;
-    padding-bottom: 80px;
-    height: calc(100% + 80px);
+  .content2{
+    height: 100%;
+    overflow-y: scroll;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  ::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
   }
   .main{
     margin-left: 200px;
-    /* background-color: rgba(255, 255, 255, 0.075); */
+    /* margin-top: 80px; */
     backdrop-filter: blur(0.000001px);
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-    height: calc( 100% + 80px );
   }
 </style>

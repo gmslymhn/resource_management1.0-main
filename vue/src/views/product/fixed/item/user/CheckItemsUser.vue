@@ -10,10 +10,13 @@
     
 
     <!-- 添加新物品弹窗 -->
-    <el-dialog :title="dialogFormVisibleTitle" :visible.sync="dialogFormVisible" :append-to-body="true" class="itemsDialog">
+    <el-dialog :title="dialogFormVisibleTitle" :visible.sync="dialogFormVisibleAdd" :append-to-body="true" class="itemsDialog">
       <el-form :model="items" :rules="rules" ref="items" label-width="100px" class="demo-ruleForm">
         <el-form-item label="物品名称" prop="goodsName">
           <el-input v-model="items.goodsName"></el-input>
+        </el-form-item>
+        <el-form-item label="物品数量" prop="goodsQuantity">
+          <el-input v-model.number="items.goodsQuantity"></el-input>
         </el-form-item>
         <el-form-item label="物品状态" prop="goodsState">
           <el-radio-group v-model="items.goodsState">
@@ -38,11 +41,39 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitButton('items')">确 定</el-button>
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
+      </div>
+    </el-dialog>
+
+    <!-- 上报列表弹窗 -->
+    <el-dialog title="上报" :visible.sync="dialogFormVisibleReported" :append-to-body="true" class="itemsDialog">
+      
+      <el-form :model="report" :rules="rules" ref="report" class="demo-ruleForm">
+        <el-form-item label="上报人id" prop="reportNameId">
+          <el-input v-model="report.reportNameId" :disabled="true"></el-input>
+        </el-form-item>
+
+        <el-form-item label="上报人姓名" prop="reportName">
+          <el-input v-model.number="report.reportName" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="物品id" prop="goodsId">
+          <el-input v-model.number="report.goodsId" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="损坏描述" prop="damageDescription">
+          <el-input type="textarea" v-model="report.damageDescription"></el-input>
+        </el-form-item>
+        <el-button type="primary" @click="submitFormReport('rules')">上 报</el-button>
+      </el-form>
+
+      
+        
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleReported = false">关 闭</el-button>
       </div>
     </el-dialog>
 
     <div class="checkItemsInner">
+
       <div class="checkItemsInnerHeader">
         <!-- 物品名搜索 -->
         <div class="inputDiv">
@@ -52,18 +83,36 @@
             placeholder="物品名搜索(回车)"
             @keyup.enter.native="searchByGoodsNameFunc"/>
         </div>
+        <!-- 物品id搜索 -->
+        <div class="inputDiv">
+          <el-input
+            v-model="searchByGoodsId"
+            size="mini"
+            placeholder="物品id搜索(回车)"
+            @keyup.enter.native="searchByGoodsIdFunc"/>
+        </div>
+        <!-- 查看全部按钮 -->
+        <el-button class="seeAll" type="primary" round @click="seeAll">查看全部</el-button>
       </div>
+
       <!-- 展示页面 -->
       <el-table :data="tableData" border align="center" class="itemsTable" :header-cell-style="{'text-align':'center'}">
-          <el-table-column prop="goodsId" label="物品id" align='center'></el-table-column>
+          <el-table-column width="100px" prop="goodsId" label="物品id" align='center'></el-table-column>
           <el-table-column prop="goodsImage" label="物品照片" align='center'>
               <template slot-scope="scope">
-                  <img style="width:80px;height:80px" :src="scope.row.goodsImage">
+                  <img style="width:200px;max-height:200px;object-fit:contain;" :src="scope.row.goodsImage">
               </template>
           </el-table-column>
-          <el-table-column prop="goodsName" label="物品名称" align='center'></el-table-column>
+          <el-table-column width="100px" prop="goodsName" label="物品名称" align='center'></el-table-column>
           <el-table-column prop="goodsState" label="物品状态" align='center'></el-table-column>
+          <!-- 操作 -->
+          <el-table-column label="操作" align='center'>
+              <template slot-scope="scope">
+                  <el-button type="primary" @click="damageReportFromItems(scope.$index,scope.row)" size="mini">损坏上报</el-button>
+              </template>
+          </el-table-column>
       </el-table>
+      
     </div>
 
     <!-- 分页 -->
@@ -78,88 +127,51 @@
 // 防抖引入
 import { debounce } from 'lodash-es';
 import Pagination from '@/components/pagination/Pagination';
-import { itemsList,searchByGoodsNameFunc,itemsEdit } from '@/api/goods/goodsUser.js'
+import getMessageQuantity from "@/utils/getMessageQuantity";
+import { itemsList,searchByGoodsNameFunc,searchByGoodsIdFunc } from '@/api/goods/goodsUser.js'
+import { itemsAdd } from '@/api/goods/goodsAdmin.js'
+
+import { damageReported } from "@/api/damage/damageUser.js"
 export default {
   goodsName: 'Content-CheckItems',
   components:{Pagination,},
   data() {
     return {
       formLabelWidth: '120px',
-      tableData: [{
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }, {
-        goodsId:"001",
-        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        goodsState:"已使用",
-        goodsName: '门酱',
-      }],
+      tableData: [],
       // 控制弹窗
-      dialogFormVisible: false,
+      dialogFormVisibleAdd: false,
       // 弹窗标题
       dialogFormVisibleTitle: "",
       // 添加物品
       items: {
         goodsId: '',
         goodsName: '',
+        goodsQuantity:'',
         goodsState: '',
         goodsImage: '',
       },
+      // 上报损坏物品信息
+      report: {
+        reportNameId:'',        // 1上报人id
+        reportName:'',          // 1上报人账号：用户自己
+        goodsId: '',            // 1上报物品id
+        damageDescription: '',  // 1上报损坏描述
+      },
       // 搜索
       searchByGoodsName: '',
+      searchByGoodsId: '',
+      // 控制弹窗
+      dialogFormVisibleReported: false,
       // 暂存图片
       fileList:[],
       // 添加物品规则
       rules: {
         goodsName: [
           { required: true, message: '请输入物品名称', trigger: 'blur' },
+        ],
+        goodsQuantity: [
+          { required: true, message: '请输入物品数量', trigger: 'blur' },
         ],
         goodsState: [
           { required: true, message: '请选择物品状态', trigger: 'change' }
@@ -170,7 +182,7 @@ export default {
       },
       // 关于页码
       // 总共条数
-      total: 100,
+      total: 0,
       // 页码数量
       totalPages: 10,
       // 当前页码有几个
@@ -184,29 +196,78 @@ export default {
     async getItemsList(pageNum,pageSize){
     let res = await itemsList({pageNum: pageNum,pageSize: pageSize})
       console.log("产品列表数据-----",res)
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.totalPages
+      if(res.data){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.total = res.data.data.total
+        this.totalPages = res.data.totalPages
+      }
+      
     },
 
     // 添加新物品接口
-    async postItemsEdit(submitFormURL, img, goods){
-      let res = await itemsEdit({submitFormURL: submitFormURL, img: img, goods: goods})
-      console.log("修改/增加产品列表-----",res);
-      // 重新获取列表
-      this.getItemsList(this.pageNum)
+    async postItemsAdd(img, goods){
+      let res = await itemsAdd({img: img, goods: goods})
+      console.log("增加产品列表-----",res);
+      if(res.status === 201){
+        this.$message({
+          type: 'success',
+          message: '添加成功咯!'
+        })
+        this.dialogFormVisibleAdd = false
+        // 重新获取列表
+        this.getItemsList(1,this.pageNum)
+      }
+    },
+
+    // 上报提交接口
+    async postDamageReported(report){
+      let res = await damageReported({items: report})
+      console.log("上报提交-----",res);
+      if(res.status === 201){
+        this.$message({
+          type: 'success',
+          message: '上报成功咯!',
+        })
+        this.dialogFormVisibleReported = false
+        this.report.goodsId = ""
+        this.report.damageDescription = ""
+        // 重新获取列表
+        this.getItemsList(1,this.pageSize)
+      }
     },
 
     // 物品名字搜索接口
     async getSearchByGoodsNameFunc(pageNum,pageSize,goodsName){
       let res = await searchByGoodsNameFunc({pageNum: pageNum, pageSize: pageSize, goodsName: goodsName})
       console.log("上报人搜索数据-----",res);
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.totalPages
-      this.pageNum = 1
+      if(Array.isArray(res.data.data.list) && res.data.data.list.length){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.tableData.forEach( (e,index) => {
+          e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
+        })
+        this.total = res.data.data.total
+        this.totalPages = res.data.totalPages
+        this.pageNum = 1
+      }
+      
+    },
+
+    // 物品id搜索接口
+    async getSearchByGoodsIdFunc(goodsId){
+      let res = await searchByGoodsIdFunc({goodsId: goodsId})
+      console.log("物品id搜索数据-----",res);
+      if(Array.isArray(res.data.data.list) && res.data.data.list.length){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.tableData.forEach( (e,index) => {
+          e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
+        })
+        this.total = 1
+        this.totalPages = 1
+        this.pageNum = 1
+      }
     },
 
     // 更新页码
@@ -215,22 +276,43 @@ export default {
       this.pageNum = val
       this.getItemsList(val,this.pageSize)
     },
+
+    // 上报弹窗展开
+    damageReportFromItems(index,row){
+      console.log("上报弹窗展开",index,row);
+      this.dialogFormVisibleReported = true
+      this.report.goodsId = row.goodsId
+    },
+    // 上报提交操作
+    submitFormReport(){
+      this.$refs.report.validate((valid) => {
+        if (valid) {
+          console.log("上报提交按钮-----",this.report);
+          this.postDamageReported(this.report)
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
     // 提交新物品的大按钮
     itemsButton(){
       // 触发弹窗
-      this.dialogFormVisible = true;
+      this.dialogFormVisibleAdd = true;
       // 将弹窗标题修改
       this.dialogFormVisibleTitle = '添加新物品'
       // 表单数据清空
       this.items.goodsName = ""
       this.items.goodsState = ""
+      this.items.goodsQuantity = ""
     },
     // 提交新物品
-    submitButton(items) {
-      this.$refs[items].validate((valid) => {
+    submitButton() {
+      this.$refs.items.validate((valid) => {
         if (valid) {
           console.log("提交新物品操作-----",this.items);
-          this.submitForm("addGoods")
+          this.submitFormAdd()
         } else {
           console.log('error submit!!');
           return false;
@@ -239,48 +321,67 @@ export default {
     },
     // 获取图片对象
     changeFile(file, fileList) {
+      //图片格式
+      const isJPG = file.type === 'image/jpg' || file.type === 'image/png';
+        //图片大小
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJPG) {
+        this.$message.error('上传图片只能为jpg或png格式');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过2MB');
+      }
       this.items.goodsImage = URL.createObjectURL(file.raw);
       // 选择文件后，给fileList对象赋值
       this.fileList = fileList
+
     },
     // 正式提交新物品
-    submitForm(){
+    submitFormAdd(){
       let formData = new FormData()
       this.items.goodsImage = this.fileList[0].raw
-      console.log("this.fileList[0].raw",this.fileList[0].raw);
-      formData["uploadImage"] = this.items.goodsImage
-      formData["goodsId"] = this.items.goodsId
-      formData["goodsName"] = this.items.goodsName
-      formData["goodsState"] = this.items.goodsState
-      console.log("formData",formData);
+
+      formData.append("uploadImage",this.fileList[0].raw)
+      formData.append("goodsName",this.items.goodsName)
+      formData.append("goodsState",this.items.goodsState)
+      formData.append("goodsQuantity",this.items.goodsQuantity)
+
+      console.log("formData的uploadImage",formData.get("uploadImage"));
       // 发送请求
       this.postItemsAdd(formData)
-    },
-
-    // 修改物品
-    submitFormEdit(){
-      let formData = new FormData()
-      this.items.goodsImage = this.fileList[0].raw
-      console.log("this.fileList[0].raw",this.fileList[0].raw);
-      formData["uploadImage"] = this.items.goodsImage
-      formData["goodsId"] = this.items.goodsId
-      formData["goodsName"] = this.items.goodsName
-      formData["goodsState"] = this.items.goodsState
-      console.log("formData",formData);
-      // 发送请求
-      this.postItemsEdit(formData)
     },
 
     // 物品名字搜索操作
     searchByGoodsNameFunc:debounce(function() {
       if(this.searchByGoodsName){
+        console.log("我要搜索咯-----",this.searchByGoodsName);
         this.getSearchByGoodsNameFunc(this.pageNum,this.pageSize,this.searchByGoodsName)
       } 
     }, 300),
+
+    // 物品id搜索操作
+    searchByGoodsIdFunc:debounce(function() {
+      if(this.searchByGoodsId){
+        console.log("我要搜索咯-----",this.searchByGoodsId);
+        this.getSearchByGoodsIdFunc(this.searchByGoodsId)
+      }
+    }, 300),
+
+    // 查看全部
+    seeAll(){
+      this.getItemsList(1,this.pageSize)
+      this.searchByGoodsName = ''
+      this.searchByGoodsId = ''
+    },
     
   },
   created() {
-    this.getItemsList(this.pageNum,this.pageSize)
+    this.getItemsList(1,this.pageSize)
+  },
+  mounted() {
+    getMessageQuantity(this)
+    this.report.reportName = this.$store.state.login.name
+    this.report.reportNameId = Number(this.$store.state.login.id)
   },
 };
 </script>
@@ -290,8 +391,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: rgba(255, 255, 255, 0.6);
-    overflow-y: scroll;
+    
   }
   .itemsText{
     font-size: 38px;
@@ -311,7 +411,9 @@ export default {
     margin-top: 60px;
     font-size: 18px;
     position: fixed;
-    left: 0px;
+    border-radius: 20px;
+    left: 20px;
+    top: 5px;
     background-color: aliceblue;
     z-index: 1;
   }
@@ -320,6 +422,7 @@ export default {
     /* height: 100%; */
     font-size: 25px;
     margin: 40px auto;
+    margin-bottom: 80px;
   }
   .checkItemsInnerHeader{
     display: flex;
@@ -341,6 +444,9 @@ export default {
     height: 100%;
     font-size: 10px;
   }
+  .seeAll{
+    margin-top: 60px;
+  }
   .itemsImg{
     display: flex;
     flex-direction: column;
@@ -357,13 +463,15 @@ export default {
   ::v-deep .el-table th,
   ::v-deep .el-table tr,
   ::v-deep .el-table td {
-    background-color: rgba(255, 255, 255, 0.637) !important;
+    background-color: rgba(255, 255, 255, 0.281) !important;
+  }
+  .dialog-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   /* 去除底部白线 */
   .el-table::before{
     background-color: transparent;
-  }
-  .pagination{
-    background-color: rgba(255, 255, 255, 0.815) !important;
   }
 </style>

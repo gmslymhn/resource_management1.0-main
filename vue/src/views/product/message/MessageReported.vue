@@ -7,11 +7,11 @@
 
     <div class="messageHeader">
       <!-- 损坏上报 -->
-      <el-badge :value="200" :max="99" class="messageHeaderReported">
+      <el-badge :value="reportedMessage" :max="99" class="messageHeaderReported">
         <el-button type="success">损坏上报</el-button>
       </el-badge>
       <!-- 资金审批 -->
-      <el-badge :value="200" :max="99" class="messageHeaderAssets">
+      <el-badge :value="assetsMessage" :max="99" class="messageHeaderAssets">
         <el-button type="info" @click="gotoMessageAssets">资金审批</el-button>
       </el-badge>
     </div>
@@ -95,7 +95,7 @@
 
       <!-- 弹窗 -->
       <el-dialog title="损坏物品处理" :visible.sync="dialogFormVisibleEdit" :append-to-body="true" class="itemsDialog">
-      
+
       <el-form :model="dispose" :rules="rules" ref="dispose" class="demo-ruleForm">
 
         <el-form-item label="上报人" prop="reportName">
@@ -105,8 +105,6 @@
         <el-form-item label="物品id" prop="goodsId">
           <el-input v-model="dispose.goodsId" :disabled="true"></el-input>
         </el-form-item>
-
-        
 
         <el-form-item label="物品名字" prop="goodsName">
           <el-input v-model="dispose.goodsName" :disabled="true"></el-input>
@@ -125,7 +123,7 @@
         </el-form-item>
 
         <el-form-item label="是否申请资金购买新物品" prop="gotoApply">
-          <el-radio-group v-model="gotoApply">
+          <el-radio-group v-model="dispose.gotoApply">
             <el-radio label="是"></el-radio>
             <el-radio label="否"></el-radio>
           </el-radio-group>
@@ -161,6 +159,11 @@ import { deleteGoods } from "@/api/damage/damageAdmin.js"
 import { throttle } from 'lodash-es';
 // 分页
 import Pagination from '@/components/pagination/Pagination';
+import getMessageQuantity from "@/utils/getMessageQuantity";
+import getUnprocessedReportNum from "@/utils/getReportedMessage"
+import getUnprocessedAssetsNum from "@/utils/getAssetsMessage"
+// 时间戳处理
+import dayjs from 'dayjs';
 export default {
   name: 'Message-MessageReported',
   components:{Pagination,},
@@ -168,151 +171,7 @@ export default {
   data() {
     return {
       // 列表
-      tableData: [{
-        sequenceId: 1,
-        reportNameId: 1,
-        reportName: '门酱',
-        reportTime: '2023-07-02 03:29:33',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportName: '门酱',
-        reportTime: '2023-07-02 03:29:33',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-       sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-       sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }, {
-        sequenceId: 1,
-        reportNameId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-      }],
+      tableData: [],
       // 处理信息
       dispose: {
         // 不可修改的框框
@@ -320,18 +179,22 @@ export default {
         goodsId: '',               // 物品id
         goodsName: '',             // 物品名称
         damageDescription: '',     // 上报人描述
+        gotoApply: '',             // 是否跳转
 
         // post的数据
-        sequenceId: '',            // 上报信息id
+        sequenceId: '',            // 1上报信息id
         disposeNameId: '',         // 1处理人id
         disposeName: '',           // 1处理人姓名
         disposeDescription: '',    // 1处理描述
-        goodsState: '',            // 处理状态判断
+        disposeResult: '',         // 1处理状态判断
       },
       // 处理信息规则
       rules: {
         goodsState: [
           { required: true, message: '请选择处理状态', trigger: 'change' }
+        ],
+        gotoApply: [
+          { required: true, message: '请选择是否跳转到申请资金', trigger: 'change' }
         ],
         disposeDescription: [
           { required: true, message: '请填入处理描述', trigger: 'blur' }
@@ -348,6 +211,12 @@ export default {
       pageNum: 1,
       // 控制弹窗
       dialogFormVisibleEdit: false,
+      // 用于判断下面
+      role: '',
+      // 损坏上报未处理信息数
+      reportedMessage: '',
+      // 资金申请未处理信息数
+      assetsMessage: '',
     };
   },
 
@@ -356,17 +225,29 @@ export default {
     async getUnprocessedReport(pageNum){
       let res = await unprocessedReport({pageNum: pageNum})
       console.log("未处理损坏物品数据-----",res)
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.data.pages
+      if(res.data){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.total = res.data.data.total
+        this.totalPages = res.data.data.pages
+        this.tableData.forEach( e => {
+          e.applyTime = dayjs(e.applyTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+      }
     },
+
     // [更新]管理员处理(未处理的)损坏记录信息接口
     async postUpdateProcessedReport(sequenceId,disposeNameId,disposeName,disposeDescription){
-      let res = updateProcessedReport({sequenceId: sequenceId,disposeNameId: disposeNameId,disposeName: disposeName,disposeDescription :disposeDescription})
+      let res = await updateProcessedReport({sequenceId: sequenceId,disposeNameId: disposeNameId,disposeName: disposeName,disposeDescription :disposeDescription})
       console.log("审批损坏结果-----",res)
-      // 重新获取列表
-      this.getUnprocessedReport(1)
+      if(res.state === 200){
+        this.$message({
+          type: 'success',
+          message: '删除成功咯!',
+        })
+        // 重新获取列表
+        this.getUnprocessedReport(1)
+      }
     },
 
     // 上报提交操作
@@ -374,13 +255,23 @@ export default {
       this.$refs.dispose.validate((valid) => {
         if (valid) {
           console.log("处理提交按钮-----",this.dispose);
-          this.postUpdateProcessedReport(this.sequenceId,this.dispose.disposeNameId,this.disposeName,this.dispose.disposeDescription)
+          this.dispose.disposeNameId = Number(this.dispose.disposeNameId)
+          this.postUpdateProcessedReport(this.dispose.sequenceId,this.dispose.disposeNameId,this.dispose.disposeName,this.dispose.disposeDescription)
+          // 触发弹窗
+          this.dialogFormVisibleEdit = false
           if( this.dispose.goodsState === "是" ){
             // 调用物品损坏上报的删除接口
             console.log("调用物品损坏上报删除接口-----");
             deleteGoods({sequenceId: this.dispose.sequenceId}).then((res) => {
               console.log("物品损坏上报删除此条目成功");
             })
+          }
+          if( this.dispose.gotoApplyRes === "是" ){
+            if( this.role === "user" ){
+              this.$router.push({ name:"user_shenqing" })
+            }else if( this.role === "admin" ){
+              this.$router.push({ name:"admin_shenqing" })
+            }
           }
         } else {
           console.log('error submit!!');
@@ -421,13 +312,29 @@ export default {
 
     // 跳转资金审批
     gotoMessageAssets: throttle(function(){
-      this.$router.push({ name:"admin_message_assets" }).catch(err => err)
-    },1500),
-  },
+        this.$router.push({ name:"admin_message_assets" }).catch(err => err)
+      },1500),
+    },
 
   created() {
     // 获取未处理损坏物品列表数据操作
     this.getUnprocessedReport(this.pageNum)
+    getMessageQuantity(this)
+
+    
+  },
+  mounted() {
+    getUnprocessedReportNum().then( resReported => {
+      console.log("resReported",resReported);
+      this.reportedMessage = resReported.data.data
+    } )
+    
+    getUnprocessedAssetsNum().then( resAssets => {
+      console.log("resAssets",resAssets);
+      this.assetsMessage = resAssets.data.data
+    })
+
+    this.role = this.$store.state.login.role
   },
 };
 </script>
