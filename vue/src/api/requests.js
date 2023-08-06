@@ -39,7 +39,7 @@ import router from '@/router'
 import { Loading } from 'element-ui';
 // 创建的axios的实列 requests
 const requests = axios.create({
-    baseURL:"http://localhost:8080", // 基准地址  可直接配置路径,也可代理路径(以实际项目为准)
+    baseURL:"http://172.16.1.49:8080", // 基准地址  可直接配置路径,也可代理路径(以实际项目为准)
     timeout: 10000 // 超时时间
 })
 // 请求拦截

@@ -34,16 +34,17 @@ export const itemsList = ({pageNum,pageSize}) => {
   })
 }
 
-// 修改以及增加物品物品
+// 增加物品
 /**
  * @URL /user/usegoods/updateGoods
  * @method post
  * @param 第一个参数uploadImage是用input获取的文件，第二个参数名字是goods，他是一个Goods类
  */
-export const itemsEdit = ({submitFormURL, goodsImage, formData}) => {
-  return requests.post(url + `/addGoods${submitFormURL}`, {
-    uploadImage: goodsImage,
-    goods: formData
+export const itemsEdit = ({submitFormURL, formData}) => {
+  return requests.post(url + `/${submitFormURL}`, {
+    data: {
+      formData: formData
+    }
   }, {
     headers: { "Content-type": "multipart/form-data" }
   });
@@ -52,13 +53,15 @@ export const itemsEdit = ({submitFormURL, goodsImage, formData}) => {
 // 根据物品名查询上报信息
 /**
  * @URL /user/usegoods/selectGoodsByGoodsName
- * @method get
- * @param goodsName
+ * @method post
+ * @param pageNum,pageSize,goodsName
  */
-export const searchByGoodsNameFunc = ({goodsName}) => {
-  return requests.get(url + "/selectGoodsByGoodsName",{
-    params: {
+export const searchByGoodsNameFunc = ({pageNum,pageSize,goodsName}) => {
+  return requests.post(url + "/selectGoodsByGoodsName",{
+      pageNum: pageNum,
+      pageSize: pageSize,
       goodsName: goodsName,
-    }
+  }, {
+    headers: { "Content-type": "multipart/form-data" }
   });
-}
+} 

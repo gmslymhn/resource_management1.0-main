@@ -7,7 +7,7 @@
     <div class="headerInner">
 
       <!-- 消息 -->
-      <el-badge :value="200" :max="99" class="innerItem">
+      <el-badge :value="messageNum" :max="99" class="innerItem" v-if="shenfen === 'admin'">
         <el-button size="" icon="el-icon-message" class="innerItemButton" @click="message"></el-button>
       </el-badge>
 
@@ -34,6 +34,10 @@
 
 <script>
 import Cookie from "js-cookie"
+// 节流
+import { throttle } from 'lodash-es';
+// 消息查询
+import { messageQuantity } from "@/api/message/message"
 export default {
   name: 'Content-Header',
 
@@ -41,19 +45,49 @@ export default {
     return {
       // 头像地址
       circleUrl: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+      // 身份
+      shenfen: '',
+      // 消息有几条
+      messageNum: '',
     };
   },
   methods: {
-    message(){
-      this.$router.push({path:"/zhuye/message"})
-    },
+    message: throttle(function(){
+      this.$router.push({ name:"admin_message_reported" }).catch(err => err)
+    },1500),
+
     loginOut(){
+      // 清除vuex的token和role和account和name
+      this.$store.dispatch("login/clearToken")
+      this.$store.dispatch("login/clearRole")
+      this.$store.dispatch("login/clearAccount")
+      this.$store.dispatch("login/clearName")
       // 清除cookie的token
       Cookie.remove("token")
+      // 回到登录界面
       this.$router.replace("/")
-      // 清除vuex的token和role
-      this.$store.dispatch("clearToken")
-      this.$store.dispatch("clearRole")
+    },
+
+    // 消息查询
+    async getMessageQuantity(){
+      let res = await messageQuantity();
+      console.log("消息查询操作-----", res);
+      this.messageNum = res.data;
+      if(this.messageNum){
+        this.$notify.info({
+          title: '消息',
+          message: '您有待审批消息'
+        });
+      }
+    }
+  },
+  mounted() {
+    this.shenfen = this.$store.state.login.role
+    console.log("身份是:",this.$store.state.login.role);
+
+    // 消息查询
+    if(this.shenfen === "admin"){
+      this.getMessageQuantity()
     }
   },
 };
@@ -67,6 +101,7 @@ export default {
     bottom: 0;
     width: 100%;
     height: 80px;
+    border-bottom: 3px #6b6c78 solid;
     /* background-image: linear-gradient(to top, #fbc8d4e5 0%, #9795f0e5 100%); */
     /* background-color: #bd837f; */
     /* background-image: linear-gradient(to top, #e4a29de5 0%, #bd837fe5 100%); */
@@ -109,10 +144,9 @@ export default {
     overflow: hidden;
   }
   .headerImg img{
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 80px;
     object-fit: cover;
-    background-color: blue;
   }
   .headerInner{
     width: 400px;

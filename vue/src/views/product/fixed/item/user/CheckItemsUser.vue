@@ -5,19 +5,11 @@
       <p class="itemsTextP">物品展示</p>
     </div>
 
-    <div class="checkItemsHeader">
+    <el-button class="itemsButton" type="text" @click="itemsButton">添加新物品</el-button>
 
-      <el-button class="itemsButton" type="text" @click="itemsButton">添加新物品</el-button>
-  
-      <!-- 物品名搜索 -->
-      <el-input
-        v-model.trim="searchByGoodsName"
-        size="mini"
-        placeholder="物品名搜索(回车)"
-        @keyup.enter.native="searchByGoodsNameFunc"/>
-    </div>
     
-    <!-- 添加新物品弹窗 和 编辑物品弹窗 -->
+
+    <!-- 添加新物品弹窗 -->
     <el-dialog :title="dialogFormVisibleTitle" :visible.sync="dialogFormVisible" :append-to-body="true" class="itemsDialog">
       <el-form :model="items" :rules="rules" ref="items" label-width="100px" class="demo-ruleForm">
         <el-form-item label="物品名称" prop="goodsName">
@@ -25,16 +17,18 @@
         </el-form-item>
         <el-form-item label="物品状态" prop="goodsState">
           <el-radio-group v-model="items.goodsState">
-            <el-radio label="已使用"></el-radio>
-            <el-radio label="未使用"></el-radio>
+            <el-radio label="未损坏"></el-radio>
+            <el-radio label="已损坏"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="上传图片" prop="goodsImage">
           <el-upload
             class="itemsImg"
             drag
-            action="abc"
-            list-type	="picture"
+            :auto-upload="false"
+            :limit="1"
+            action="null"
+            list-type="picture"
             :on-change="changeFile">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将物品照片拖到此处，或<em>点击上传</em></div>
@@ -43,26 +37,38 @@
         </el-form-item>  
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitButton('rules')">确 定</el-button>
+        <el-button type="primary" @click="submitButton('items')">确 定</el-button>
         <el-button @click="dialogFormVisible = false">取 消</el-button>
       </div>
     </el-dialog>
 
-    <!-- 展示页面 -->
-    <el-table :data="tableData" border align="center" class="itemsTable" :header-cell-style="{'text-align':'center'}">
-        <el-table-column prop="id" label="物品id" align='center'></el-table-column>
-        <el-table-column prop="image" label="物品照片" align='center'>
-            <template slot-scope="scope">
-                <img style="width:80px;height:80px" :src="scope.row.image">
-            </template>
-        </el-table-column>
-        <el-table-column prop="name" label="物品名称" align='center'></el-table-column>
-        <el-table-column prop="state" label="物品状态" align='center'></el-table-column>
-    </el-table>
+    <div class="checkItemsInner">
+      <div class="checkItemsInnerHeader">
+        <!-- 物品名搜索 -->
+        <div class="inputDiv">
+          <el-input
+            v-model.trim="searchByGoodsName"
+            size="mini"
+            placeholder="物品名搜索(回车)"
+            @keyup.enter.native="searchByGoodsNameFunc"/>
+        </div>
+      </div>
+      <!-- 展示页面 -->
+      <el-table :data="tableData" border align="center" class="itemsTable" :header-cell-style="{'text-align':'center'}">
+          <el-table-column prop="goodsId" label="物品id" align='center'></el-table-column>
+          <el-table-column prop="goodsImage" label="物品照片" align='center'>
+              <template slot-scope="scope">
+                  <img style="width:80px;height:80px" :src="scope.row.goodsImage">
+              </template>
+          </el-table-column>
+          <el-table-column prop="goodsName" label="物品名称" align='center'></el-table-column>
+          <el-table-column prop="goodsState" label="物品状态" align='center'></el-table-column>
+      </el-table>
+    </div>
 
     <!-- 分页 -->
     <div class="pagination">
-      <Pagination :total="total" :totalPages="totalPages" @currentChange="currentChange"></Pagination>
+      <Pagination :total="total" :pageSize="pageSize" :totalPages="totalPages" @currentChange="currentChange"></Pagination>
     </div>
 
   </div>
@@ -74,73 +80,66 @@ import { debounce } from 'lodash-es';
 import Pagination from '@/components/pagination/Pagination';
 import { itemsList,searchByGoodsNameFunc,itemsEdit } from '@/api/goods/goodsUser.js'
 export default {
-  name: 'Content-CheckItems',
+  goodsName: 'Content-CheckItems',
   components:{Pagination,},
   data() {
-    const validateLogo = (rule, value, callback) => {
-      if (!this.items.goodsImage) {
-        callback(new Error('请上传图片'))
-      } else {
-        callback()
-      }
-    }
     return {
       formLabelWidth: '120px',
       tableData: [{
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }, {
-        id:"001",
-        image: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
-        state:"已使用",
-        name: '门酱',
+        goodsId:"001",
+        goodsImage: "https://pic3.zhimg.com/80/v2-cc3236b4e6b192e8a3f75a358b706582_720w.webp",
+        goodsState:"已使用",
+        goodsName: '门酱',
       }],
       // 控制弹窗
       dialogFormVisible: false,
@@ -166,7 +165,7 @@ export default {
           { required: true, message: '请选择物品状态', trigger: 'change' }
         ],
         goodsImage: [
-          { required: true, validator: validateLogo, trigger: 'change' }
+          { required: true, message: '请上传图片', trigger: 'change' }
         ],
       },
       // 关于页码
@@ -184,27 +183,29 @@ export default {
     // 获取物品列表数据接口
     async getItemsList(pageNum,pageSize){
     let res = await itemsList({pageNum: pageNum,pageSize: pageSize})
-      console.log("产品列表数据-----",res.data)
+      console.log("产品列表数据-----",res)
       // 列表赋值
-      this.tableData = [...res.data.data]
-      this.total = res.data.total
+      this.tableData = [...res.data.data.list]
+      this.total = res.data.data.total
       this.totalPages = res.data.totalPages
     },
 
-    // 添加新物品接口/修改接口
+    // 添加新物品接口
     async postItemsEdit(submitFormURL, img, goods){
       let res = await itemsEdit({submitFormURL: submitFormURL, img: img, goods: goods})
-      console.log("修改/增加产品列表-----",res.data);
+      console.log("修改/增加产品列表-----",res);
       // 重新获取列表
       this.getItemsList(this.pageNum)
     },
 
-    // 物品id搜索接口
-    async getsearchByGoodsNameFunc(goodsName){
-      let res = await searchByGoodsNameFunc({goodsName: goodsName})
-      console.log("上报人搜索数据-----",res.data);
+    // 物品名字搜索接口
+    async getSearchByGoodsNameFunc(pageNum,pageSize,goodsName){
+      let res = await searchByGoodsNameFunc({pageNum: pageNum, pageSize: pageSize, goodsName: goodsName})
+      console.log("上报人搜索数据-----",res);
       // 列表赋值
-      this.tableData = [...res.data]
+      this.tableData = [...res.data.data.list]
+      this.total = res.data.data.total
+      this.totalPages = res.data.totalPages
       this.pageNum = 1
     },
 
@@ -226,9 +227,9 @@ export default {
     },
     // 提交新物品
     submitButton(items) {
-      this.$refs.items.validate((valid) => {
+      this.$refs[items].validate((valid) => {
         if (valid) {
-          console.log("validate-----",this.items);
+          console.log("提交新物品操作-----",this.items);
           this.submitForm("addGoods")
         } else {
           console.log('error submit!!');
@@ -238,29 +239,43 @@ export default {
     },
     // 获取图片对象
     changeFile(file, fileList) {
-      console.log(fileList);
+      this.items.goodsImage = URL.createObjectURL(file.raw);
       // 选择文件后，给fileList对象赋值
       this.fileList = fileList
     },
-    // 正式提交新物品 和 修改物品
-    submitForm(submitFormURL){
+    // 正式提交新物品
+    submitForm(){
       let formData = new FormData()
       this.items.goodsImage = this.fileList[0].raw
-      console.log(this.fileList[0].raw)
-      // 将form表单中的值都赋值给FormData传递给后台
-      for(let key in this.items){
-        console.log(this.items[key])
-        formData.append(key,this.items[key])
-      }
-      // 删除Image
-      delete formData.goodsImage
+      console.log("this.fileList[0].raw",this.fileList[0].raw);
+      formData["uploadImage"] = this.items.goodsImage
+      formData["goodsId"] = this.items.goodsId
+      formData["goodsName"] = this.items.goodsName
+      formData["goodsState"] = this.items.goodsState
+      console.log("formData",formData);
       // 发送请求
-      this.postItemsEdit(submitFormURL, this.items.goodsImage, formData)
+      this.postItemsAdd(formData)
     },
 
-    // 物品id搜索操作
+    // 修改物品
+    submitFormEdit(){
+      let formData = new FormData()
+      this.items.goodsImage = this.fileList[0].raw
+      console.log("this.fileList[0].raw",this.fileList[0].raw);
+      formData["uploadImage"] = this.items.goodsImage
+      formData["goodsId"] = this.items.goodsId
+      formData["goodsName"] = this.items.goodsName
+      formData["goodsState"] = this.items.goodsState
+      console.log("formData",formData);
+      // 发送请求
+      this.postItemsEdit(formData)
+    },
+
+    // 物品名字搜索操作
     searchByGoodsNameFunc:debounce(function() {
-      this.getSearchByGoodsNameFunc(this.searchByGoodsName)
+      if(this.searchByGoodsName){
+        this.getSearchByGoodsNameFunc(this.pageNum,this.pageSize,this.searchByGoodsName)
+      } 
     }, 300),
     
   },
@@ -275,6 +290,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
+    background-color: rgba(255, 255, 255, 0.6);
     overflow-y: scroll;
   }
   .itemsText{
@@ -299,15 +315,44 @@ export default {
     background-color: aliceblue;
     z-index: 1;
   }
+  .checkItemsInner{
+    width: 80%;
+    /* height: 100%; */
+    font-size: 25px;
+    margin: 40px auto;
+  }
+  .checkItemsInnerHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .inputDiv{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .inputDiv >>> .el-input{
+    width: 150px;
+    height: 40px;
+  }
+  .inputDiv >>> .el-input__inner{
+    height: 100%;
+    font-size: 10px;
+  }
   .itemsImg{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  .itemsImg >>> .el-upload-list{
+    width: 60%;
+  }
   .itemsTable{
-    margin-top: 110px;
     background-color: transparent;
+    border-radius: 15px;
   }
   ::v-deep .el-table th,
   ::v-deep .el-table tr,
@@ -319,9 +364,6 @@ export default {
     background-color: transparent;
   }
   .pagination{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.815) !important;
   }
 </style>

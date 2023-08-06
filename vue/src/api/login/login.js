@@ -14,6 +14,6 @@ export const login = ({useraccount,password}) => {
     useraccount: useraccount,
     password: password
   }, {
-    headers:{'Content-Type': 'application/json'}
+    headers:{'Content-Type': 'application/x-www-form-urlencoded'}
   });
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <section>
+    <section id="sec">
         <div><img src="@/assets/1.jpg" alt=""></div>
         <div><img src="@/assets/2.jpg" alt=""></div>
         <div><img src="@/assets/3.jpg" alt=""></div>
@@ -9,6 +9,7 @@
         <div><img src="@/assets/6.jpg" alt=""></div>
         <div class="tyut">Welcome to ReManage</div>
     </section>
+    <div id="selab"><img src="@/assets/selab.png"></div>
   </div>
 </template>
 
@@ -29,9 +30,26 @@ export default {
     margin: 0;
     padding: 0;
 }
-
-section {
+#sec{
+    position: absolute;
+    top: 390px;
+}
+#selab img{
+    left: 22%;
+    top: 0;
+    position: absolute;
+    width: 600px;
+}
+.main{
+    background-color: transparent;
+    width: 100%;
     position: relative;
+    display: flex;
+    justify-content: center;
+}
+section {
+    position: absolute;
+    left: 32%;
     width: 300px;
     height: 200px;
     cursor: pointer;
@@ -43,7 +61,8 @@ section {
     position: absolute;
     color: white;
     top: -150px;
-    font-size: 40px;
+    font-size: 50px;
+    font-family: '华文琥珀';
 }
 section:hover{
     animation-play-state: paused;
@@ -51,8 +70,6 @@ section:hover{
 section div {
     text-align: center;
     position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
     height: 100%;
     /* 用来实现倒影效果 */
@@ -63,7 +80,6 @@ section div {
 section div img {
     width: 300px;
     height: 200px;
-
 }
 
 section div:nth-child(1) {

@@ -5,6 +5,8 @@
       <p class="itemsTextP">物品损坏上报</p>
     </div>
 
+  <!-- <button class="btn" @click="dingshiqi">定时器</button> -->
+    
     <!-- 上报页面 -->
     <div class="damageReportedInner">
 
@@ -18,14 +20,14 @@
             v-model.trim="searchByReportName"
             size="mini"
             placeholder="上报人搜索(回车)"
-            @keyup.enter.native="searchByReportNameFunc"/>
+            @keyup.enter.native="searchByReportNameFuncButton"/>
 
           <!-- 处理人搜索 -->
           <el-input
           v-model.trim="searchByDisposeName"
           size="mini"
           placeholder="处理人搜索(回车)"
-          @keyup.enter.native="searchByDisposeNameFunc"/>
+          @keyup.enter.native="searchByDisposeNameFuncButton"/>
 
         </div>
         
@@ -69,12 +71,18 @@
             label="物品名称"
             :formatter="formatter">
           </el-table-column>
+          <!-- 损坏描述 -->
+          <el-table-column
+            align='center'
+            prop="damageDescription"
+            label="损坏描述">
+          </el-table-column>
           <!-- 状态 -->
           <el-table-column
             align='center'
             prop="goodsState"
             label="状态"
-            :filters="[{ text: '未处理', value: '未处理' }, { text: '未同意', value: '未同意' }, { text: '已同理未处理', value: '已同理未处理' }, { text: '已处理', value: '已处理' }]"
+            :filters="[{ text: '未处理', value: '未处理' }, { text: '已处理', value: '已处理' }]"
             :filter-method="filterTag"
             filter-placement="bottom-end">
             <template slot-scope="scope">
@@ -114,6 +122,8 @@
         <el-button type="success" round class="reportedListButton" @click="reportedListButton">上报损坏物品</el-button>
       </div>
 
+      
+
     </div>
 
 
@@ -121,16 +131,20 @@
     <el-dialog title="上报" :visible.sync="dialogFormVisible" :append-to-body="true" class="itemsDialog">
       
       <el-form :model="items" :rules="rules" ref="items" class="demo-ruleForm">
-        <el-form-item label="物品id(请输入数字)" prop="goodsId">
+        <el-form-item label="上报人id" prop="reportNameId">
+          <el-input v-model="items.reportNameId" :disabled="true"></el-input>
+        </el-form-item>
+
+        <el-form-item label="上报人姓名" prop="reportName">
+          <el-input v-model.number="items.reportName" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="物品id" prop="goodsId">
           <el-input v-model.number="items.goodsId"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="物品名称" prop="goodsName">
-          <el-input v-model="items.goodsName"></el-input>
-        </el-form-item> -->
         <el-form-item label="损坏描述" prop="damageDescription">
           <el-input type="textarea" v-model="items.damageDescription"></el-input>
         </el-form-item>
-        <el-button type="primary" @click="submitForm()">上 报</el-button>
+        <el-button type="primary" @click="submitForm('rules')">上 报</el-button>
       </el-form>
 
       
@@ -139,7 +153,6 @@
         <el-button @click="dialogFormVisible = false">关 闭</el-button>
       </div>
     </el-dialog>
-
     <!-- 分页 -->
     <div class="pagination">
       <Pagination :total="total" :totalPages="totalPages" @currentChange="currentChange"></Pagination>
@@ -167,6 +180,7 @@ export default {
         reportName: '门酱',
         goodsId: 1,
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsState: '未处理',
         processTime: '2023-08-01 06:30:55',
         disposeName: '无'
@@ -175,6 +189,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -184,6 +199,7 @@ export default {
         reportTime: '2023-07-01 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '已同理未处理',
         processTime: '2023-08-01 06:30:55',
@@ -193,6 +209,7 @@ export default {
         reportTime: '2023-07-03 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '已处理',
         processTime: '2023-08-01 06:30:55',
@@ -202,6 +219,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -211,6 +229,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -220,6 +239,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -229,6 +249,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -238,6 +259,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -247,6 +269,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -256,6 +279,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -265,6 +289,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -274,6 +299,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -283,6 +309,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -292,6 +319,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -301,6 +329,7 @@ export default {
         reportTime: '2023-07-04 03:29:33',
         reportName: '门酱',
         goodsName: '物品名字',
+        damageDescription: '描述',
         goodsId: 1,
         goodsState: '未同意',
         processTime: '2023-08-01 06:30:55',
@@ -308,12 +337,16 @@ export default {
       }],
       // 上报损坏物品信息
       items: {
-        reportName:'',          // 1上报人：用户自己
+        reportNameId:'',        // 1上报人id
+        reportName:'',          // 1上报人账号：用户自己
         goodsId: '',            // 1上报物品id
         damageDescription: '',  // 1上报损坏描述
-        reportTime: '',         // 上报时间
-        disposeName: '',        // 1处理人
-        goodsState: '',         // 处理状态
+      },
+      ok: {
+        reportNameId: 120,        // 1上报人id
+        reportName:'李浩坤',          // 1上报人账号：用户自己
+        goodsId: 35447,            // 1上报物品id
+        damageDescription: '描述',  // 1上报损坏描述
       },
       // 搜索
       searchByReportName: '',
@@ -333,11 +366,10 @@ export default {
       rules: {
         goodsId: [
           { required: true, message: '请输入物品id', trigger: 'blur' },
-          { type: 'number', message: '物品id必须为数值'}
         ],
-        // goodsName: [
-        //   { required: true, message: '请输入物品名称', trigger: 'blur' },
-        // ],
+        goodsName: [
+          { required: true, message: '请输入物品名称', trigger: 'blur' },
+        ],
         damageDescription: [
           { required: true, message: '请输入损坏描述', trigger: 'blur' }
         ],
@@ -348,56 +380,70 @@ export default {
     // 获取上报列表数据接口
     async getReportList(pageNum,pageSize){
       let res = await reportList({pageNum: pageNum,pageSize: pageSize})
-      console.log("上报列表数据-----",res.data)
+      console.log("上报列表数据-----",res)
       // 列表赋值
-      this.tableData = [...res.data]
-      this.total = res.data.total
-      this.totalPages = res.data.totalPages
+      this.tableData = [...res.data.data.list]
+      this.total = res.data.data.total
+      this.totalPages = res.data.data.pages
     },
 
     // 上报提交接口
     async postDamageReported(items){
       let res = await damageReported({items: items})
-      console.log("上报提交-----",res.data);
+      console.log("上报提交-----",res);
     },
 
     // 上报人搜索接口
     async getSearchByReportNameFunc(pageNum,pageSize,reportName){
       let res = await searchByReportNameFunc({pageNum: pageNum,pageSize: pageSize,reportName: reportName})
-      console.log("上报人搜索数据-----",res.data);
+      console.log("上报人搜索数据-----",res);
       // 列表赋值
-      this.tableData = [...res.data]
+      this.tableData = [...res.data.data.list]
+      this.total = res.data.data.total
+      this.totalPages = res.data.data.pages
     },
 
     // 处理人搜索接口
     async getSearchByDisposeNameFunc(pageNum,pageSize,disposeName){
       let res = await searchByDisposeNameFunc({pageNum: pageNum,pageSize: pageSize,disposeName: disposeName})
-      console.log("处理人搜索数据-----",res.data);
+      console.log("处理人搜索数据-----",res);
       // 列表赋值
-      this.tableData = [...res.data]
+      this.tableData = [...res.data.data.list]
+      this.total = res.data.data.total
+      this.totalPages = res.data.data.pages
     },
 
     // 删除数据接口
     async getDeleteGoods(sequenceId){
       let res = await deleteGoods({sequenceId: sequenceId})
-      console.log("删除数据-----",res.data);
-      if(res.data.code === 200){
+      console.log("删除数据-----",res);
+      if(res.status === 200){
         this.$message({
           type: 'success',
-          message: '删除成功!'
+          message: '删除成功!',
         })
         // 重新获取列表
         this.getReportList(1,this.pageSize)
       }
     },
-
+      
+    // dingshiqi(){
+    //   setInterval(() => {
+    //     this.postDamageReported(this.ok)
+    //   }, 1000);
+    // },
     // 上报人搜索操作
-    searchByReportNameFunc:debounce(function() {
-      this.getSearchByReportNameFunc(this.pageNum,this.pageSize,this.reportName)
+    searchByReportNameFuncButton:debounce(function() {
+      if(this.searchByReportName){
+        this.getSearchByReportNameFunc(this.pageNum,this.pageSize,this.searchByReportName)
+      }
     }, 300),
+
     // 处理人搜索操作
-    searchByDisposeNameFunc:debounce(function() {
-      this.getSearchByDisposeNameFunc(this.pageNum,this.pageSize,this.searchByDisposeName)
+    searchByDisposeNameFuncButton:debounce(function() {
+      if(this.searchByDisposeName){
+        this.getSearchByDisposeNameFunc(this.pageNum,this.pageSize,this.searchByDisposeName)
+      }
     }, 300),
 
     // 上报提交操作
@@ -449,34 +495,44 @@ export default {
     },
     clearFilter() {
       this.$refs.filterTable.clearFilter();
+      this.getReportList(1,this.pageSize)
     },
 
     // 状态颜色判断
     tagColor(scope){
       if(scope.row.goodsState === "未处理"){
         return "info"
-      } else if(scope.row.goodsState === "未同意"){
-        return "danger"
-      } else if(scope.row.goodsState === "已同理未处理"){
-        return "warning"
       } else if(scope.row.goodsState === "已处理"){
         return "success"
-      } 
+      }
     },
   },
   created() {
     // 获取上报列表数据操作
     this.getReportList(this.pageNum,this.pageSize)
+    
+  },
+  mounted() {
+    
+    this.items.reportName = this.$store.state.login.name
+    this.items.reportNameId = Number(this.$store.state.login.id)
   },
 };
 </script>
 
 <style scoped>
+  /* .btn{
+    position: relative;
+    top: 50%;
+    z-index: 100;
+  } */
   .damageReported{
     width: 100%;
     height: 100%;
     position: relative;
     background-color: rgba(255, 255, 255, 0.6);
+    overflow-y: scroll;
+    /* overflow-x: scroll; */
   }
   .itemsText{
     font-size: 38px;
@@ -499,9 +555,9 @@ export default {
   }
   .damageReportedInner{
     width: 80%;
-    height: 100%;
+    /* height: 100%; */
     font-size: 25px;
-    margin: 80px auto;
+    margin: 80px;
   }
   .damageReportedInnerHeader{
     display: flex;
@@ -535,5 +591,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .pagination{
+    background-color: rgba(255, 255, 255, 0.815) !important;
   }
 </style>

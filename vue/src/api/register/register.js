@@ -5,16 +5,16 @@ const url = "/abc/register"
 
 // 注册
 /**
- * @URL /abc/login
+ * @URL /abc/register
  * @method post
  * @param report类
  */
-export const register = ({useraccount,password,username,usernumber,userpost}) => {
+export const register = ({userAccount,userPassword,userName,userNumber,userpost}) => {
   return requests.post(url, {
-    useraccount: useraccount,
-    password: password,
-    username: username,
-    usernumber: usernumber,
+    userAccount: userAccount,
+    userPassword: userPassword,
+    userName: userName,
+    userNumber: userNumber,
     userpost: userpost
   }, {
     headers:{'Content-Type': 'application/json'}

@@ -69,9 +69,9 @@ export const searchByDisposeNameFunc = ({pageNum,pageSize,disposeName}) => {
  */
 export const damageReported = ({items}) => {
   return requests.post(url + "/addReport", {
-    report: items
-  }, {
-    headers:{'Content-Type': 'application/json'}
+    data: {
+      report: items
+    }
   });
 }
 

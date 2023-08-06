@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="pagination">
     <el-pagination
       @current-change="currentChange"
       :current-page="currentPage"
       :page-size="pageSize"
+      :page-count="totalPages"
       layout="total, prev, pager, next, jumper"
       :total="total">
     </el-pagination>
@@ -19,6 +20,10 @@ export default {
       defalut:100
     },
     pageSize:{
+      type:Number,
+      defalut:5
+    },
+    totalPages:{
       type:Number,
       defalut:10
     }
@@ -40,5 +45,11 @@ export default {
 </script>
 
 <style scoped>
-
+  .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 </style>

@@ -17,7 +17,7 @@
         <el-input v-model="loginForm.loginName" autocomplete="off" placeholder="请输入账号" clearable></el-input>
       </el-form-item>
       <el-form-item label="">
-        <el-input v-model="loginForm.loginPassword" autocomplete="off" placeholder="请输入密码" show-password></el-input>
+        <el-input v-model="loginForm.loginPassword" autocomplete="off" placeholder="请输入密码" show-password  @keyup.enter.native="LoginButton"></el-input>
       </el-form-item>
       <div class="tool">
         <div>
@@ -39,7 +39,7 @@
 
 <script>
 import Cookie from "js-cookie"
-import {login} from "@/api/login/login"
+import { login } from "@/api/login/login"
 export default {
   name: 'App-Login',
 
@@ -56,23 +56,28 @@ export default {
   methods: {
     // 登录按钮
     LoginButton() {
-      this.$router.replace("/admin");
-
+      // this.$router.replace("/admin");
+      // console.log({useraccount: this.loginForm.loginName, password: this.loginForm.loginPassword});
       login({useraccount: this.loginForm.loginName, password: this.loginForm.loginPassword})
         .then((res) => {
-          if(res.code === 200){
+          console.log("用户信息-----",res);
+          if(res.data.code === 1){
             // 请求成功后跳转到指定路由界面
-            Cookie.set("token",res.token);
-            this.$store.dispatch("setRole", res.role);
-            this.$store.dispatch("setToken", res.token);
+            Cookie.set("token",res.data.data.token);
+            this.$store.dispatch("login/setAccount", res.data.data.account);
+            this.$store.dispatch("login/setId", res.data.data.id);
+            this.$store.dispatch("login/setName", res.data.data.name);
+            this.$store.dispatch("login/setRole", res.data.role);
+            this.$store.dispatch("login/setToken", res.data.data.token);
+
             this.$message({
               showClose:true,
               type:"success",
               message:"成功登录！喜欢您来",
             })
-            if(res.role === "admin"){
+            if(res.data.role === "admin"){
               this.$router.replace("/admin");
-            } else if(res.role === "user") {
+            } else if(res.data.role === "user") {
               this.$router.replace("/user");
             }
           } else{

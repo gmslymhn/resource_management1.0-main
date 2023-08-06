@@ -12,8 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 引入axios
 import axios from "axios"
 // import VueAxios from 'vue-axios';
-// 引入仓库
-import store from "./store"
+// 引入大仓库
+import store from "@/store/index"
 
 Vue.config.productionTip = false;
 
