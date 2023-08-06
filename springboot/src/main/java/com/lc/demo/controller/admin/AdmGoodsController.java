@@ -27,29 +27,31 @@ public class AdmGoodsController {
 
     /**
      * 得到一个全部物品的List
-     * @param pageNum 页码
+     * @param
      * @return 该页的List集合
      */
 
-    @GetMapping("/getAllGoods")
-    public GoodsResult getAllGoods(Integer pageNum, Integer pageSize){
+    @PostMapping("/getAllGoods")
+    public GoodsResult getAllGoods(@RequestParam Integer pageNum, @RequestParam Integer pageSize){
         return goodsService.getAllGoods(pageNum,pageSize);
     }
 
     /**
      * 添加物品
-     * @param uploadImage
-     * @param goodsName
-     * @param goodsState
+     * @param
+     * @param
+     * @param
      * @return
      */
     @PostMapping("/addGoods")
-    public ResponseEntity<Void> addGoods(@RequestParam MultipartFile uploadImage, @RequestParam String goodsName,@RequestParam String goodsState){
+    public ResponseEntity<Void> addGoods(@RequestParam MultipartFile uploadImage,@RequestParam String goodsName,@RequestParam String goodsState,@RequestParam Integer goodsQuantity){
         Goods goods = new Goods();
         goods.setGoodsName(goodsName);
         goods.setGoodsState(goodsState);
         imageService.saveGoodsImage(uploadImage,goods);
-        goodsService.addGoods(goods);
+        for(int i = 0;i < goodsQuantity;i++){
+            goodsService.addGoods(goods);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -97,8 +99,7 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsById")
-    public GoodsResult selectGoodsById(@RequestParam int goodsId){
-
+    public GoodsResult selectGoodsById(@RequestParam Integer goodsId){
         return goodsService.selectGoodsById(goodsId);
     }
 

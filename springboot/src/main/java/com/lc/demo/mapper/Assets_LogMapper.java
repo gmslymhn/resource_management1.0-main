@@ -51,9 +51,14 @@ public interface Assets_LogMapper {
      * @param  log
      * @return
      */
-    @Insert("insert into assets_log (user_name,description,change_assets,process_time,before_assets,afterwards_assets)" +
+    @Insert("insert into assets_log (user_name,description,change_assets,before_assets,afterwards_assets)" +
             "VALUES" +
-            "(#{userName},#{description},#{changeAssets},#{processTime},#{beforeAssets},#{afterAssets})")
+            "(#{userName},#{description},#{changeAssets},#{beforeAssets},#{afterAssets})")
+
+    @Results({
+            @Result(property = "description", column = "description"),
+    })
+
     int insertAssetsLog(Assets_Log log);
 
 
@@ -71,6 +76,14 @@ public interface Assets_LogMapper {
      * 根据主键动态修改属性
      * @param assetsLog
      */
+    @Update("UPDATE assets_log SET " +
+            "user_name = #{userName}," +
+            " description = #{description}, " +
+            "change_assets = #{changeAssets}," +
+            " process_time = #{processTime}," +
+            " before_assets = #{beforeAssets}, " +
+            "afterwards_assets = #{afterAssets} " +
+            "WHERE assets_log_id = #{assetsLogId} " )
     void update(Assets_Log assetsLog);
 
 

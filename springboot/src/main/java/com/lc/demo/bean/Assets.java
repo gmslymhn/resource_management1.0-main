@@ -2,63 +2,77 @@ package com.lc.demo.bean;
 
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
-public class Assets {
-private  int id;
-    private float totalAssets;
-    private float disposableAssets;
+import java.util.Date;
 
-    private DateTimeLiteralExpression.DateTime time;
+public class Assets {
+
+    private Float  totalAssets;
+    private Float  disposableAssets;
+
+    private Date time;
+    private Integer   id;
+
+    private String description;
+    private Float  percentage;
+
 
     public Assets() {
-    }
 
-    public int getId() {
+    }
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public float getTotalAssets() {
+    public Float getTotalAssets() {
         return totalAssets;
     }
 
-    public void setTotalAssets(float totalAssets) {
+    public void setTotalAssets(Float totalAssets) {
         this.totalAssets = totalAssets;
     }
 
-    public float getDisposableAssets() {
+    public Float getDisposableAssets() {
         return disposableAssets;
     }
 
-    public void setDisposableAssets(float disposableAssets) {
+    public void setDisposableAssets(Float disposableAssets) {
         this.disposableAssets = disposableAssets;
     }
 
-    public DateTimeLiteralExpression.DateTime getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(DateTimeLiteralExpression.DateTime time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    @Override
-    public String toString() {
-        return "Assets{" +
-                "id=" + id +
-                ", totalAssets=" + totalAssets +
-                ", disposableAssets=" + disposableAssets +
-                ", time=" + time +
-                '}';
+    public Float getPercentage() {
+        return percentage;
     }
 
-    public Assets(int id, float totalAssets, float disposableAssets, DateTimeLiteralExpression.DateTime time) {
+    public void setPercentage(Float percentage) {
+        this.percentage = percentage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Assets(Integer id, Float totalAssets, Float disposableAssets, Date time, Float percentage, String description) {
         this.id = id;
         this.totalAssets = totalAssets;
         this.disposableAssets = disposableAssets;
         this.time = time;
+        this.percentage = percentage;
+        this.description = description;
     }
-
 }

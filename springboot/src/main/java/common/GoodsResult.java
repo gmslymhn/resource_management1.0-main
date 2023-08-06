@@ -29,6 +29,22 @@ import java.util.List;
  * @Author: 22932
  * @Date: 2023/7/27 10:32:19
  */
+import com.github.pagehelper.PageInfo;
+import com.lc.demo.bean.Goods;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @ClassName: Result
+ * @Description: java类描述
+ * @Author: 22932
+ * @Date: 2023/7/27 10:32:19
+ */
 public class GoodsResult {
     private PageInfo<Goods> data;
     private int totalPages;
@@ -65,7 +81,7 @@ public class GoodsResult {
      * @param pageInfo
      * @return
      */
-    public static GoodsResult pagingGoodsResult(int pageSize, PageInfo<Goods> pageInfo) {
+    public static GoodsResult pagingGoodsResult(int pageNum,int pageSize, PageInfo<Goods> pageInfo) {
         GoodsResult goodsResult = new GoodsResult();
 
         // 获取总记录数和总页码
@@ -74,9 +90,17 @@ public class GoodsResult {
 
         List<Goods> goodsList = pageInfo.getList();
         List<ResponseEntity<byte[]>> responseEntityList = new ArrayList<ResponseEntity<byte[]>>();
-        for (int i = 0; i < pageSize; i++){
-            responseEntityList.add(ProcessPictures(goodsList.get(i)));
+
+        if(pageNum != totalPages){
+            for (int i = 0; i < pageSize; i++){
+                responseEntityList.add(ProcessPictures(goodsList.get(i)));
+            }
+        }else{
+            for (int i = 0; i < total-pageSize*(totalPages-1); i++){
+                responseEntityList.add(ProcessPictures(goodsList.get(i)));
+            }
         }
+
 
         goodsResult.setResponseEntityList(responseEntityList);
         goodsResult.setData(pageInfo);
@@ -94,7 +118,7 @@ public class GoodsResult {
         String goodsImage = goods.getGoodsImage();
         FileInputStream fileInputStream = null;
         try {
-            fileInputStream = new FileInputStream(goodsImage);
+            fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\springboot\\src\\main\\resources"+goodsImage);
             byte[] bytes = new byte[1024];
             int b;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

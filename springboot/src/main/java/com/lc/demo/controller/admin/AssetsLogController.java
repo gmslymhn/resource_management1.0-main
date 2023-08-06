@@ -1,9 +1,14 @@
 package com.lc.demo.controller.admin;
 
+import com.lc.demo.bean.Assets;
 import com.lc.demo.bean.Assets_Log;
+import com.lc.demo.service.AssetsService;
 import com.lc.demo.service.Assets_LogService;
+import common.AssetLogsPage;
+import common.AssetsPage;
 import common.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,16 +20,19 @@ import java.util.List;
 @RequestMapping("/admin/admassets/assetslog")
 @Slf4j
 public class AssetsLogController {
+    @Autowired
+
     private Assets_LogService  assetsLogService;
 
     /**
      * 查询所有
-     * @param
+     * @param pageNum
+     * @param  pageSize
      * @return
      */
     @GetMapping
-    public  Result<List<Assets_Log>> getAllAssets_Logs(){
-        List<Assets_Log> list =assetsLogService.selectAllAssets_Logs();
+    public Result<AssetLogsPage> getAllAssets_Logs(@RequestParam int pageNum, @RequestParam int pageSize){
+        AssetLogsPage list =  assetsLogService.selectAllAssets_Logs(pageNum,pageSize);
         return  Result.success(list);
     }
 
@@ -34,7 +42,7 @@ public class AssetsLogController {
      * @return
      */
     @DeleteMapping("/{assetsLogId}")
-     public Result deleteByAssets_Log(int assetsLogId){
+    public Result deleteByAssets_Log(int assetsLogId){
         log.info("删除：{}", assetsLogId);
         assetsLogService.deleteByAssets_Log(assetsLogId);
         return Result.success();
@@ -42,28 +50,28 @@ public class AssetsLogController {
 
     /**
      * 添加
-     * @param  id
-     * @param change_assets
-     * @param  description
+     * @param  applyId
      * @return
      */
     @PostMapping
-    public Result addAssets_Log(int  id,float change_assets,String description ) {
-        log.info("新增：{},{},{}",id,change_assets,description );
-        assetsLogService.addAssets_Log(id);
+    public Result addAssets_Log(int  applyId ) {
+        log.info("新增：{}",applyId );
+        assetsLogService.addAssets_Log(applyId);
         return  Result.success();
-}
+    }
 
     /**
      * 修改信息
-     * @param assetsLog
+     * @param id
+     *  @param description
      */
-    @PutMapping
-    public Result  update(@RequestBody Assets_Log assetsLog){
-        log.info("修改信息:{}",assetsLog);
-        assetsLogService.update(assetsLog);
+    @PutMapping("/update")
+    public Result  update(@RequestParam  int id ,@RequestParam String description){
+        log.info("修改信息:{}，{}",id,description);
+        assetsLogService.update(id,description);
         return Result.success();
     }
+
 
 
     /**
@@ -72,10 +80,10 @@ public class AssetsLogController {
      * @return
      */
     @GetMapping("/{assetsLogId}")
-    public Result selectById(@PathVariable int assetsLogId){
-        log.info("根据id查询:{}",assetsLogId);
+    public Result<Assets_Log> selectById(@RequestParam int assetsLogId){
+        log.info("根据日志id查询:{}",assetsLogId);
         Assets_Log assetsLog =assetsLogService.selectById(assetsLogId);
-                return Result.success(assetsLog);
+        return Result.success(assetsLog);
     }
 
     /**
@@ -84,9 +92,9 @@ public class AssetsLogController {
      * @return
      */
     @GetMapping("/{userName}")
-    public Result<List<Assets_Log>> selectByName(@PathVariable String userName) {
+    public Result<AssetLogsPage> selectByName(@RequestParam String userName, @RequestParam int pageNum, @RequestParam int pageSize) {
         log.info("根据name查询:{}",userName);
-        List<Assets_Log> list =assetsLogService.selectByName(userName);
+        AssetLogsPage list =assetsLogService.selectByName(userName,pageNum,pageSize);
         return Result.success(list);
 
     }

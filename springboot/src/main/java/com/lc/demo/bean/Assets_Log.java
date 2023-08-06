@@ -19,18 +19,10 @@ public class Assets_Log {
     public Assets_Log() {
     }
 
-    public Assets_Log(int assetsLogId, String userName, String dascription, float changeAssets, Date processTime, float beforeAssets, float afterAssets) {
-        this.assetsLogId = assetsLogId;
-        this.userName = userName;
-        this.description = dascription;
-        this.changeAssets = changeAssets;
-        this.processTime = processTime;
-        this.beforeAssets = beforeAssets;
-        this.afterAssets = afterAssets;
-    }
     public int getAssetsLogId() {
         return assetsLogId;
     }
+
     public void setAssetsLogId(int assetsLogId) {
         this.assetsLogId = assetsLogId;
     }
@@ -43,15 +35,13 @@ public class Assets_Log {
         this.userName = userName;
     }
 
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String dascription) {
-        this.description = dascription;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
 
     public float getChangeAssets() {
         return changeAssets;
@@ -61,7 +51,6 @@ public class Assets_Log {
         this.changeAssets = changeAssets;
     }
 
-
     public Date getProcessTime() {
         return processTime;
     }
@@ -69,7 +58,6 @@ public class Assets_Log {
     public void setProcessTime(Date processTime) {
         this.processTime = processTime;
     }
-
 
     public float getBeforeAssets() {
         return beforeAssets;
@@ -79,7 +67,6 @@ public class Assets_Log {
         this.beforeAssets = beforeAssets;
     }
 
-
     public float getAfterAssets() {
         return afterAssets;
     }
@@ -87,15 +74,27 @@ public class Assets_Log {
     public void setAfterAssets(float afterAssets) {
         this.afterAssets = afterAssets;
     }
+
     @Override
     public String toString() {
         return "Assets_Log{" +
-                "userName='" + userName + '\'' +
-                ", dascription='" + description + '\'' +
+                "assetsLogId=" + assetsLogId +
+                ", userName='" + userName + '\'' +
+                ", description='" + description + '\'' +
                 ", changeAssets=" + changeAssets +
                 ", processTime=" + processTime +
                 ", beforeAssets=" + beforeAssets +
                 ", afterAssets=" + afterAssets +
                 '}';
+    }
+
+    public Assets_Log(int assetsLogId, String userName, String description, float changeAssets, Date processTime, float beforeAssets, float afterAssets) {
+        this.assetsLogId = assetsLogId;
+        this.userName = userName;
+        this.description = description;
+        this.changeAssets = changeAssets;
+        this.processTime = processTime;
+        this.beforeAssets = beforeAssets;
+        this.afterAssets = afterAssets;
     }
 }

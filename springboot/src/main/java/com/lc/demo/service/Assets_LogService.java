@@ -1,6 +1,7 @@
 package com.lc.demo.service;
 
 import com.lc.demo.bean.Assets_Log;
+import common.AssetLogsPage;
 
 import java.util.List;
 
@@ -12,25 +13,32 @@ public interface Assets_LogService {
      */
     List<Assets_Log> selectAllAssets_Logs();
 
+
+    AssetLogsPage selectAllAssets_Logs(int pageNum, int pageSize);
+
     /**
      * 删除
      * @param   assetsLogId
      * @return
      */
     int deleteByAssets_Log(int assetsLogId);
+
+
     /**
      * 添加
-     * @param  id
-     * @param change_assets
-     * @param  description
+     * @param  applyId
      * @return
      */
-     void addAssets_Log(int  id) ;
+    void addAssets_Log(int  applyId ) ;
+
     /**
      * 修改信息
-     * @param assetsLog
+     * @param id
+     * @param description
      */
-    int  update(Assets_Log assetsLog);
+    int  update(int id ,String description);
+
+
     /**
      * 根据id查询
      * @param assetsLogId
@@ -42,6 +50,7 @@ public interface Assets_LogService {
      * @param userName
      * @return
      */
-    List<Assets_Log>  selectByName(String userName);
+    AssetLogsPage selectByName(String userName,int pageNum, int pageSize);
+
 
 }

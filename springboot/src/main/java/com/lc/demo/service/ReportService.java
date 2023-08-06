@@ -1,10 +1,18 @@
 package com.lc.demo.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Report;
+import com.lc.demo.mapper.GoodsMapper;
+import com.lc.demo.mapper.ReportMapper;
 import common.ReportsResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 public interface ReportService {
-    
+
     /**
      * 查询：所有记录
      * @param pageNum
@@ -20,6 +28,8 @@ public interface ReportService {
      */
     Report selectById(int sequenceId);
 
+    Report selectByGoodsId(int GoodsId);
+
     /**
      * 添加：上报信息
      * @param report
@@ -29,10 +39,10 @@ public interface ReportService {
     int addReport(Report report);
 
 
-
-
     /**
      * 查询：根据上报人查询记录
+     * @param pageNum
+     * @param pageSize
      * @param reportName
      * @return
      */
@@ -52,8 +62,7 @@ public interface ReportService {
      * @param sequenceId
      * @return
      */
-    int deleteReport(Integer sequenceId);
-
+    int deleteReport(int sequenceId);
 
 
 }

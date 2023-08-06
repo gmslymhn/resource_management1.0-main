@@ -4,6 +4,7 @@ import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Report;
 import com.lc.demo.bean.User;
 import com.lc.demo.service.ApplyAssetsService;
+import com.lc.demo.service.Assets_LogService;
 import com.lc.demo.service.UserService;
 import common.ApplyResult;
 import common.GoodsResult;
@@ -25,8 +26,10 @@ public class AdminApplyController {
     private UserService userService;
     @Autowired
     private ApplyAssetsService applyAssetsService;
-//    @Autowired
-//    private
+
+    @Autowired
+    private Assets_LogService assetsLogService;
+
 
     @PostMapping("/getAllApply")
     public ApplyResult getAllApply(@RequestParam int pageNum, @RequestParam int pageSize){
@@ -47,26 +50,27 @@ public class AdminApplyController {
     }
     @PostMapping("/addApply")
     public int getApplyAssetsService(@RequestBody ApplyAssets applyAssets) {
-        User user = userService.selectByAccount(applyAssets.getApplyName());
-        applyAssets.setApplyNameId(user.getUserId());
-        applyAssets.setApplyName(user.getUserName());
         applyAssets.setApplyState("未处理");
         return applyAssetsService.addApplyAssets(applyAssets);
     }
     @PostMapping("/updateApply")
     public  int updateApplyAssets(@RequestBody ApplyAssets applyAssets){
-        System.out.println(applyAssets);
+
+        if(applyAssets.getApplyId()==null){
+            return 0;
+        }
         ApplyAssets applyAssets1 = applyAssetsService.selectApplyById(applyAssets.getApplyId());
-        if((applyAssets1.getApplyState()).equals("未处理")){
+        if(("未处理").equals(applyAssets1.getApplyState())){
             applyAssets1.setApplyAssets(applyAssets.getApplyAssets());
             applyAssets1.setDisposeNameId(applyAssets.getDisposeNameId());
             applyAssets1.setDisposeName(applyAssets.getDisposeName());
             System.out.println(applyAssets.getApplyState());
             applyAssets1.setApplyState(applyAssets.getApplyState());
+            applyAssets1.setDisposeDescription(applyAssets.getDisposeDescription());
             applyAssetsService.deleteApplyById(applyAssets.getApplyId());
             applyAssetsService.addApplyAssets(applyAssets1);
             if(applyAssets1.getApplyState().equals("已同意")){
-
+                assetsLogService.addAssets_Log(applyAssets1.getApplyId());
             }
         }else{
             return 0;

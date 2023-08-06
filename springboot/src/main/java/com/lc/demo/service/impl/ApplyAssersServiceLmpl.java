@@ -41,7 +41,11 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
     public ApplyResult getAllApplyAssets(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<ApplyAssets> pageInfo = new PageInfo<>(selectAllApplyAssets());
-        return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -53,7 +57,11 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
     public ApplyResult selectApplyByName1(int pageNum, int pageSize, String applyName) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<ApplyAssets> pageInfo = new PageInfo<>(applyAssetsMapper.selectApplyByName1(applyName));
-        return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return ApplyResult.pagingApplyResult(pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
 
     @Override

@@ -23,10 +23,9 @@ public class UseGoodsController {
      * @param pageSize
      * @return
      */
-    @GetMapping("/getAllGoods")
-    public GoodsResult getAllGoods(@RequestParam int pageNum, @RequestParam int pageSize){
+    @PostMapping("/getAllGoods")
+    public GoodsResult getAllGoods(@RequestParam int pageNum,@RequestParam int pageSize){
         return goodsService.getAllGoods(pageNum,pageSize);
-
     }
 
     /**
@@ -35,7 +34,7 @@ public class UseGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsById")
-    public GoodsResult selectGoodsById(@RequestParam int goodsId){
+    public GoodsResult selectGoodsById(@RequestParam Integer goodsId){
         return goodsService.selectGoodsById(goodsId);
     }
 

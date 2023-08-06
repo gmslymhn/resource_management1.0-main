@@ -21,24 +21,39 @@ public class GoodsServicelmpl implements GoodsService {
 
 
     @Override
-    public GoodsResult getAllGoods(int pageNum,int pageSize) {
+    public GoodsResult getAllGoods(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectAllGoods());
-        return GoodsResult.pagingGoodsResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return  GoodsResult.pagingGoodsResult(pageNum,pageSize,pageInfo);
+        }else{
+            return null;
+        }
     }
+
 
     @Override
     public GoodsResult selectGoodsByGoodsName(int pageNum, int pageSize, String goodsName) {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
-        return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return  GoodsResult.pagingGoodsResult(pageNum,pageSize,pageInfo);
+        }else{
+            return null;
+        }
+
     }
 
     @Override
     public GoodsResult selectGoodsById(int goodsId) {
         PageHelper.startPage(1, 1);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsById(goodsId));
-        return GoodsResult.pagingGoodsResult(1,pageInfo);
+        if(pageInfo.getTotal() != 0) {
+            return GoodsResult.pagingGoodsResult(1,1,pageInfo);
+        }else{
+            return null;
+        }
+
     }
 
     @Override

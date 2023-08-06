@@ -10,9 +10,6 @@ spring:
     minIdle: 5
     maxActive: 20
     maxWait: 60000
-  thymeleaf:
-    cache: false
-    encoding: UTF-8
   http:
     encoding:
       charset: UTF-8
