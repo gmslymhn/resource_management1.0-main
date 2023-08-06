@@ -50,7 +50,7 @@ public class AssetsLogController {
     @PostMapping
     public Result addAssets_Log(int  id,float change_assets,String description ) {
         log.info("新增：{},{},{}",id,change_assets,description );
-        assetsLogService.addAssets_Log(id,change_assets,description);
+        assetsLogService.addAssets_Log(id);
         return  Result.success();
 }
 

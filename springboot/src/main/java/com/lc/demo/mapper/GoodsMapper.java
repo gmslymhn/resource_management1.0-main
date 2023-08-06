@@ -28,7 +28,7 @@ public interface GoodsMapper {
      * @return 一个Goods
      */
     @Select("select * from goods where goods_id = #{goodsId} ")
-        Goods  selectGoodsById(int id);
+    List<Goods>   selectGoodsById(int id);
 
     /**
      * 通过name模糊查找
@@ -43,7 +43,8 @@ public interface GoodsMapper {
      * @param goods
      * @return
      */
-    @Insert("insert into goods values(#{goodsId},#{goodsName},#{goodsState},#{goodsImage})")
+//    @Insert("insert into goods values(#{goodsId},#{goodsName},#{goodsState},#{goodsImage})")
+    @Insert("insert into goods values(null,#{goodsName},#{goodsState},#{goodsImage})")
     int insertGoods(Goods goods);
 
     /**

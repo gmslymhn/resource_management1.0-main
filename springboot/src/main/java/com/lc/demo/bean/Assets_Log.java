@@ -9,7 +9,7 @@ public class Assets_Log {
     private  int assetsLogId;
 
     private String userName;
-    private String dascription;
+    private String description;
     private float changeAssets;
     private Date processTime;
     private float beforeAssets;
@@ -22,7 +22,7 @@ public class Assets_Log {
     public Assets_Log(int assetsLogId, String userName, String dascription, float changeAssets, Date processTime, float beforeAssets, float afterAssets) {
         this.assetsLogId = assetsLogId;
         this.userName = userName;
-        this.dascription = dascription;
+        this.description = dascription;
         this.changeAssets = changeAssets;
         this.processTime = processTime;
         this.beforeAssets = beforeAssets;
@@ -44,12 +44,12 @@ public class Assets_Log {
     }
 
 
-    public String getDascription() {
-        return dascription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDascription(String dascription) {
-        this.dascription = dascription;
+    public void setDescription(String dascription) {
+        this.description = dascription;
     }
 
 
@@ -91,7 +91,7 @@ public class Assets_Log {
     public String toString() {
         return "Assets_Log{" +
                 "userName='" + userName + '\'' +
-                ", dascription='" + dascription + '\'' +
+                ", dascription='" + description + '\'' +
                 ", changeAssets=" + changeAssets +
                 ", processTime=" + processTime +
                 ", beforeAssets=" + beforeAssets +

@@ -32,7 +32,7 @@ public class AdmGoodsController {
      */
 
     @GetMapping("/getAllGoods")
-    public GoodsResult getAllGoods(@RequestParam int pageNum,@RequestParam int pageSize){
+    public GoodsResult getAllGoods(Integer pageNum, Integer pageSize){
         return goodsService.getAllGoods(pageNum,pageSize);
     }
 
@@ -75,6 +75,7 @@ public class AdmGoodsController {
         }
     }
 
+
     /**
      * 删除物品
      * @param goodsId
@@ -96,13 +97,9 @@ public class AdmGoodsController {
      * @return
      */
     @PostMapping("/selectGoodsById")
-        public ResponseEntity<Goods> selectGoodsById(@RequestParam int goodsId){
-            Goods goods = goodsService.selectGoodsById(goodsId);
-            if(goods != null){
-                return ResponseEntity.ok(goods);
-            }else {
-                return ResponseEntity.notFound().build();
-            }
+    public GoodsResult selectGoodsById(@RequestParam int goodsId){
+
+        return goodsService.selectGoodsById(goodsId);
     }
 
     /**
@@ -115,5 +112,6 @@ public class AdmGoodsController {
     public GoodsResult selectGoodsByGoodsName(@RequestParam int pageNum, @RequestParam  int pageSize,@RequestParam  String goodsName){
         return goodsService.selectGoodsByGoodsName(pageNum,pageSize,goodsName);
     }
+
 
 }

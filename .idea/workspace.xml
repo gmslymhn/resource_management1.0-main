@@ -4,10 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="更新">
+    <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="数据库统一修正">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfApply.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfApply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/MessageResultOfReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets_Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/bean/Assets_Log.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdmGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdminApplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AdminApplyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AssetsLogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/admin/AssetsLogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/user/UseGoodsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ApplyAssetsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/ApplyAssetsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/GoodsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/GoodsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/Assets_LogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/Assets_LogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/GoodsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/GoodsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/Assets_LogServiceLmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/Assets_LogServiceLmpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/GoodsServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/GoodsServicelmpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdmGoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdmGoodsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdminApplyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AdminApplyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AssetsLogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/admin/AssetsLogController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/UseGoodsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/UseGoodsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/UserApplyControlller.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/user/UserApplyControlller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/ApplyAssetsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/ApplyAssetsMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/GoodsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/mapper/GoodsMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ApplyAssersServiceLmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ApplyAssersServiceLmpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/GoodsServicelmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/GoodsServicelmpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,48 +64,79 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelOrder2": "2",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RequestMappingsPanelWidth2": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
-    "last_opened_file_path": "C:/Users/gmsly/Documents/GitHub/resource_management1.0-main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "spring.configuration.checksum": "fe01ce2a7fbac8fafaed7c982a04e229",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "RunConfigurationTargetLRU": [
-      "b8e22cca-7e87-4bd1-8749-4d7e6ca62b58/schema/\"resoursemanagement\""
-    ]
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/gmsly/Documents/GitHub/resource_management1.0-main/springboot/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gmsly/Documents/GitHub/resource_management1.0-main/springboot/src/main/java/com/lc/demo/controller/user&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;fe01ce2a7fbac8fafaed7c982a04e229&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gmsly\Documents\GitHub\resource_management1.0-main\springboot\src\main\java\com\lc\demo\controller\user" />
+      <recent name="C:\Users\gmsly\Documents\GitHub\resource_management1.0-main\springboot\src\main\java\com\lc\demo\controller\admin" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.lc.demo.controller.user" />
+      <recent name="common" />
     </key>
   </component>
-  <component name="RunManager" selected="Database Script.resourcemanagement.sql">
-    <configuration name="resourcemanagement.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/springboot/sql/resourcemanagement.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="b8e22cca-7e87-4bd1-8749-4d7e6ca62b58" namespace="schema/&quot;resoursemanagement&quot;" />
-      <method v="2" />
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DemoApplication (2)">
+    <configuration name="DemoApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lc.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.DemoApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test.testSelectAllAssets" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lc.demo.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lc.demo.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.lc.demo.controller.test" />
+      <option name="METHOD_NAME" value="testSelectAllAssets" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="resource_management1.0-main" />
@@ -125,15 +178,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Database Script.resourcemanagement.sql" />
-      <item itemvalue="Spring Boot.DemoApplication (2)" />
-      <item itemvalue="Spring Boot.DemoApplication" />
-      <item itemvalue="Spring Boot.DemoApplication (1)" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.resourcemanagement.sql" />
+        <item itemvalue="JUnit.test.testSelectAllAssets" />
+        <item itemvalue="JUnit.DemoApplicationTests" />
         <item itemvalue="Spring Boot.DemoApplication (1)" />
       </list>
     </recent_temporary>
@@ -162,6 +210,10 @@
       <workItem from="1690906615491" duration="597000" />
       <workItem from="1690942490657" duration="281000" />
       <workItem from="1691073387940" duration="23000" />
+      <workItem from="1691074821762" duration="176000" />
+      <workItem from="1691077556317" duration="8510000" />
+      <workItem from="1691146899344" duration="38636000" />
+      <workItem from="1691229660304" duration="10299000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>
@@ -233,7 +285,28 @@
       <option name="project" value="LOCAL" />
       <updated>1690608077808</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="数据库统一修正">
+      <created>1691215804632</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1691215804632</updated>
+    </task>
+    <task id="LOCAL-00012" summary="数据库统一修正">
+      <created>1691215960357</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1691215960357</updated>
+    </task>
+    <task id="LOCAL-00013" summary="数据库统一修正">
+      <created>1691229687320</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1691229687320</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +325,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新" />
+    <MESSAGE value="数据库统一修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="数据库统一修正" />
   </component>
 </project>

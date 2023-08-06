@@ -1,10 +1,12 @@
 package com.lc.demo.service.impl;
 
+import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Assets;
 import com.lc.demo.bean.Assets_Log;
 import com.lc.demo.bean.Report;
 import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
+import com.lc.demo.service.ApplyAssetsService;
 import com.lc.demo.service.Assets_LogService;
 import com.lc.demo.service.ReportService;
 
@@ -15,7 +17,7 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
 
     private Assets_LogMapper assetsLogMapper;
     private AssetsMapper assetsMapper;
-    private ReportService  reportService;
+    private ApplyAssetsService applyAssetsService;
 
     @Override
     public List<Assets_Log> selectAllAssets_Logs() {
@@ -37,21 +39,20 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
     }
 
     @Override
-    public void addAssets_Log(int  id,float change_assets,String description ) {
+    public void addAssets_Log(int  applyId ) {
+        ApplyAssets applyAssets = applyAssetsService.selectApplyById(applyId);
+        Assets_Log assetsLog =new Assets_Log();
 
-    Report report = reportService.selectById(id);
-    Assets_Log assetsLog =new Assets_Log();
+        assetsLog.setUserName(applyAssets.getApplyName());
+        assetsLog.setProcessTime(applyAssets.getDisposeTime());
+        assetsLog.setChangeAssets(applyAssets.getApplyAssets());
+        assetsLog.setDescription(applyAssets.getDisposeDescription());
 
-    assetsLog.setUserName(report.getReportName());
-    assetsLog.setProcessTime(report.getProcessTime());
-    assetsLog.setChangeAssets(change_assets);
-    assetsLog.setDascription(description);
+        Assets assets=assetsMapper.newAssets();
+        assetsLog.setBeforeAssets(assets.getTotalAssets());
+        assetsLog.setAfterAssets(assets.getTotalAssets()-applyAssets.getApplyAssets());
 
-    Assets assets=assetsMapper.newAssets();
-    assetsLog.setBeforeAssets(assets.getTotalAssets());
-    assetsLog.setAfterAssets(assets.getTotalAssets()-change_assets);
-
-    assetsLogMapper.insertAssetsLog(assetsLog);
+        assetsLogMapper.insertAssetsLog(assetsLog);
 
     }
 

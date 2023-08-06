@@ -34,8 +34,7 @@ public interface ApplyAssetsMapper {
     List<ApplyAssets> selectApplyByState(String applyState);
 
     //添加上报
-
-    @Insert("insert into apply_assets values(#{applyId},#{applyAssets},#{applyNameId},#{applyName},#{disposeNameId},#{disposeName},#{applyDescription},#{disposeDescription},#{applyTime},#{disposeTime},#{applyState})")
+    @Insert("insert into apply_assets(apply_id,apply_assets,apply_name_id,apply_name,dispose_name_id,dispose_name,apply_description,dispose_description,apply_state) values(#{applyId},#{applyAssets},#{applyNameId},#{applyName},#{disposeNameId},#{disposeName},#{applyDescription},#{disposeDescription},#{applyState})")
     int insertApplyAssets(ApplyAssets applyAssets);
 
     @Delete("delete from apply_assets where apply_id = #{applyId}")

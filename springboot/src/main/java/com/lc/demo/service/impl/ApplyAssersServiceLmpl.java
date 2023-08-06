@@ -29,9 +29,11 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
     @Override
     public List<ApplyAssets> selectAllApplyAssets() {
         List<ApplyAssets> list1 = applyAssetsMapper.selectApplyByState("未处理");
-        List<ApplyAssets> list2 = applyAssetsMapper.selectApplyByState("已处理");
+        List<ApplyAssets> list2 = applyAssetsMapper.selectApplyByState("未同意");
+        List<ApplyAssets> list3 = applyAssetsMapper.selectApplyByState("已同意");
         List<ApplyAssets> list = list1;
         list.addAll(list2);
+        list.addAll(list3);
         return list;
     }
 
