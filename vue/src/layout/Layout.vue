@@ -22,8 +22,12 @@ export default {
   components:{Header,Content},
   data() {
     return {
-      
+
     };
+  },
+
+  created() {
+    
   },
 };
 </script>
@@ -31,8 +35,6 @@ export default {
 <style scoped>
   .layout{
     height: 100vh;
-    /* min-width: 1000px;
-    min-height: 800px; */
     background-position: center center;
     background-size: cover;
     background-image: url("../assets/zhuyeBackground.jpg");
@@ -41,6 +43,7 @@ export default {
 
   }
   .content{
-    height: 100%;
+    height: calc( 100% - 80px );
+    margin-top: 80px;
   }
 </style>

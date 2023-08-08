@@ -22,8 +22,4 @@ export default {
     list-style: none;
     text-decoration: none;
   }
-  /* .app{
-    min-width: 1000px;
-    min-height: 800px;
-  } */
 </style>

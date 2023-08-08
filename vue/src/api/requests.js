@@ -39,7 +39,7 @@ import router from '@/router'
 import { Loading } from 'element-ui';
 // 创建的axios的实列 requests
 const requests = axios.create({
-    baseURL: '/admin', // 基准地址  可直接配置路径,也可代理路径(以实际项目为准)
+    baseURL:"http://172.16.1.49:8080", // 基准地址  可直接配置路径,也可代理路径(以实际项目为准)
     timeout: 10000 // 超时时间
 })
 // 请求拦截
@@ -49,14 +49,14 @@ requests.interceptors.request.use((config) => {
     // // 设置请求头
     // let token = localStorage.getItem('token')
     // config.headers.Authorization = token
-    // //设置logding配置 赋值
-    // loadingInstance = Loading.service({
-    //     lock: true,
-    //     text: '拼命加载中...',
-    //     spinner: 'el-icon-loading',
-    //     background: 'rgba(0, 0, 0, 0.7)'
-    // });
-   // 返回请求头
+    // 设置logding配置 赋值
+    loadingInstance = Loading.service({
+        lock: true,
+        text: '拼命加载中...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+    });
+    // 返回请求头
     return config
 }, err => {
    // 请求失败返回失败信息
@@ -67,7 +67,7 @@ requests.interceptors.request.use((config) => {
 requests.interceptors.response.use((res) => {
     // 响应成功则关闭loading加载
     loadingInstance.close();
-    //返回响应数据
+    // 返回响应数据
     return res
 }, err => {
     // 响应失败则关闭loading加载  

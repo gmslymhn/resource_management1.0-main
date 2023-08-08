@@ -4,31 +4,40 @@
       <h3 class="loginTitle">
         系统登录
       </h3>
+
+      <el-alert
+        v-if= isLoginFail
+        title="登陆失败"
+        type="error"
+        description="请检查账号密码是否正确"
+        show-icon>
+      </el-alert>
+
       <el-form-item label="">
         <el-input v-model="loginForm.loginName" autocomplete="off" placeholder="请输入账号" clearable></el-input>
       </el-form-item>
       <el-form-item label="">
-        <el-input v-model="loginForm.loginPassword" autocomplete="off" placeholder="请输入密码" show-password></el-input>
+        <el-input v-model="loginForm.loginPassword" autocomplete="off" placeholder="请输入密码" show-password  @keyup.enter.native="LoginButton"></el-input>
       </el-form-item>
       <div class="tool">
         <div>
-          <el-checkbox v-model="checked" @change="remenber" class="remeberPassword">
-            记住密码
-          </el-checkbox>
+          
         </div>
         <div>
           <span class="forgetPassword" @click="open2">忘记密码？</span>
         </div>
       </div>
       <el-form-item class="button">
-        <el-button class="button1" type="primary" round @click="Login">登录</el-button>
-        <el-button type="success" round @click="toRegister">注册</el-button>
+        <el-button class="button1" type="danger" round @click="LoginButton">登录</el-button>
+        <el-button type="info" round @click="toRegister">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+import Cookie from "js-cookie"
+import { login } from "@/api/login/login"
 export default {
   name: 'App-Login',
 
@@ -38,29 +47,44 @@ export default {
         loginName: '',
         loginPassword: '',
       },
-      checked: false
+      checked: false,
+      isLoginFail: false
     }
   },
   methods: {
-    // 登录
-    Login() {
-      // this.axios.post("http://localhost:xxxx/user/login",this.loginForm).then((response) => {
-      //   let data = response.data
-      //   if(data){
-      //     this.loginForm = {}
-      //     this.$router.push({path:"/zhuye"})
-      //     this.$message({
-      //       showClose:true,
-      //       type:"success",
-      //       message:"成功登录！喜欢您来",
-      //     })
-      //     console.log(data)
-      //   }
-      // }).catch(err => {
-      //   console.log(err);
-      // })
-      this.$router.push({path:"/zhuye"})
+    // 登录按钮
+    LoginButton() {
+      // this.$router.replace("/admin");
+      // console.log({useraccount: this.loginForm.loginName, password: this.loginForm.loginPassword});
+      login({useraccount: this.loginForm.loginName, password: this.loginForm.loginPassword})
+        .then((res) => {
+          console.log("用户信息-----",res);
+          if(res.data.code === 1){
+            // 请求成功后跳转到指定路由界面
+            Cookie.set("token",res.data.data.token);
+            this.$store.dispatch("login/setAccount", res.data.data.account);
+            this.$store.dispatch("login/setId", res.data.data.id);
+            this.$store.dispatch("login/setName", res.data.data.name);
+            this.$store.dispatch("login/setRole", res.data.role);
+            this.$store.dispatch("login/setToken", res.data.data.token);
+
+            this.$message({
+              showClose:true,
+              type:"success",
+              message:"成功登录！喜欢您来",
+            })
+            if(res.data.role === "admin"){
+              this.$router.replace("/admin");
+            } else if(res.data.role === "user") {
+              this.$router.replace("/user");
+            }
+          } else{
+            this.loginForm = {},
+            this.isLoginFail = true
+          }
+        })
     },
+
     // 注册
     toRegister() {
       this.$router.push({path:"/register"})
@@ -105,8 +129,7 @@ export default {
     transform: translate(-50%);
     margin-left: 50%;
     padding: 80px 100px;
-    background-color:rgba(255,255,255,0.15);
-    box-shadow: 5px 5px 10px rgb(85, 238, 71);
+    box-shadow: 5px 5px 10px rgb(179, 86, 86);
     border-radius: 20px;
   }
   .loginTitle {
@@ -117,6 +140,10 @@ export default {
     font-weight: bolder;
     color: white;
     text-shadow: 2px 2px 4px #000000;
+  }
+  .el-alert{
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .tool {
     display: flex;

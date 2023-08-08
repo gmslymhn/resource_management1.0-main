@@ -4,9 +4,14 @@ import Vuex from "vuex"
 Vue.use(Vuex)
 
 // 引入小仓库
-import home from "./modules/Home"
+import message from "./modules/message"
+import login from "@/store/modules/login"
+import style from "@/store/modules/style"
+
 export default new Vuex.Store({
   modules:{
-    home,
+    message,
+    login,
+    style
   }
 })
