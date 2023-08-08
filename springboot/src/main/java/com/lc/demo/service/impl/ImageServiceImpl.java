@@ -35,7 +35,7 @@ public class ImageServiceImpl implements ImageService {
         // 处理上传的图片文件，保存到合适的位置
         // 例如，可以使用UUID生成唯一的文件名
         String fileName = UUID.randomUUID().toString() + ".jpg";
-        String filePath = System.getProperty("user.dir") + "\\springboot\\src\\main\\resources\\goodsImage\\" + fileName;
+        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\goodsImage\\" + fileName;
         try {
             uploadImage.transferTo(new File(filePath));
             goods.setGoodsImage( "/goodsImage/" + fileName);
