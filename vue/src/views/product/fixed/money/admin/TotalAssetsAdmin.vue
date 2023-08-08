@@ -5,8 +5,8 @@
     </div>
     <div id="totalAsstes1">总资产：{{ totalAssets + "￥" }}</div>
     <div id="totalAsstes2">可支配资产：{{ disposableAssets + "￥" }}</div>
-    <div id="table" style="width: 100%;">
-      <el-table :data="tableData" border style="width: 80%" class="tableData">
+    <div id="table">
+      <el-table :data="tableData" border class="tableData">
         <el-table-column fixed prop="id" label="id" width="150">
         </el-table-column>
         <el-table-column prop="totalAssets" label="总资产" width="120">
@@ -82,11 +82,14 @@ export default {
           console.log(response.data.data);
           this.totalAssets = response.data.data.totalAssets;
           this.disposableAssets = response.data.data.disposableAssets;
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     //修改可用资产的百分比
     changePercentage() {
-      const percentage = window.prompt("请输入修改后的百分比(请输入小数)");
+      const percentage = window.prompt("请输入修改后的百分比(%)");
       const description = window.prompt("请输入修改的描述");
       //修改可用资产的百分比
       //说明:调用此接口，传入修改的百分比，更改可用资产值（可用资产值=总资产*百分比）
@@ -101,6 +104,9 @@ export default {
         .then((response) => {
           console.log(response);
           alert("修改成功！");
+        })
+        .then(() => {
+          this.findAllAssets();
         })
         .catch(() => {
           alert("请求失败，请稍后重试");
@@ -127,53 +133,13 @@ export default {
             alert("修改失败！请稍后再试");
           }
         })
+        .then(() => {
+          this.findAllAssets();
+        })
         .catch(() => {
           alert("请求失败，请稍后重试");
         });
     },
-  },
-  mounted() {
-    //查询最新的资产
-    // axios
-    //   .get("http://localhost:8080/admin/admassets/assets/new")
-    //   .then((response) => {
-    //     console.log(response);
-    //   });
-    //查询当前资产
-    // axios({
-    //   method:'get',
-    //   url:"http://localhost:8080/admin/admassets/assets",
-    //   params:{
-    //     pageNum:1,
-    //     pageSize:5
-    //   }
-    // }).then(response=>{
-    //   console.log(response)
-    // })
-    //修改总资产
-    // axios({
-    //   method: "put",
-    //   url: "http://localhost:8080/admin/admassets/assets/update/total",
-    //   params: {
-    //     //现有的总资产
-    //     totalAssets: 520,
-    //     description: "接口测试a"
-    //   },
-    // }).then((response) => {
-    //   console.log(response);
-    // });
-    //修改可用资产的百分比
-    //说明:调用此接口，传入修改的百分比，更改可用资产值（可用资产值=总资产*百分比）
-    // axios({
-    //   method:"put",
-    //   url:"http://localhost:8080/admin/admassets/assets/update/percentage",
-    //   params:{
-    //     percentage:0.8,
-    //     description:"测试接口"
-    //   }
-    // }).then(response=>{
-    //   console.log(response)
-    // })
   },
   created() {
     // 查询当前资产
@@ -184,13 +150,17 @@ export default {
         pageNum: 1,
         pageSize: 1000000,
       },
-    }).then((response) => {
-      this.tableData = [...response.data.data.data.list];
-      console.log(this.tableData);
-      this.tableData.forEach((e) => {
-        e.time = dayjs(e.disposeTime).format("YYYY-MM-DD HH:mm:ss");
+    })
+      .then((response) => {
+        this.tableData = [...response.data.data.data.list];
+        console.log(this.tableData);
+        this.tableData.forEach((e) => {
+          e.time = dayjs(e.disposeTime).format("YYYY-MM-DD HH:mm:ss");
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    });
     // 查询最新的资产
     axios
       .get("http://localhost:8080/admin/admassets/assets/new")
@@ -198,6 +168,9 @@ export default {
         console.log(response.data.data);
         this.totalAssets = response.data.data.totalAssets;
         this.disposableAssets = response.data.data.disposableAssets;
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
 };
@@ -211,14 +184,12 @@ export default {
 }
 #table {
   position: absolute;
-
   top: 230px;
   left: 50%;
   transform: translateX(-50%);
 }
 .itemsText {
   font-size: 38px;
-  margin-bottom: 20px;
   padding-top: 2px;
   padding-bottom: 3px;
   background-color: #e0dbdb;
@@ -231,8 +202,8 @@ export default {
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   z-index: 1;
 }
-.tableData{
-  margin: 40px auto;
+.tableData {
+  width: 100%;
 }
 .totalAsstes {
   width: 100%;

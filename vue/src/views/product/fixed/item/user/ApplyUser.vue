@@ -1,11 +1,11 @@
 <template>
-  <div class="apply" style="overflow-y: scroll;">
+  <div class="apply">
     <div class="itemsText">
       <p class="itemsTextP">资金申请与查询</p>
     </div>
 
     <div class="applyInner">
-      <div id="part1" v-show="Options">
+      <div id="part1" v-show="Options1">
         <el-row id="wrappper_button">
           <el-button type="danger" round id="applyMoney" @click="applyMoney"
             >资金申请</el-button
@@ -28,7 +28,7 @@
         </el-radio-group>
         <br />
         <br />
-        <el-table :data="newTableData" style="width: 100%">
+        <el-table :data="newTableData">
           <el-table-column fixed prop="applyId" label="申请id" width="100">
           </el-table-column>
           <el-table-column prop="applyAssets" label="申请金额" width="120">
@@ -49,50 +49,11 @@
             width="300"
           >
           </el-table-column>
-          <el-table-column prop="applyTime" label="申请时间" width="120">
-          </el-table-column>
           <el-table-column prop="disposeTime" label="处理时间" width="120">
           </el-table-column>
           <el-table-column prop="applyState" label="处理状态" width="120">
           </el-table-column>
-          <el-table-column fixed="right" label="" width="120">
-          </el-table-column>
         </el-table>
-      </div>
-
-      <div
-        id="part2"
-        style="position: absolute; top: 100px; width: 60%"
-        v-show="!Options"
-      >
-        <el-input
-          type="text"
-          placeholder="请输入申请的金额"
-          v-model="text"
-          maxlength="10"
-          show-word-limit
-        >
-        </el-input>
-        <div style="margin: 20px 0"></div>
-        <el-input
-          type="textarea"
-          placeholder="请输入内容"
-          v-model="textarea"
-          maxlength="30"
-          show-word-limit
-        >
-        </el-input>
-        <br />
-        <br />
-        <el-row>
-          <el-button
-            type="danger"
-            round
-            id="applyMoney_bottom"
-            @click="applyMoney_bottom"
-            >提交申请</el-button
-          >
-        </el-row>
       </div>
     </div>
   </div>
@@ -100,28 +61,78 @@
 <script>
 import dayjs from "dayjs";
 import axios from "axios";
-import { set } from "vue";
 export default {
   name: "Content-Apply",
   methods: {
-    applyMoney_bottom() {
+    apply() {
+      this.$router.push({ name: "admin_message_assets" }).catch((err) => err);
+    },
+    applyMoney() {
+      const applyAssets = window.prompt("请输入申请金额");
+      const applyDescription = window.prompt("请输入申请描述");
       axios({
         method: "POST",
         url: "http://localhost:8080/admin/admapply/addApply",
         data: {
-          applyAssets: this.text,
+          applyAssets,
           applyNameId: this.$store.state.login.id,
           applyName: this.$store.state.login.name,
-          applyDescription: this.textarea,
+          applyDescription,
         },
-      });
-      this.Options = !this.Options;
+      })
+        .then(() => {
+          if (applyAssets == null || applyDescription == null)
+            alert("输入内容不能为空，请重新申请");
+          else alert("提交成功！");
+        })
+        .then(() => {
+          //查询所有资金申请信息
+          axios({
+            method: "post",
+            url: "http://localhost:8080/user/userapply/getAllApply",
+            params: {
+              //当前页码
+              pageNum: 1,
+              //当前页面有几个
+              pageSize: 100000000,
+            },
+          })
+            .then((Response) => {
+              this.tableData = [...Response.data.data.list];
+              this.newTableData = [...Response.data.data.list];
+              this.tableData.forEach((e) => {
+                e.disposeTime = dayjs(e.disposeTime).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+              });
+              this.total = Response.data.data.total;
+            })
+            .catch((err) => {
+              alert("请求失败，请稍后重试");
+            });
+        })
+        .catch(() => {
+          alert("请求失败，请稍后重试");
+        });
     },
-    applyMoney() {
-      this.Options = !this.Options;
-    },
-    handleClick(row) {
-      console.log(row);
+    handleClick(sco) {
+      const result = window.confirm("确定要删除吗？");
+      if (result) {
+        axios({
+          method: "POST",
+          url: "http://localhost:8080/admin/admapply/deleteApply",
+          params: {
+            applyId: sco.applyId,
+          },
+        })
+          .then((response) => {
+            alert("删除成功,请重新刷新");
+            console.log(response);
+          })
+          .catch(() => {
+            alert("请求失败，请稍后重试");
+          });
+      }
     },
     //禁用按钮 防止多次发送请求
     findAllApply() {
@@ -134,19 +145,23 @@ export default {
         method: "post",
         url: "http://localhost:8080/user/userapply/getAllApply",
         params: {
+          //当前页码
           pageNum: 1,
-          pageSize: 1000000000,
+          //当前页面有几个
+          pageSize: 100000000,
         },
-      }).then((Response) => {
-        this.tableData = [...Response.data.data.list];
-        this.newTableData = [...Response.data.data.list];
-        this.tableData.forEach((e) => {
-          e.disposeTime = dayjs(e.disposeTime).format("YYYY-MM-DD HH:mm:ss");
+      })
+        .then((Response) => {
+          this.tableData = [...Response.data.data.list];
+          this.newTableData = [...Response.data.data.list];
+          this.tableData.forEach((e) => {
+            e.disposeTime = dayjs(e.disposeTime).format("YYYY-MM-DD HH:mm:ss");
+          });
+          this.total = Response.data.data.total;
+        })
+        .catch((err) => {
+          alert("请求失败，请稍后重试");
         });
-        this.tableData.forEach((e) => {
-          e.applyTime = dayjs(e.applyTime).format("YYYY-MM-DD HH:mm:ss");
-        });
-      });
     },
   },
   watch: {
@@ -173,16 +188,39 @@ export default {
   },
   data() {
     return {
-      Options: true,
-      text: null,
-      textarea: "",
+      Options1: true,
+      Options2: false,
       disabled: false,
       newTableData: null,
       inputFind: "",
       radio: 1,
       tableData: [],
     };
-  }
+  },
+  created() {
+    //查询所有资金申请信息
+    axios({
+      method: "post",
+      url: "http://localhost:8080/user/userapply/getAllApply",
+      params: {
+        //当前页码
+        pageNum: 1,
+        //当前页面有几个
+        pageSize: 100000000,
+      },
+    })
+      .then((Response) => {
+        this.tableData = [...Response.data.data.list];
+        this.newTableData = [...Response.data.data.list];
+        this.tableData.forEach((e) => {
+          e.disposeTime = dayjs(e.disposeTime).format("YYYY-MM-DD HH:mm:ss");
+        });
+        this.total = Response.data.data.total;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
 </script>
 
@@ -191,6 +229,14 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.6);
+  overflow-y: scroll;
+}
+#part2 {
+  position: absolute;
+  top: 100px;
+  width: 80%;
+  z-index: 9999;
 }
 #applyMoney {
   margin-bottom: 30px;
@@ -208,11 +254,11 @@ export default {
   width: 100%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-  z-index: 1;
+  z-index: 99999;
 }
 .applyInner {
   position: relative;
-  width: 60%;
+  width: 80%;
   height: 100%;
   font-size: 25px;
   margin: 60px auto;

@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import getMessageQuantity from "@/utils/getMessageQuantity";
 export default {
   name: 'Content-Home',
 
@@ -29,6 +30,11 @@ export default {
 
   created() {
     this.$store.dispatch("style/setContent2Style","background-color: transparent !important")
+  },
+  mounted() {
+    if(this.$store.state.login.role === "admin"){
+      getMessageQuantity(this)
+    }
   },
   beforeDestroy() {
     this.$store.dispatch("style/clearContent2Style")

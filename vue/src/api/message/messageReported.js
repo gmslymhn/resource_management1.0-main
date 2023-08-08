@@ -31,7 +31,7 @@ export const unprocessedReport = ({pageNum}) => {
 
 // 更新管理员处理(未处理的)损坏记录信息
 /**
- * @URL /admin/messageReminding/UpdateProcessedReport,
+ * @URL /admin/messageReminding/UpdateProcessedReport
  * @method post
  * @param sequenceId,disposeNameId,disposeName,disposeDescription,disposeResult
  */

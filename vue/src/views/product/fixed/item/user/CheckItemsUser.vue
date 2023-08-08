@@ -7,44 +7,6 @@
 
     <el-button class="itemsButton" type="text" @click="itemsButton">添加新物品</el-button>
 
-    
-
-    <!-- 添加新物品弹窗 -->
-    <el-dialog :title="dialogFormVisibleTitle" :visible.sync="dialogFormVisibleAdd" :append-to-body="true" class="itemsDialog">
-      <el-form :model="items" :rules="rules" ref="items" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="物品名称" prop="goodsName">
-          <el-input v-model="items.goodsName"></el-input>
-        </el-form-item>
-        <el-form-item label="物品数量" prop="goodsQuantity">
-          <el-input v-model.number="items.goodsQuantity"></el-input>
-        </el-form-item>
-        <el-form-item label="物品状态" prop="goodsState">
-          <el-radio-group v-model="items.goodsState">
-            <el-radio label="未损坏"></el-radio>
-            <el-radio label="已损坏"></el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="上传图片" prop="goodsImage">
-          <el-upload
-            class="itemsImg"
-            drag
-            :auto-upload="false"
-            :limit="1"
-            action="null"
-            list-type="picture"
-            :on-change="changeFile">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将物品照片拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-        </el-form-item>  
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitButton('items')">确 定</el-button>
-        <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
-      </div>
-    </el-dialog>
-
     <!-- 上报列表弹窗 -->
     <el-dialog title="上报" :visible.sync="dialogFormVisibleReported" :append-to-body="true" class="itemsDialog">
       
@@ -104,7 +66,21 @@
               </template>
           </el-table-column>
           <el-table-column width="100px" prop="goodsName" label="物品名称" align='center'></el-table-column>
-          <el-table-column prop="goodsState" label="物品状态" align='center'></el-table-column>
+          <!-- 状态 -->
+          <el-table-column
+            width="100px"
+            align='center'
+            prop="goodsState"
+            label="物品状态"
+            :filters="[{ text: '未损坏', value: '未损坏' }, { text: '已损坏', value: '已损坏' }]"
+            :filter-method="filterTag"
+            filter-placement="bottom-end">
+            <template slot-scope="scope">
+              <el-tag
+                :type="scope.row.goodsState === '未损坏' ? 'info' : 'danger'"
+                disable-transitions>{{scope.row.goodsState}}</el-tag>
+            </template>
+          </el-table-column>
           <!-- 操作 -->
           <el-table-column label="操作" align='center'>
               <template slot-scope="scope">
@@ -112,7 +88,7 @@
               </template>
           </el-table-column>
       </el-table>
-      
+
     </div>
 
     <!-- 分页 -->
@@ -127,9 +103,7 @@
 // 防抖引入
 import { debounce } from 'lodash-es';
 import Pagination from '@/components/pagination/Pagination';
-import getMessageQuantity from "@/utils/getMessageQuantity";
 import { itemsList,searchByGoodsNameFunc,searchByGoodsIdFunc } from '@/api/goods/goodsUser.js'
-import { itemsAdd } from '@/api/goods/goodsAdmin.js'
 
 import { damageReported } from "@/api/damage/damageUser.js"
 export default {
@@ -143,14 +117,6 @@ export default {
       dialogFormVisibleAdd: false,
       // 弹窗标题
       dialogFormVisibleTitle: "",
-      // 添加物品
-      items: {
-        goodsId: '',
-        goodsName: '',
-        goodsQuantity:'',
-        goodsState: '',
-        goodsImage: '',
-      },
       // 上报损坏物品信息
       report: {
         reportNameId:'',        // 1上报人id
@@ -201,22 +167,9 @@ export default {
         this.tableData = [...res.data.data.list]
         this.total = res.data.data.total
         this.totalPages = res.data.totalPages
-      }
-      
-    },
-
-    // 添加新物品接口
-    async postItemsAdd(img, goods){
-      let res = await itemsAdd({img: img, goods: goods})
-      console.log("增加产品列表-----",res);
-      if(res.status === 201){
-        this.$message({
-          type: 'success',
-          message: '添加成功咯!'
+        this.tableData.forEach( (e,index) => {
+          e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
         })
-        this.dialogFormVisibleAdd = false
-        // 重新获取列表
-        this.getItemsList(1,this.pageNum)
       }
     },
 
@@ -258,7 +211,7 @@ export default {
     async getSearchByGoodsIdFunc(goodsId){
       let res = await searchByGoodsIdFunc({goodsId: goodsId})
       console.log("物品id搜索数据-----",res);
-      if(Array.isArray(res.data.data.list) && res.data.data.list.length){
+      if(res.list){
         // 列表赋值
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
@@ -296,61 +249,6 @@ export default {
       });
     },
 
-    // 提交新物品的大按钮
-    itemsButton(){
-      // 触发弹窗
-      this.dialogFormVisibleAdd = true;
-      // 将弹窗标题修改
-      this.dialogFormVisibleTitle = '添加新物品'
-      // 表单数据清空
-      this.items.goodsName = ""
-      this.items.goodsState = ""
-      this.items.goodsQuantity = ""
-    },
-    // 提交新物品
-    submitButton() {
-      this.$refs.items.validate((valid) => {
-        if (valid) {
-          console.log("提交新物品操作-----",this.items);
-          this.submitFormAdd()
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    // 获取图片对象
-    changeFile(file, fileList) {
-      //图片格式
-      const isJPG = file.type === 'image/jpg' || file.type === 'image/png';
-        //图片大小
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isJPG) {
-        this.$message.error('上传图片只能为jpg或png格式');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传图片大小不能超过2MB');
-      }
-      this.items.goodsImage = URL.createObjectURL(file.raw);
-      // 选择文件后，给fileList对象赋值
-      this.fileList = fileList
-
-    },
-    // 正式提交新物品
-    submitFormAdd(){
-      let formData = new FormData()
-      this.items.goodsImage = this.fileList[0].raw
-
-      formData.append("uploadImage",this.fileList[0].raw)
-      formData.append("goodsName",this.items.goodsName)
-      formData.append("goodsState",this.items.goodsState)
-      formData.append("goodsQuantity",this.items.goodsQuantity)
-
-      console.log("formData的uploadImage",formData.get("uploadImage"));
-      // 发送请求
-      this.postItemsAdd(formData)
-    },
-
     // 物品名字搜索操作
     searchByGoodsNameFunc:debounce(function() {
       if(this.searchByGoodsName){
@@ -374,12 +272,17 @@ export default {
       this.searchByGoodsId = ''
     },
     
+
+    // 过滤标签 
+    filterTag(value, row) {
+      return row.goodsState === value;
+    },
+ 
   },
   created() {
     this.getItemsList(1,this.pageSize)
   },
   mounted() {
-    getMessageQuantity(this)
     this.report.reportName = this.$store.state.login.name
     this.report.reportNameId = Number(this.$store.state.login.id)
   },

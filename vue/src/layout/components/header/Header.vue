@@ -78,8 +78,8 @@ export default {
     messageQuantity().then( res => {
       console.log("messageQuantity",res);
       this.$store.dispatch("message/setAllMessage",res.data.data)
+      this.allMessage = this.$store.state.message.allMessage
     })
-    this.allMessage = this.$store.state.message.allMessage
   },
 };
 </script>

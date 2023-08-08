@@ -196,8 +196,6 @@ export default {
     toLogin(){
       this.$router.push({path:"/login"})
     }
-
-
   },
 
 }

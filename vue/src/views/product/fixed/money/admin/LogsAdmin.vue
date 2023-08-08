@@ -21,7 +21,7 @@
       >
     </el-row>
     <div id="tabledata">
-      <el-table :data="newTableData" border style="width: 100%">
+      <el-table :data="newTableData" border>
         <el-table-column fixed prop="assetsLogId" label="日志id" width="150">
         </el-table-column>
         <el-table-column prop="userName" label="用户姓名" width="120">
@@ -98,7 +98,30 @@ export default {
           },
         })
           .then(() => {
-            alert("删除成功！请重新查询日志");
+            alert("删除成功！");
+          })
+          .then(() => {
+            axios({
+              url: "http://localhost:8080/admin/admassets/assetslog",
+              method: "get",
+              params: {
+                pageNum: 1,
+                pageSize: 1000000,
+              },
+            }).then((response) => {
+              this.tableData = response.data.data.data.list;
+              this.newTableData = response.data.data.data.list;
+              this.tableData.forEach((e) => {
+                e.processTime = dayjs(e.processTime).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+              });
+              this.newTableData.forEach((e) => {
+                e.processTime = dayjs(e.processTime).format(
+                  "YYYY-MM-DD HH:mm:ss"
+                );
+              });
+            });
           })
           .catch(() => {
             alert("请求失败，请稍后重试");
@@ -119,7 +142,30 @@ export default {
         },
       })
         .then(() => {
-          alert("修改成功！请重新查询日志");
+          alert("修改成功！");
+        })
+        .then(() => {
+          axios({
+            url: "http://localhost:8080/admin/admassets/assetslog",
+            method: "get",
+            params: {
+              pageNum: 1,
+              pageSize: 1000000,
+            },
+          }).then((response) => {
+            this.tableData = response.data.data.data.list;
+            this.newTableData = response.data.data.data.list;
+            this.tableData.forEach((e) => {
+              e.processTime = dayjs(e.processTime).format(
+                "YYYY-MM-DD HH:mm:ss"
+              );
+            });
+            this.newTableData.forEach((e) => {
+              e.processTime = dayjs(e.processTime).format(
+                "YYYY-MM-DD HH:mm:ss"
+              );
+            });
+          });
         })
         .catch(() => {
           alert("请求失败，请稍后重试");
@@ -155,32 +201,11 @@ export default {
         .then((response) => {
           this.totalAssets = response.data.data.totalAssets;
           this.disposableAssets = response.data.data.disposableAssets;
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
-  },
-  mounted() {
-    //根据id查询日志
-    // axios({
-    //   url: "http://localhost:8080/admin/admassets/assetslog/{assetsLogId}",
-    //   method: "get",
-    //   params: {
-    //     assetsLogId: 12,
-    //   },
-    // }).then((response) => {
-    //   console.log(response);
-    // });
-    //根据申报人姓名查询
-    // axios({
-    //   url:'http://localhost:8080/admin/admassets/assetslog/{userName}',
-    //   method:'get',
-    //   params:{
-    //     userName:"iukkiu",
-    //     pageNum:1,
-    //     pageSize:5
-    //   }
-    // }).then(response=>{
-    //   console.log(response)
-    // })
   },
   created() {
     //获取总资产和可支配资产
@@ -189,6 +214,9 @@ export default {
       .then((response) => {
         this.totalAssets = response.data.data.totalAssets;
         this.disposableAssets = response.data.data.disposableAssets;
+      })
+      .catch((err) => {
+        console.log(err);
       });
     // 查询现在所有的日志
     axios({
@@ -209,8 +237,8 @@ export default {
           e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
         });
       })
-      .catch(() => {
-        alert("请求失败，请稍后重试");
+      .catch((err) => {
+        console.log(err);
       });
   },
 };

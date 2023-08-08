@@ -89,7 +89,7 @@
             :on-change="changeFile">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将物品照片拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
           </el-upload>
         </el-form-item>  
       </el-form>
@@ -171,7 +171,7 @@
             filter-placement="bottom-end">
             <template slot-scope="scope">
               <el-tag
-                :type="tagColor(scope)"
+                :type="scope.row.goodsState === '未损坏' ? 'info' : 'danger'"
                 disable-transitions>{{scope.row.goodsState}}</el-tag>
             </template>
           </el-table-column>
@@ -199,7 +199,6 @@
 // 防抖引入
 import { debounce } from 'lodash-es';
 import Pagination from '@/components/pagination/Pagination';
-import getMessageQuantity from "@/utils/getMessageQuantity";
 import { itemsList,searchByGoodsNameFunc,searchByGoodsIdFunc,itemsRemove,itemsAdd,itemsEdit } from '@/api/goods/goodsAdmin.js'
 import { damageReported } from "@/api/damage/damageAdmin.js"
 
@@ -238,6 +237,7 @@ export default {
       // 暂存图片
       fileList:[],
       files:[],
+      imageOK: false,
       // 添加物品规则
       rules: {
         goodsName: [
@@ -274,8 +274,10 @@ export default {
         this.tableData = [...res.data.data.list]
         this.total = res.data.data.total
         this.totalPages = res.data.totalPages
+        this.tableData.forEach( (e,index) => {
+          e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
+        })
       }
-
     },
 
     // 添加新物品接口
@@ -344,7 +346,7 @@ export default {
     async getSearchByGoodsNameFunc(pageNum,pageSize,goodsName){
       let res = await searchByGoodsNameFunc({pageNum: pageNum, pageSize: pageSize, goodsName: goodsName})
       console.log("物品名字搜索数据-----",res);
-      if(Array.isArray(res.data.data.list) && res.data.data.list.length){
+      if(res.list){
         // 列表赋值
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
@@ -361,7 +363,7 @@ export default {
     async getSearchByGoodsIdFunc(goodsId){
       let res = await searchByGoodsIdFunc({goodsId: goodsId})
       console.log("物品id搜索数据-----",res);
-      if(Array.isArray(res.data.data.list) && res.data.data.list.length){
+      if(res.list){
         // 列表赋值
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
@@ -476,23 +478,23 @@ export default {
       const isLt2M = file.raw.size / 1024 / 1024 < 1;
       if (!isJPG) {
         this.$message.error('上传图片只能为jpg或png格式');
-        file = ""
+        this.items.goodsImage = ""
       }else if (!isLt2M) {
         this.$message.error('上传图片大小不能超过1MB');
-        file = ""
+        this.items.goodsImage = ""
       }else{
+        console.log("图片符合要求");
         this.items.goodsImage = URL.createObjectURL(file.raw);
         // 选择文件后，给fileList对象赋值
+        this.imageOK = true
         console.log("fileList",fileList);
         this.fileList = fileList
       }
-      
     },
     // 正式提交新物品
     submitFormAdd(){
       let formData = new window.FormData()
       this.items.goodsImage = this.fileList[0].raw
-
       formData.append("uploadImage",this.fileList[0].raw)
       formData.append("goodsName",this.items.goodsName)
       formData.append("goodsState",this.items.goodsState)
@@ -506,17 +508,20 @@ export default {
     // 修改物品
     submitFormEdit(){
       let formData = new window.FormData()
-      this.items.goodsImage = this.fileList[0].raw
+      if(this.imageOK){
+        this.items.goodsImage = this.fileList[0].raw
 
-      formData.append("uploadImage",this.fileList[0].raw)
-      formData.append("goodsId",this.items.goodsId)
-      formData.append("goodsName",this.items.goodsName)
-      formData.append("goodsState",this.items.goodsState)
+        formData.append("uploadImage",this.fileList[0].raw)
+        formData.append("goodsId",this.items.goodsId)
+        formData.append("goodsName",this.items.goodsName)
+        formData.append("goodsState",this.items.goodsState)
 
-      console.log("formData的uploadImage",formData.get("uploadImage"));
+        console.log("formData的uploadImage",formData.get("uploadImage"));
 
-      // 发送请求
-      this.postItemsEdit(formData)
+        // 发送请求
+        this.postItemsEdit(formData)
+      }
+      
     },
 
     // 物品名字搜索操作
@@ -547,20 +552,13 @@ export default {
       return row.goodsState === value;
     },
  
-    // 状态颜色判断
-    tagColor(scope){
-      if(scope.row.goodsState === "未损坏"){
-        return "primary"
-      } else if(scope.row.goodsState === "已损坏"){
-        return "danger"
-      }
-    },
+    
   },
+
   created() {
     this.getItemsList(1,this.pageSize)
   },
   mounted() {
-    getMessageQuantity(this)
     this.report.reportName = this.$store.state.login.name
     this.report.reportNameId = Number(this.$store.state.login.id)
   },

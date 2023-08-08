@@ -85,7 +85,7 @@
             filter-placement="bottom-end">
             <template slot-scope="scope">
               <el-tag
-                :type="tagColor(scope)"
+                :type="scope.row.goodsState === '未处理' ? 'info' : 'success'"
                 disable-transitions>{{scope.row.goodsState}}</el-tag>
             </template>
           </el-table-column>
@@ -504,14 +504,6 @@ export default {
       this.$refs.filterTable.clearFilter();
     },
 
-    // 状态颜色判断
-    tagColor(scope){
-      if(scope.row.goodsState === "未处理"){
-        return "info"
-      } else if(scope.row.goodsState === "已处理"){
-        return "success"
-      } 
-    },
 
   },
   created() {
@@ -519,7 +511,6 @@ export default {
     this.getReportList(this.pageNum,this.pageSize)
   },
   mounted() {
-    getMessageQuantity(this)
     this.items.reportName = this.$store.state.login.name
     this.items.reportNameId = Number(this.$store.state.login.id)
   },

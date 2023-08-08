@@ -71,11 +71,11 @@
         <!-- 申请时间 -->
         <el-table-column
           align='center'
-          prop="applyTime"
+          prop="disposeTime"
           label="申请时间"
           sortable
           width="160"
-          column-key="applyTime">
+          column-key="disposeTime">
         </el-table-column>
         <!-- 处理操作 -->
         <el-table-column label="处理">
@@ -210,19 +210,26 @@ export default {
         this.total = res.data.data.total
         this.totalPages = res.data.data.pages
         this.tableData.forEach( e => {
-          e.applyTime = dayjs(e.applyTime).format("YYYY-MM-DD HH:mm:ss");
+          e.disposeTime = dayjs(e.disposeTime).format("YYYY-MM-DD HH:mm:ss");
         })
       }
     },
 
     // [更新]管理员处理(未处理的)损坏记录信息接口
     async postUpdateProcessedAssets(applyId,disposeName,disposeNameId,applyState,disposeDescription){
-      let res = updateProcessedApply({applyId: applyId,disposeName: disposeName,disposeNameId:disposeNameId,applyState :applyState,disposeDescription: disposeDescription})
-      console.log("审批损坏结果-----",res)
-      if(res.state === 200){
+      let res = await updateProcessedApply({applyId: applyId,disposeName: disposeName,disposeNameId:disposeNameId,applyState :applyState,disposeDescription: disposeDescription})
+      console.log("审批资金申请结果-----",res)
+      if(res.data === 1){
         this.$message({
           type: 'success',
-          message: '删除成功咯!',
+          message: '审批成功咯!',
+        })
+        // 重新获取列表
+        this.getUnprocessedAssets(1)
+      } else if(res.data === 0){
+        this.$message({
+          type: 'error',
+          message: '没钱咯!',
         })
         // 重新获取列表
         this.getUnprocessedAssets(1)
@@ -238,6 +245,10 @@ export default {
           this.postUpdateProcessedAssets(this.dispose.applyId,this.dispose.disposeName,this.dispose.disposeNameId,this.dispose.applyState,this.dispose.disposeDescription)
           // 触发弹窗
           this.dialogFormVisibleEdit = false
+          setTimeout(() => {
+            this.getUnprocessedAssets(1)
+          }, 500);
+          
         } else {
           console.log('error submit!!');
           return false;
@@ -264,14 +275,14 @@ export default {
       this.dispose.applyState = row.applyState                    // 申请状态
       this.dispose.disposeNameId = this.$store.state.login.id     // 处理人id
       this.dispose.disposeName = this.$store.state.login.name     // 处理人姓名
-      // this.dispose.disposeDescription = row.disposeDescription // 处理描述不需要，因为v-model
+      this.dispose.disposeDescription = ""                        // 处理描述不需要，因为v-model
     },
 
     // 更新页码
     currentChange(val){
       console.log("更新页码-----",val);
       this.pageNum = val
-      this.getUnprocessedAssets(val,this.pageSize)
+      this.getUnprocessedAssets(val)
     },
     // 上报列表函数
     formatter(row, column) {
@@ -292,11 +303,10 @@ export default {
   
   created() {
     // 获取未处理损坏物品列表数据操作
-    this.getUnprocessedAssets(this.pageNum)
+    this.getUnprocessedAssets(1)
   },
 
   mounted() {
-    getMessageQuantity(this)
     getUnprocessedReportNum().then( resReported => {
       console.log("resReported",resReported);
       this.reportedMessage = resReported.data.data

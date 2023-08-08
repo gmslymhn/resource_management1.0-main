@@ -93,7 +93,7 @@
             filter-placement="bottom-end">
             <template slot-scope="scope">
               <el-tag
-                :type="tagColor(scope)"
+                :type="scope.row.goodsState === '未处理' ? 'info' : 'success'"
                 disable-transitions>{{scope.row.goodsState}}</el-tag>
             </template>
           </el-table-column>
@@ -166,7 +166,6 @@
 import { debounce } from 'lodash-es';
 // 分页
 import Pagination from '@/components/pagination/Pagination';
-import getMessageQuantity from "@/utils/getMessageQuantity";
 
 import { reportList,searchByReportNameFunc,searchByDisposeNameFunc,damageReported,deleteGoods } from "@/api/damage/damageAdmin.js"
 // 时间戳处理
@@ -246,7 +245,6 @@ export default {
           e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
         })
       }
-      
     },
 
     // 上报提交接口
@@ -311,7 +309,7 @@ export default {
         this.getReportList(1,this.pageSize)
       }
     },
-      
+
     // 上报人搜索操作
     searchByReportNameFuncButton:debounce(function() {
       if(this.searchByReportName){
@@ -384,32 +382,12 @@ export default {
       this.$refs.filterTable.clearFilter();
       this.getReportList(1,this.pageSize)
     },
-
-    // 状态颜色判断
-    tagColor(scope){
-      if(scope.row.goodsState === "未处理"){
-        return "info"
-      } else if(scope.row.goodsState === "已处理"){
-        return "success"
-      }
-    },
-  },
-  computed(){
-    // // 状态颜色判断
-    // tagColor(scope){
-    //   if(scope.row.goodsState === "未处理"){
-    //     return "info"
-    //   } else if(scope.row.goodsState === "已处理"){
-    //     return "success"
-    //   }
-    // },
   },
   created() {
     // 获取上报列表数据操作
     this.getReportList(this.pageNum,this.pageSize)
   },
   mounted() {
-    getMessageQuantity(this)
     this.items.reportName = this.$store.state.login.name
     this.items.reportNameId = Number(this.$store.state.login.id)
   },

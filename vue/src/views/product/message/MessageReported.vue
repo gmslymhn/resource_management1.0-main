@@ -154,12 +154,11 @@
 
 <script>
 import { unprocessedReport,updateProcessedReport } from "@/api/message/messageReported"
-import { deleteGoods } from "@/api/damage/damageAdmin.js"
+import { itemsRemove } from '@/api/goods/goodsAdmin.js'
 // 节流
 import { throttle } from 'lodash-es';
 // 分页
 import Pagination from '@/components/pagination/Pagination';
-import getMessageQuantity from "@/utils/getMessageQuantity";
 import getUnprocessedReportNum from "@/utils/getReportedMessage"
 import getUnprocessedAssetsNum from "@/utils/getAssetsMessage"
 // 时间戳处理
@@ -180,6 +179,7 @@ export default {
         goodsName: '',             // 物品名称
         damageDescription: '',     // 上报人描述
         gotoApply: '',             // 是否跳转
+        goodsState: '',            // 是否删除
 
         // post的数据
         sequenceId: '',            // 1上报信息id
@@ -231,7 +231,7 @@ export default {
         this.total = res.data.data.total
         this.totalPages = res.data.data.pages
         this.tableData.forEach( e => {
-          e.applyTime = dayjs(e.applyTime).format("YYYY-MM-DD HH:mm:ss");
+          e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
         })
       }
     },
@@ -243,10 +243,22 @@ export default {
       if(res.state === 200){
         this.$message({
           type: 'success',
-          message: '删除成功咯!',
+          message: '审批成功咯!',
         })
         // 重新获取列表
         this.getUnprocessedReport(1)
+      }
+    },
+
+    // 删除接口
+    async getItemsRemove(id){
+      let res = await itemsRemove({goodsId: id})
+      console.log("产品删除数据-----",res)
+      if(res.status === 200){
+        this.$message({
+          type: 'success',
+          message: '删除成功咯!'
+        })
       }
     },
 
@@ -262,21 +274,23 @@ export default {
           if( this.dispose.goodsState === "是" ){
             // 调用物品损坏上报的删除接口
             console.log("调用物品损坏上报删除接口-----");
-            deleteGoods({sequenceId: this.dispose.sequenceId}).then((res) => {
-              console.log("物品损坏上报删除此条目成功");
-            })
+            this.getItemsRemove(this.dispose.goodsId)
           }
-          if( this.dispose.gotoApplyRes === "是" ){
+          if( this.dispose.gotoApply === "是" ){
             if( this.role === "user" ){
               this.$router.push({ name:"user_shenqing" })
             }else if( this.role === "admin" ){
               this.$router.push({ name:"admin_shenqing" })
             }
           }
+
         } else {
           console.log('error submit!!');
           return false;
         }
+        setTimeout(() => {
+          this.getUnprocessedReport(1) 
+        }, 500);
       });
     },
     // table处理按钮
@@ -296,7 +310,7 @@ export default {
       this.dispose.sequenceId = row.sequenceId                    // 上报信息id
       this.dispose.disposeNameId = this.$store.state.login.id     // 处理人id
       this.dispose.disposeName = this.$store.state.login.name     // 处理人姓名
-      // this.dispose.disposeDescription = row.disposeDescription // 处理描述不需要，因为v-model
+      this.dispose.disposeDescription = ""                        // 处理描述变空
 
     },
     // 更新页码
@@ -312,16 +326,13 @@ export default {
 
     // 跳转资金审批
     gotoMessageAssets: throttle(function(){
-        this.$router.push({ name:"admin_message_assets" }).catch(err => err)
-      },1500),
-    },
+      this.$router.push({ name:"admin_message_assets" }).catch(err => err)
+    },1500),
+  },
 
   created() {
     // 获取未处理损坏物品列表数据操作
-    this.getUnprocessedReport(this.pageNum)
-    getMessageQuantity(this)
-
-    
+    this.getUnprocessedReport(1)
   },
   mounted() {
     getUnprocessedReportNum().then( resReported => {

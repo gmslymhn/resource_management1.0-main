@@ -31,10 +31,6 @@
 
 // 引入axios
 import axios from 'axios'
-// 引入提示框(以实际项目为准)
-import { Message } from "element-ui";
-// 引入路由(以实际项目为准)
-import router from '@/router'
 //引入loading组件(以实际项目为准)
 import { Loading } from 'element-ui';
 // 创建的axios的实列 requests
