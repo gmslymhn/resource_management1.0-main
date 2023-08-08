@@ -5,58 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="资源管理系统后端集合初版">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/interceptor/LoginHandlerInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/interceptor/LoginHandlerInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/mapper/MessageRemindingMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ApplyAssersServiceLmpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/AssetsServicelmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/AssetsServicelmpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/Assets_LogServiceLmpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/Assets_LogServiceLmpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/MessageRemindingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ReportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/619c22bc-b0e2-48a7-8ad3-ffbd747c60f6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/8bbd468b-f4b3-455d-b9bb-0390372104e2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/a7db9b74-1411-429e-b848-27585e2b2a7f.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/b3accbdf-f228-49f4-a8d3-b10042a774ff.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/goodsImage/bb0a3926-b5b8-46db-a673-dd30f4173ed3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/css/dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/css/signin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/Chart.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/feather.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/jquery-3.2.1.slim.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/static/asserts/js/popper.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/addgoods.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/adminindex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/goodsbyid.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/goodsbyname.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/goodslist.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/adm/updategoods.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/commons/admbar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/commons/userbar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/goodsbyid.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/goodsbyname.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/goodslist.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/src/main/resources/templates/user/userindex.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ApplyAssersServiceLmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ApplyAssersServiceLmpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/AssetsServicelmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/AssetsServicelmpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/Assets_LogServiceLmpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/Assets_LogServiceLmpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/MessageRemindingServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/MessageRemindingServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ReportServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,6 +191,8 @@
       <workItem from="1691146899344" duration="38636000" />
       <workItem from="1691229660304" duration="10299000" />
       <workItem from="1691316240037" duration="14948000" />
+      <workItem from="1691346295455" duration="32000" />
+      <workItem from="1691346338521" duration="31000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>

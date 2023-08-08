@@ -1,17 +1,13 @@
 package com.lc.demo.controller.admin;
 
-import com.lc.demo.bean.Assets;
 import com.lc.demo.bean.Assets_Log;
-import com.lc.demo.service.AssetsService;
 import com.lc.demo.service.Assets_LogService;
 import common.AssetLogsPage;
-import common.AssetsPage;
 import common.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * 资金日志管理

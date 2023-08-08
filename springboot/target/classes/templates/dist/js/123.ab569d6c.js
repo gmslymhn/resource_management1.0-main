@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkresource"]=self["webpackChunkresource"]||[]).push([[123],{123:function(e,n,t){t.r(n),t.d(n,{default:function(){return d}});var u=function(){var e=this,n=e._self._c;return n("div",[e._v(" CheckItemsAdmin ")])},r=[],s={name:"Content-CheckItemsAdmin",data(){return{}},mounted(){},methods:{}},c=s,o=t(1001),a=(0,o.Z)(c,u,r,!1,null,"664f9287",null),d=a.exports}}]);
-//# sourceMappingURL=123.ab569d6c.js.map

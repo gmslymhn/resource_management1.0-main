@@ -4,16 +4,12 @@ import com.lc.demo.service.UserService;
 import common.Result;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
 
 import java.security.MessageDigest;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

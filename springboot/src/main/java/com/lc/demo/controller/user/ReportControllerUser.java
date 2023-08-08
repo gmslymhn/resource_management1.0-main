@@ -4,13 +4,11 @@ import com.lc.demo.bean.Report;
 import com.lc.demo.service.GoodsService;
 import com.lc.demo.service.ReportService;
 import common.ReportsResult;
-import common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * 物品损坏上报

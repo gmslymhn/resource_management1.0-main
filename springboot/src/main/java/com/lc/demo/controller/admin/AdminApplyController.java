@@ -1,17 +1,11 @@
 package com.lc.demo.controller.admin;
 
 import com.lc.demo.bean.ApplyAssets;
-import com.lc.demo.bean.Report;
-import com.lc.demo.bean.User;
 import com.lc.demo.service.ApplyAssetsService;
 import com.lc.demo.service.Assets_LogService;
 import com.lc.demo.service.UserService;
 import common.ApplyResult;
-import common.GoodsResult;
-import common.ReportsResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
