@@ -32,6 +32,7 @@ public class AdminApplyController {
     @PostMapping("/selectByApplyId")
     public ApplyAssets selectByApplyId(@RequestParam int applyId){
         System.out.println(applyAssetsService.selectApplyById(applyId).getDisposeTime());
+        System.out.println(applyAssetsService.selectApplyById(applyId).getApplyTime());
         return applyAssetsService.selectApplyById(applyId);
     }
     @PostMapping("/selectByApplyName1")

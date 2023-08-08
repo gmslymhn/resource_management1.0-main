@@ -6,7 +6,6 @@ import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Report;
 import com.lc.demo.mapper.MessageRemindingMapper;
 import com.lc.demo.service.MessageRemindingService;
-import common.GoodsResult;
 import common.MessageResultOfApply;
 import common.MessageResultOfReport;
 import org.springframework.beans.factory.annotation.Autowired;

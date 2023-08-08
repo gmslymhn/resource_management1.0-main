@@ -1,13 +1,7 @@
 package com.lc.demo.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.Report;
-import com.lc.demo.mapper.GoodsMapper;
-import com.lc.demo.mapper.ReportMapper;
 import common.ReportsResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

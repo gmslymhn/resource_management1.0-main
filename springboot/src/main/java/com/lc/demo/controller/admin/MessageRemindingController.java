@@ -107,20 +107,27 @@ public class MessageRemindingController {
      * @return 更行行数
      */
     @PostMapping("/UpdateProcessedApply")
-    public ResponseEntity<Void> updateApplyAssetsByApplyId(@RequestParam int applyId, @RequestParam String applyState, @RequestParam int disposeNameId, @RequestParam String disposeName, @RequestParam String disposeDescription){
+    public int updateApplyAssetsByApplyId(@RequestParam int applyId, @RequestParam String applyState, @RequestParam int disposeNameId, @RequestParam String disposeName, @RequestParam String disposeDescription){
+       ApplyAssets applyAssets1  =applyAssetsService.selectApplyById(applyId);
         ApplyAssets applyAssets = new ApplyAssets();
         applyAssets.setApplyId(applyId);
         applyAssets.setApplyState(applyState);
         applyAssets.setDisposeNameId(disposeNameId);
         applyAssets.setDisposeName(disposeName);
         applyAssets.setDisposeDescription(disposeDescription);
-//        if(applyState.equals("已同意"&&assetsService.selectNewDisposableAssets()>=)){
-//            assetsLogService.addAssets_Log(applyAssets1.getApplyId());
-//        }
+        System.out.println(applyState);
+        System.out.println(applyAssets1.getApplyAssets());
         if(messageRemindingService.updateApplyAssetsByApplyId(applyAssets)==1){
-            return ResponseEntity.ok().build();
+            if(("同意").equals(applyState)&&assetsService.selectNewDisposableAssets()>=applyAssets1.getApplyAssets()){
+                assetsLogService.addAssets_Log(applyAssets1.getApplyId());
+            }else {
+                applyAssets.setApplyState("未处理");
+                messageRemindingService.updateApplyAssetsByApplyId(applyAssets);
+                return 0;
+            }
+            return 1;
         }else {
-            return ResponseEntity.notFound().build();
+            return 0;
         }
     }
 }

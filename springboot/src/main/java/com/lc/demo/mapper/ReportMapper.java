@@ -11,7 +11,8 @@ import java.util.List;
 
 @Mapper
 public interface ReportMapper {
-
+    @Select("select * from report ")
+    List<Report> selectAllReport();
     /**
      * 查询所有相应处理状态信息
      * @return

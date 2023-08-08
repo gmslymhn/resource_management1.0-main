@@ -3,7 +3,6 @@ package com.lc.demo.service;
 import com.lc.demo.bean.Goods;
 import common.GoodsResult;
 
-import java.util.List;
 
 public interface GoodsService {
 

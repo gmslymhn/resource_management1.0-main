@@ -5,19 +5,16 @@ import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.ApplyAssets;
 import com.lc.demo.bean.Assets;
 import com.lc.demo.bean.Assets_Log;
-import com.lc.demo.bean.Report;
 import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.ApplyAssetsService;
 import com.lc.demo.service.AssetsService;
 import com.lc.demo.service.Assets_LogService;
 import com.lc.demo.service.ReportService;
-import common.ApplyResult;
 import common.AssetLogsPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -79,7 +76,6 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
         assetsLog.setBeforeAssets(assets.getTotalAssets());
         assetsLog.setAfterAssets(assets.getTotalAssets()-applyAssets.getApplyAssets());
         System.out.println(assetsLog);
-
         assetsLogMapper.insertAssetsLog(assetsLog);
         float disposableAssets =(assets.getTotalAssets()-applyAssets.getApplyAssets())*assets.getPercentage();
         assetsService.insertAssets(assets.getTotalAssets()-applyAssets.getApplyAssets(),disposableAssets,assets.getPercentage(),applyAssets.getDisposeDescription());

@@ -14,12 +14,8 @@
 package com.lc.demo.service;
 
 import com.lc.demo.bean.Goods;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
 
 /**
  * @ClassName: ImageService

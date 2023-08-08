@@ -32,6 +32,7 @@ public class ReportsResult {
 
         // 获取总记录数和总页码
         long total = pageInfo.getTotal();
+        System.out.println(total);
         int totalPages = (int) Math.ceil((double) total / pageSize);
         pageInfo.setPages(totalPages);
 

@@ -7,14 +7,10 @@ import com.lc.demo.bean.Assets_Log;
 import com.lc.demo.mapper.AssetsMapper;
 import com.lc.demo.mapper.Assets_LogMapper;
 import com.lc.demo.service.AssetsService;
-import common.AssetLogsPage;
 import common.AssetsPage;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -66,9 +62,9 @@ public class AssetsServicelmpl  implements AssetsService {
 
     public void updateAssetsPercentage(float percentage,String description) {
         float total =assetsMapper.newAssets().getTotalAssets();
+        assetsMapper.insert(total,total*percentage, LocalDateTime.now(),description,percentage) ;
         Assets_Log log =new Assets_Log(0,"至尊管理","修改可支配资产占总资产百分比",0,null,selectNewDisposableAssets(),selectNewTotalAssets()*percentage);
         assetsLogMapper.insertAssetsLog(log);
-        assetsMapper.insert(total,total*percentage, LocalDateTime.now(),description,percentage) ;
     }
 
     public void updateTotalAssets(Float totalAssets,String description) {

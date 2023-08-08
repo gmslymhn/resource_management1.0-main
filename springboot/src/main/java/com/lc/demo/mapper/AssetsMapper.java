@@ -29,7 +29,7 @@ public interface AssetsMapper {
                @Param("disposableAssets") float disposable,
                @Param("time") LocalDateTime now,
                @Param("description") String description,
-               @Param("percentage") float percentage);;
+               @Param("percentage") float percentage);
 
 
 }

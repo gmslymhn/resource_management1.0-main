@@ -2,10 +2,7 @@ package com.lc.demo.mapper;
 
 import com.lc.demo.bean.ApplyAssets;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -15,10 +12,14 @@ public interface ApplyAssetsMapper {
     //查询所有申请
     @Select("select * from apply_assets")
     List<ApplyAssets> selectAllApplyAssets();
+    @Results({
+            @Result(property = "applyTime", column = "apply_time"),
+    })
 
     //通过id查询
     @Select("select * from apply_assets  where apply_id = #{applyId}")
     ApplyAssets selectApplyById(int applyId);
+
 
     //通过上报人查询
     @Select("select * from apply_assets  where apply_name = #{applyName}")

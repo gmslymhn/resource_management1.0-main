@@ -3,15 +3,13 @@ package com.lc.demo.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lc.demo.bean.ApplyAssets;
-import com.lc.demo.bean.Goods;
 import com.lc.demo.mapper.ApplyAssetsMapper;
 import com.lc.demo.service.ApplyAssetsService;
-import com.lc.demo.service.Assets_LogService;
 import common.ApplyResult;
-import common.GoodsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,10 +26,11 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
 
     @Override
     public List<ApplyAssets> selectAllApplyAssets() {
+        List<ApplyAssets> list =new ArrayList<>();
         List<ApplyAssets> list1 = applyAssetsMapper.selectApplyByState("未处理");
         List<ApplyAssets> list2 = applyAssetsMapper.selectApplyByState("未同意");
         List<ApplyAssets> list3 = applyAssetsMapper.selectApplyByState("已同意");
-        List<ApplyAssets> list = list1;
+        list.addAll(list1);
         list.addAll(list2);
         list.addAll(list3);
         return list;
@@ -40,7 +39,7 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
     @Override
     public ApplyResult getAllApplyAssets(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        PageInfo<ApplyAssets> pageInfo = new PageInfo<>(selectAllApplyAssets());
+        PageInfo<ApplyAssets> pageInfo = new PageInfo<>(applyAssetsMapper.selectAllApplyAssets());
         if(pageInfo.getTotal() != 0) {
             return ApplyResult.pagingApplyResult(pageSize,pageInfo);
         }else{
@@ -50,6 +49,7 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
 
     @Override
     public ApplyAssets selectApplyById(int applyId) {
+        System.out.println(applyAssetsMapper.selectApplyById(applyId));
         return applyAssetsMapper.selectApplyById(applyId);
     }
 

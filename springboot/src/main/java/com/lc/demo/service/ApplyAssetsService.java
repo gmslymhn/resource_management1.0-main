@@ -2,9 +2,6 @@ package com.lc.demo.service;
 
 import com.lc.demo.bean.ApplyAssets;
 import common.ApplyResult;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

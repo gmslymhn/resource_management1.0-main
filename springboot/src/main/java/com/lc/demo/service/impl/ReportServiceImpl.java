@@ -7,7 +7,6 @@ import com.lc.demo.bean.Report;
 import com.lc.demo.mapper.GoodsMapper;
 import com.lc.demo.mapper.ReportMapper;
 import com.lc.demo.service.ReportService;
-import common.MessageResultOfApply;
 import common.ReportsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +24,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public ReportsResult getALLReport(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Report> list = reportMapper.selectReportByState("未处理");
-        list.addAll(reportMapper.selectReportByState("已处理"));
+        List<Report> list =reportMapper.selectAllReport();
+//        list.clear();
+//        list.addAll(reportMapper.selectReportByState("未处理"));
+//        list.addAll(reportMapper.selectReportByState("已处理"));
         PageInfo<Report> pageInfo = new PageInfo<>(list);
         if(pageInfo.getTotal() != 0) {
             return ReportsResult.pagingReportsResult(pageNum, pageInfo);
