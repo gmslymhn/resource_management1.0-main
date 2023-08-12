@@ -181,54 +181,54 @@ const router = new VueRouter({
 import Cookie from 'js-cookie';
 import store from '@/store/index';
 
-// 添加全局前置路由守卫
-router.beforeEach((to, from, next) => {
-  // 获取身份
-  const role = store.state.login.role;
-  console.log("前置路由守卫检查出role为:",role);
-  // 组件的meta
-  const requiresAdmin = to.meta.requiresAdmin;
-  const requiresUser = to.meta.requiresUser;
-  // 判断token存不存在
-  const token = Cookie.get("token")
-  // 未登录，应该跳转登录页面
-  // if(!token) {
-  //   console.log("没有token,未登录");
-  //   next( { name: 'denglu' }) 
-  // } else if(token) {
-  //   // 已登录，跳转首页
-  //   if ( requiresAdmin && role === "admin") {
-  //     console.log("已登录,且当前页面为登录,为管理员,前往管理员首页");
-  //     next( { name: "admin_shouye" } );
-  //     return 
-  //   } else if ( requiresUser && role === "user") {
-  //     console.log("已登录,且当前页面为登录,为用户,前往用户首页");
-  //     next( { name: "user_shouye" } );
-  //     return 
-  //   } else {
-  //     // console.log("已登录,且当前页面为登录,但没有身份,前往无权");
-  //     next()
-  //   }
-  // } else{
-  //   if( role === "admin" ){
-  //     next( { name: "admin_shouye" } )
-  //   } else if( role === "user" ){
-  //     next( { name: "user_shouye" } )
-  //   }
-  // }
+// // 添加全局前置路由守卫
+// router.beforeEach((to, from, next) => {
+//   // 获取身份
+//   const role = store.state.login.role;
+//   console.log("前置路由守卫检查出role为:",role);
+//   // 组件的meta
+//   const requiresAdmin = to.meta.requiresAdmin;
+//   const requiresUser = to.meta.requiresUser;
+//   // 判断token存不存在
+//   const token = Cookie.get("token")
+//   // 未登录，应该跳转登录页面
+//   // if(!token) {
+//   //   console.log("没有token,未登录");
+//   //   next( { name: 'denglu' }) 
+//   // } else if(token) {
+//   //   // 已登录，跳转首页
+//   //   if ( requiresAdmin && role === "admin") {
+//   //     console.log("已登录,且当前页面为登录,为管理员,前往管理员首页");
+//   //     next( { name: "admin_shouye" } );
+//   //     return 
+//   //   } else if ( requiresUser && role === "user") {
+//   //     console.log("已登录,且当前页面为登录,为用户,前往用户首页");
+//   //     next( { name: "user_shouye" } );
+//   //     return 
+//   //   } else {
+//   //     // console.log("已登录,且当前页面为登录,但没有身份,前往无权");
+//   //     next()
+//   //   }
+//   // } else{
+//   //   if( role === "admin" ){
+//   //     next( { name: "admin_shouye" } )
+//   //   } else if( role === "user" ){
+//   //     next( { name: "user_shouye" } )
+//   //   }
+//   // }
 
-  // 检查路由元数据中的 requiresAdmin 和 requiresUser 属性
-  if (to.meta.requiresAdmin && role !== 'admin') {
-    // 用户无权访问管理员页面
-    next('/nopermission');
-  } else if (to.meta.requiresUser && role !== 'user') {
-    // 用户无权访问普通用户页面
-    next('/nopermission');
-  } else {
-    // 用户有权限访问该页面
-    next();
-  }
-})
+//   // 检查路由元数据中的 requiresAdmin 和 requiresUser 属性
+//   if (to.meta.requiresAdmin && role !== 'admin') {
+//     // 用户无权访问管理员页面
+//     next('/nopermission');
+//   } else if (to.meta.requiresUser && role !== 'user') {
+//     // 用户无权访问普通用户页面
+//     next('/nopermission');
+//   } else {
+//     // 用户有权限访问该页面
+//     next();
+//   }
+// })
 
 
 

@@ -160,8 +160,7 @@
 import { debounce } from 'lodash-es';
 // 分页
 import Pagination from '@/components/pagination/Pagination';
-import getMessageQuantity from "@/utils/getMessageQuantity";
-import { reportList,searchByReportNameFunc,damageReported,deleteGoods } from "@/api/damage/damageUser.js"
+import { reportList,searchByReportNameFunc,deleteGoods } from "@/api/damage/damageUser.js"
 // 时间戳处理
 import dayjs from 'dayjs';
 export default {
@@ -171,167 +170,7 @@ export default {
   data() {
     return {
       // 列表
-      tableData: [{
-        sequenceId: 1,
-        reportTime: '2023-07-02 03:29:33',
-        reportName: '门酱',
-        goodsId: 1,
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsState: '未处理',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '无'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-01 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '已同理未处理',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-03 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '已处理',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }, {
-        sequenceId: 1,
-        reportTime: '2023-07-04 03:29:33',
-        reportName: '门酱',
-        goodsName: '物品名字',
-        damageDescription: '描述',
-        goodsId: 1,
-        goodsState: '未同意',
-        processTime: '2023-08-01 06:30:55',
-        disposeName: '袁笙'
-      }],
+      tableData: [],
       // 上报损坏物品信息
       items: {
         reportNameId:'',        // 1上报人id
@@ -383,23 +222,11 @@ export default {
         this.tableData.forEach( e => {
           e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
         })
-      }
-    },
-
-    // 上报提交接口
-    async postDamageReported(items){
-      let res = await damageReported({items: items})
-      console.log("上报提交-----",res);
-      if(res.status === 200){
-        this.$message({
-          type: 'success',
-          message: '提交成功咯!',
-        })
-        this.dialogFormVisible = false
-        this.items.goodsId = ""
-        this.items.damageDescription = ""
-        // 重新获取列表
-        this.getReportList(1,this.pageSize)
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
     },
 
@@ -407,16 +234,23 @@ export default {
     async getSearchByReportNameFunc(pageNum,pageSize,reportName){
       let res = await searchByReportNameFunc({pageNum: pageNum,pageSize: pageSize,reportName: reportName})
       console.log("上报人搜索数据-----",res);
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.data.pages
-      this.tableData.forEach( e => {
-        e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
-      })
-      this.tableData.forEach( e => {
-        e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
-      })
+      if(res.data){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.total = res.data.data.total
+        this.totalPages = res.data.data.pages
+        this.tableData.forEach( e => {
+          e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+        this.tableData.forEach( e => {
+          e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
+      }
     },
 
     // 删除数据接口
@@ -450,24 +284,6 @@ export default {
       this.getReportList(1,this.pageSize)
       this.searchByReportName = ''
       this.searchByDisposeName = ''
-    },
-
-    // 上报提交操作
-    submitForm(){
-      this.$refs.items.validate((valid) => {
-        if (valid) {
-          console.log("上报提交按钮-----",this.items);
-
-          this.postDamageReported(this.items)
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    // 上报列表弹窗展开
-    reportedListButton(){
-      this.dialogFormVisible = true
     },
 
     // 删除操作

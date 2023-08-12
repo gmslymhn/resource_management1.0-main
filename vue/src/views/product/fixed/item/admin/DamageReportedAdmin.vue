@@ -167,7 +167,7 @@ import { debounce } from 'lodash-es';
 // 分页
 import Pagination from '@/components/pagination/Pagination';
 
-import { reportList,searchByReportNameFunc,searchByDisposeNameFunc,damageReported,deleteGoods } from "@/api/damage/damageAdmin.js"
+import { reportList,searchByReportNameFunc,searchByDisposeNameFunc,deleteGoods } from "@/api/damage/damageAdmin.js"
 // 时间戳处理
 import dayjs from 'dayjs';
 export default {
@@ -233,8 +233,8 @@ export default {
     async getReportList(pageNum,pageSize){
       let res = await reportList({pageNum: pageNum,pageSize: pageSize})
       console.log("上报列表数据-----",res)
-      // 列表赋值
       if(res.data){
+        // 列表赋值
         this.tableData = [...res.data.data.list]
         this.total = res.data.data.total
         this.totalPages = res.data.data.pages
@@ -244,23 +244,11 @@ export default {
         this.tableData.forEach( e => {
           e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
         })
-      }
-    },
-
-    // 上报提交接口
-    async postDamageReported(items){
-      let res = await damageReported({items: items})
-      console.log("上报提交-----",res);
-      if(res.status === 200){
-        this.$message({
-          type: 'success',
-          message: '提交成功咯!',
-        })
-        this.dialogFormVisible = false
-        this.items.goodsId = ""
-        this.items.damageDescription = ""
-        // 重新获取列表
-        this.getReportList(1,this.pageSize)
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
     },
 
@@ -268,32 +256,46 @@ export default {
     async getSearchByReportNameFunc(pageNum,pageSize,reportName){
       let res = await searchByReportNameFunc({pageNum: pageNum,pageSize: pageSize,reportName: reportName})
       console.log("上报人搜索数据-----",res);
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.data.pages
-      this.tableData.forEach( e => {
-        e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
-      })
-      this.tableData.forEach( e => {
-        e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
-      })
+      if(res.data){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.total = res.data.data.total
+        this.totalPages = res.data.data.pages
+        this.tableData.forEach( e => {
+          e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+        this.tableData.forEach( e => {
+          e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
+      }
     },
 
     // 处理人搜索接口
     async getSearchByDisposeNameFunc(pageNum,pageSize,disposeName){
       let res = await searchByDisposeNameFunc({pageNum: pageNum,pageSize: pageSize,disposeName: disposeName})
       console.log("处理人搜索数据-----",res);
-      // 列表赋值
-      this.tableData = [...res.data.data.list]
-      this.total = res.data.data.total
-      this.totalPages = res.data.data.pages
-      this.tableData.forEach( e => {
-        e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
-      })
-      this.tableData.forEach( e => {
-        e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
-      })
+      if(res.data){
+        // 列表赋值
+        this.tableData = [...res.data.data.list]
+        this.total = res.data.data.total
+        this.totalPages = res.data.data.pages
+        this.tableData.forEach( e => {
+          e.reportTime = dayjs(e.reportTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+        this.tableData.forEach( e => {
+          e.processTime = dayjs(e.processTime).format("YYYY-MM-DD HH:mm:ss");
+        })
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
+      }
     },
 
     // 删除数据接口
@@ -329,23 +331,6 @@ export default {
       this.getReportList(1,this.pageSize)
       this.searchByReportName = ''
       this.searchByDisposeName = ''
-    },
-
-    // 上报提交操作
-    submitForm(items){
-      this.$refs.items.validate((valid) => {
-        if (valid) {
-          console.log("上报提交按钮-----",this.items);
-          this.postDamageReported(this.items)
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    // 上报列表弹窗展开
-    reportedListButton(){
-      this.dialogFormVisible = true
     },
 
     // 删除操作

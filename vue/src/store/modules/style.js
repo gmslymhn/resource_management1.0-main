@@ -1,8 +1,7 @@
 export default{
   namespaced: true,
   state:{
-    // contentActive: "background-color: transparent !important"
-    contentActive:''
+    contentActive: ""
   },
   mutations:{
     SET_CONTENT2_STYLE(state,contentActive){
@@ -14,6 +13,7 @@ export default{
   },
   actions:{
     setContent2Style(context,contentActive){
+      console.log("setContent2Style执行了",contentActive);
       context.commit("SET_CONTENT2_STYLE",contentActive)
     },
     clearContent2Style(context){

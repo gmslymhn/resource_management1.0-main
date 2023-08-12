@@ -29,15 +29,18 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("style/setContent2Style","background-color: transparent !important")
   },
   mounted() {
     if(this.$store.state.login.role === "admin"){
       getMessageQuantity(this)
     }
+    this.$emit('backgroundChange', "backgroundColor: transparent");
+    // this.$store.dispatch("style/setContent2Style","backgroundColor: transparent")
   },
   beforeDestroy() {
-    this.$store.dispatch("style/clearContent2Style")
+    // this.$store.dispatch("style/clearContent2Style")
+    this.$emit('backgroundChange', "");
+    this.$off("backgroundChange");
   },
 };
 </script>
@@ -48,7 +51,7 @@ export default {
     src:url('@/assets/font/ttf/Aa厚底黑.ttf')
   }
 .home{
-    background-color: transparent !important;
+    /* background-color: transparent !important; */
     width: 100%;
     height: calc( 100vh - 80px );
     display: flex;

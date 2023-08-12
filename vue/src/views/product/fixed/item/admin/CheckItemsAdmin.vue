@@ -89,7 +89,6 @@
             :on-change="changeFile">
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将物品照片拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过1MB</div>
           </el-upload>
         </el-form-item>  
       </el-form>
@@ -131,14 +130,6 @@
     <div class="checkItemsInner">
 
       <div class="checkItemsInnerHeader">
-        <!-- 物品名搜索 -->
-        <div class="inputDiv">
-          <el-input
-            v-model.trim="searchByGoodsName"
-            size="mini"
-            placeholder="物品名搜索(回车)"
-            @keyup.enter.native="searchByGoodsNameFunc"/>
-        </div>
         <!-- 物品id搜索 -->
         <div class="inputDiv">
           <el-input
@@ -147,6 +138,15 @@
             placeholder="物品id搜索(回车)"
             @keyup.enter.native="searchByGoodsIdFunc"/>
         </div>
+        <!-- 物品名搜索 -->
+        <div class="inputDiv">
+          <el-input
+            v-model.trim="searchByGoodsName"
+            size="mini"
+            placeholder="物品名搜索(回车)"
+            @keyup.enter.native="searchByGoodsNameFunc"/>
+        </div>
+        
         <!-- 查看全部按钮 -->
         <el-button class="seeAll" type="primary" round @click="seeAll">查看全部</el-button>
       </div>
@@ -277,6 +277,11 @@ export default {
         this.tableData.forEach( (e,index) => {
           e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
         })
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
     },
 
@@ -346,7 +351,7 @@ export default {
     async getSearchByGoodsNameFunc(pageNum,pageSize,goodsName){
       let res = await searchByGoodsNameFunc({pageNum: pageNum, pageSize: pageSize, goodsName: goodsName})
       console.log("物品名字搜索数据-----",res);
-      if(res.list){
+      if(res.data){
         // 列表赋值
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
@@ -355,6 +360,11 @@ export default {
         this.total = res.data.data.total
         this.totalPages = res.data.totalPages
         this.pageNum = 1
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
       
     },
@@ -363,8 +373,9 @@ export default {
     async getSearchByGoodsIdFunc(goodsId){
       let res = await searchByGoodsIdFunc({goodsId: goodsId})
       console.log("物品id搜索数据-----",res);
-      if(res.list){
+      if(res.data){
         // 列表赋值
+        console.log("id赋值");
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
           e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
@@ -372,6 +383,11 @@ export default {
         this.total = 1
         this.totalPages = 1
         this.pageNum = 1
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
       
     },
@@ -394,7 +410,6 @@ export default {
       this.$refs.report.validate((valid) => {
         if (valid) {
           console.log("上报提交按钮-----",this.report);
-
           this.postDamageReported(this.report)
         } else {
           console.log('error submit!!');
@@ -477,7 +492,7 @@ export default {
       //图片大小
       const isLt2M = file.raw.size / 1024 / 1024 < 1;
       if (!isJPG) {
-        this.$message.error('上传图片只能为jpg或png格式');
+        this.$message.error('上传图片只能为png格式');
         this.items.goodsImage = ""
       }else if (!isLt2M) {
         this.$message.error('上传图片大小不能超过1MB');
@@ -635,6 +650,9 @@ export default {
   }
   .itemsImg >>> .el-upload-list{
     width: 60%;
+  }
+  .itemsImg >>> .el-upload__tip{
+    visibility:hidden;
   }
   .itemsTable{
     background-color: transparent;

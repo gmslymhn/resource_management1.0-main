@@ -100,8 +100,6 @@ export const searchByGoodsIdFunc = ({goodsId}) => {
     goodsId,
   }),{
     headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
-  },{
-    responseType: 'arraybuffer',
   });
 }
 

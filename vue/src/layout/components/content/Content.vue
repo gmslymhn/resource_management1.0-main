@@ -1,5 +1,5 @@
 <template>
-  <div class="content2">
+  <div class="content2" :style="contentActive">
     <!-- 侧栏 -->
     <div class="menu">
       <Menu></Menu>
@@ -7,7 +7,7 @@
 
     <!-- 内容 -->
     <div class="main">
-      <router-view></router-view>
+      <router-view @backgroundChange="backgroundChange"></router-view>
     </div>
 
   </div>
@@ -24,11 +24,14 @@ export default {
     };
   },
   methods: {
-    
+    backgroundChange(style){
+      this.contentActive = style
+    }
   },
 
   created() {
-    this.contentActive = this.$store.state.style
+    // this.contentActive = this.$store.state.style.contentActive
+    
   },
 };
 </script>

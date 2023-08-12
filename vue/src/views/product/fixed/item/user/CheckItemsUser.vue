@@ -5,8 +5,6 @@
       <p class="itemsTextP">物品展示</p>
     </div>
 
-    <el-button class="itemsButton" type="text" @click="itemsButton">添加新物品</el-button>
-
     <!-- 上报列表弹窗 -->
     <el-dialog title="上报" :visible.sync="dialogFormVisibleReported" :append-to-body="true" class="itemsDialog">
       
@@ -27,8 +25,7 @@
         <el-button type="primary" @click="submitFormReport('rules')">上 报</el-button>
       </el-form>
 
-      
-        
+
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibleReported = false">关 闭</el-button>
       </div>
@@ -37,14 +34,6 @@
     <div class="checkItemsInner">
 
       <div class="checkItemsInnerHeader">
-        <!-- 物品名搜索 -->
-        <div class="inputDiv">
-          <el-input
-            v-model.trim="searchByGoodsName"
-            size="mini"
-            placeholder="物品名搜索(回车)"
-            @keyup.enter.native="searchByGoodsNameFunc"/>
-        </div>
         <!-- 物品id搜索 -->
         <div class="inputDiv">
           <el-input
@@ -53,6 +42,15 @@
             placeholder="物品id搜索(回车)"
             @keyup.enter.native="searchByGoodsIdFunc"/>
         </div>
+        <!-- 物品名搜索 -->
+        <div class="inputDiv">
+          <el-input
+            v-model.trim="searchByGoodsName"
+            size="mini"
+            placeholder="物品名搜索(回车)"
+            @keyup.enter.native="searchByGoodsNameFunc"/>
+        </div>
+        
         <!-- 查看全部按钮 -->
         <el-button class="seeAll" type="primary" round @click="seeAll">查看全部</el-button>
       </div>
@@ -170,6 +168,11 @@ export default {
         this.tableData.forEach( (e,index) => {
           e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
         })
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
     },
 
@@ -194,7 +197,7 @@ export default {
     async getSearchByGoodsNameFunc(pageNum,pageSize,goodsName){
       let res = await searchByGoodsNameFunc({pageNum: pageNum, pageSize: pageSize, goodsName: goodsName})
       console.log("上报人搜索数据-----",res);
-      if(Array.isArray(res.data.data.list) && res.data.data.list.length){
+      if(res.data){
         // 列表赋值
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
@@ -203,6 +206,11 @@ export default {
         this.total = res.data.data.total
         this.totalPages = res.data.totalPages
         this.pageNum = 1
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
       
     },
@@ -211,7 +219,7 @@ export default {
     async getSearchByGoodsIdFunc(goodsId){
       let res = await searchByGoodsIdFunc({goodsId: goodsId})
       console.log("物品id搜索数据-----",res);
-      if(res.list){
+      if(res.data){
         // 列表赋值
         this.tableData = [...res.data.data.list]
         this.tableData.forEach( (e,index) => {
@@ -220,6 +228,11 @@ export default {
         this.total = 1
         this.totalPages = 1
         this.pageNum = 1
+      } else{
+        // 列表赋值
+        this.tableData = []
+        this.total = 0
+        this.totalPages = 0
       }
     },
 
