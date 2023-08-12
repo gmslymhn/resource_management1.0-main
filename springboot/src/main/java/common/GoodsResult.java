@@ -118,7 +118,8 @@ public class GoodsResult {
         String goodsImage = goods.getGoodsImage();
         FileInputStream fileInputStream = null;
         try {
-            fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\resources"+goodsImage);
+            fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\resources\\"+goodsImage);
+            System.out.println(System.getProperty("user.dir"));
             byte[] bytes = new byte[1024];
             int b;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

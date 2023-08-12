@@ -39,7 +39,6 @@ public class ImageServiceImpl implements ImageService {
         try {
             uploadImage.transferTo(new File(filePath));
             goods.setGoodsImage( "/goodsImage/" + fileName);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

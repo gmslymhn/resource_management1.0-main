@@ -86,6 +86,10 @@ public class ApplyAssersServiceLmpl implements ApplyAssetsService {
     }
     @Override
     public int addApplyAssets(ApplyAssets applyAssets) {
+
+        if(applyAssets.getApplyAssets()==0){
+            return 0;
+        }
         return applyAssetsMapper.insertApplyAssets(applyAssets);
     }
 

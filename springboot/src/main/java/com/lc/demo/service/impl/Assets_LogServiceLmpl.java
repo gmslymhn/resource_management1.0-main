@@ -77,8 +77,12 @@ public class Assets_LogServiceLmpl implements Assets_LogService {
         assetsLog.setAfterAssets(assets.getTotalAssets()-applyAssets.getApplyAssets());
         System.out.println(assetsLog);
         assetsLogMapper.insertAssetsLog(assetsLog);
-        float disposableAssets =(assets.getTotalAssets()-applyAssets.getApplyAssets())*assets.getPercentage();
-        assetsService.insertAssets(assets.getTotalAssets()-applyAssets.getApplyAssets(),disposableAssets,assets.getPercentage(),applyAssets.getDisposeDescription());
+        float disposableAssets = assets.getDisposableAssets() - applyAssets.getApplyAssets();
+        if (disposableAssets < 0) {
+            System.out.println("可用资金不足");
+        } else {
+            assetsService.insertAssets(assets.getTotalAssets() - applyAssets.getApplyAssets(), disposableAssets, assets.getPercentage(), applyAssets.getDisposeDescription());
+        }
     }
 
     @Override
