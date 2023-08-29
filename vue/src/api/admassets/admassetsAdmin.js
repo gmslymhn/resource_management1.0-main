@@ -1,6 +1,6 @@
 import requests from "@/utils/requests";
 
-const url="admassets"
+const url = "admassets"
 
 // 修改可用资产的百分比
 /**
@@ -8,13 +8,13 @@ const url="admassets"
  * @method get
  * @params 必选参数：percentage:百分比
  */
-export const changePercentage=(percentage)=>{
-    requests.get(url+'assets/update',{
-      params:{
-        percentage
-      }
-    })
-  }
+export const changePercentage = (percentage) => {
+  requests.get(url + 'assets/update', {
+    params: {
+      percentage
+    }
+  })
+}
 
 
 //查询所有assets
@@ -23,8 +23,8 @@ export const changePercentage=(percentage)=>{
  * @method get
  * @params 必选参数: 无
  */
-export const getAllAssets=()=>{
-    requests.get(url+'assets')
+export const getAllAssets = () => {
+  requests.get(url + 'assets')
 }
 
 //查询new_assets
@@ -33,7 +33,7 @@ export const getAllAssets=()=>{
  * @method get
  * @params 必选参数: 无
  */
-export const getAllNewAssets=()=>{
-    requests.get(url+'assets/new')
+export const getAllNewAssets = () => {
+  requests.get(url + 'assets/new')
 }
 

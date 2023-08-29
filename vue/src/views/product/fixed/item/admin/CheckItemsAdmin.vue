@@ -275,7 +275,9 @@ export default {
         this.total = res.data.data.total
         this.totalPages = res.data.totalPages
         this.tableData.forEach( (e,index) => {
-          e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
+          if(res.data.responseEntityList[index].body){
+            e.goodsImage = 'data:image/png;base64,' + res.data.responseEntityList[index].body
+          }
         })
       } else{
         // 列表赋值
@@ -305,10 +307,20 @@ export default {
     async postDamageReported(report){
       let res = await damageReported({items: report})
       console.log("上报提交-----",res);
-      if(res.status === 201){
+      if(res.data === 1){
         this.$message({
           type: 'success',
           message: '上报成功咯!',
+        })
+        this.dialogFormVisibleReported = false
+        this.report.goodsId = ""
+        this.report.damageDescription = ""
+        // 重新获取列表
+        this.getItemsList(1,this.pageSize)
+      }else if(res.data === 0){
+        this.$message({
+          type: 'error',
+          message: '上报失败呜呜呜!',
         })
         this.dialogFormVisibleReported = false
         this.report.goodsId = ""
