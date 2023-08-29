@@ -65,7 +65,7 @@ public class ReportController {
      * @return
      */
     @GetMapping("/addReport")
-    public ResponseEntity<Integer> addReport(@RequestParam int reportNameId,@RequestParam String reportName,
+    public int addReport(@RequestParam int reportNameId,@RequestParam String reportName,
                                              @RequestParam int goodsId,@RequestParam String damageDescription) {
         if(goodsService.selectGoodsById(goodsId)!=null){
             Report report = new Report();
@@ -77,12 +77,17 @@ public class ReportController {
             PageInfo<Goods> goods1 = good.getData();
             Goods goods2 = goods1.getList().get(0);
             goods2.setGoodsState("已损坏");
-            goodsService.updateGoods(goods2);
-            reportService.addReport(report);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            if ("已损坏".equals(goodsService.selectGoodsById(goodsId).getData().getList().get(0).getGoodsState()))
+            {
+                return 0;
+            }else {
+                goodsService.updateGoods(goods2);
+                reportService.addReport(report);
+            }
+            return 1;
         }
         else {
-            return new ResponseEntity<>(0, HttpStatus.OK);
+            return 0;
         }
     }
 

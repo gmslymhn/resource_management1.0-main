@@ -6,6 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="7cfed054-3691-4161-adff-7fad0fea3323" name="更改" comment="资源管理系统后端集合初版">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/com/lc/demo/service/impl/ImageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/src/main/java/common/GoodsResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ImageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/com/lc/demo/service/impl/ImageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/common/GoodsResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/common/GoodsResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/springboot/target/classes/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/247.d5a364b8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/247.d5a364b8.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/38.c7dc2273.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/38.c7dc2273.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/769.4970070d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/769.4970070d.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/803.74f21134.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/803.74f21134.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/911.b899d7d0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/911.b899d7d0.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/app.27ae7e96.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot/target/classes/static/js/app.27ae7e96.js.map" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,8 +158,13 @@
       </method>
     </configuration>
     <configuration name="DemoApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="demo" />
+      <option name="ACTIVE_PROFILES" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.lc.demo.DemoApplication" />
+      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -193,6 +215,8 @@
       <workItem from="1691316240037" duration="14948000" />
       <workItem from="1691346295455" duration="32000" />
       <workItem from="1691346338521" duration="31000" />
+      <workItem from="1693303629608" duration="21000" />
+      <workItem from="1693303660630" duration="37000" />
     </task>
     <task id="LOCAL-00001" summary="更新">
       <created>1689903300746</created>

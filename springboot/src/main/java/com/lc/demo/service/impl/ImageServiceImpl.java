@@ -15,9 +15,10 @@ package com.lc.demo.service.impl;
 
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.ImageService;
+import org.springframework.boot.ApplicationHome;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -32,13 +33,23 @@ import java.util.UUID;
 public class ImageServiceImpl implements ImageService {
     @Override
     public void saveGoodsImage(MultipartFile uploadImage, Goods goods) {
+
         // 处理上传的图片文件，保存到合适的位置
         // 例如，可以使用UUID生成唯一的文件名
         String fileName = UUID.randomUUID().toString() + ".jpg";
-        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\goodsImage\\" + fileName;
+
+
+
+        String staticPath = ClassUtils.getDefaultClassLoader().getResource("goodsImage").getPath() + File.separator+ fileName;
+
+
+
+
         try {
-            uploadImage.transferTo(new File(filePath));
+
+            uploadImage.transferTo(new File(staticPath));
             goods.setGoodsImage( "/goodsImage/" + fileName);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

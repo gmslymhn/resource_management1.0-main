@@ -14,30 +14,20 @@
 package common;
 
 import com.github.pagehelper.PageInfo;
+
 import com.lc.demo.bean.Goods;
+import org.apache.ibatis.io.Resources;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import sun.applet.Main;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * @ClassName: Result
- * @Description: java类描述
- * @Author: 22932
- * @Date: 2023/7/27 10:32:19
- */
-import com.github.pagehelper.PageInfo;
-import com.lc.demo.bean.Goods;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @ClassName: Result
@@ -116,14 +106,15 @@ public class GoodsResult {
      */
     public static ResponseEntity<byte[]> ProcessPictures(Goods goods){
         String goodsImage = goods.getGoodsImage();
-        FileInputStream fileInputStream = null;
+        InputStream inputStream = null;
+
         try {
-            fileInputStream = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\resources\\"+goodsImage);
-            System.out.println(System.getProperty("user.dir"));
+            inputStream  = ClassLoader.getSystemClassLoader().getResourceAsStream(goodsImage.substring(1));
+
             byte[] bytes = new byte[1024];
             int b;
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            while((b = fileInputStream.read(bytes)) != -1){
+            while((b = inputStream.read(bytes)) != -1){
                 byteArrayOutputStream.write(bytes,0,b);
             }
             return new ResponseEntity<>(byteArrayOutputStream.toByteArray(), HttpStatus.OK);
@@ -133,4 +124,5 @@ public class GoodsResult {
         return null;
     }
 }
+
 
