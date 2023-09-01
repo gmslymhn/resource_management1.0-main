@@ -2,8 +2,8 @@ package com.lc.demo.controller.admin;
 
 import com.lc.demo.bean.Goods;
 import com.lc.demo.service.GoodsService;
-import com.lc.demo.service.ImageService;
 import common.GoodsResult;
+import common.OssUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/admin/admgoods")
 public class AdmGoodsController {
 
+
+
     @Autowired
     private GoodsService goodsService;
+
     @Autowired
-    private ImageService imageService;
+    private OssUtil ossUtil;
 
     /**
      * 得到一个全部物品的List
@@ -45,10 +48,18 @@ public class AdmGoodsController {
      */
     @PostMapping("/addGoods")
     public ResponseEntity<Void> addGoods(@RequestParam MultipartFile uploadImage,@RequestParam String goodsName,@RequestParam String goodsState,@RequestParam Integer goodsQuantity){
+        String goodsImage = null;
+        try {
+            //此处是调用上传服务接口
+            goodsImage = ossUtil.checkImage(uploadImage);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         Goods goods = new Goods();
         goods.setGoodsName(goodsName);
         goods.setGoodsState(goodsState);
-        imageService.saveGoodsImage(uploadImage,goods);
+        goods.setGoodsImage(goodsImage);
+
         for(int i = 0;i < goodsQuantity;i++){
             goodsService.addGoods(goods);
         }
@@ -65,11 +76,20 @@ public class AdmGoodsController {
      */
     @PostMapping("/updateGoods")
     public ResponseEntity<Void> updateGoods(@RequestParam MultipartFile uploadImage,@RequestParam int goodsId,@RequestParam String goodsName,@RequestParam String goodsState){
+        String goodsImage = null;
+        try {
+            //此处是调用上传服务接口
+            goodsImage = ossUtil.checkImage(uploadImage);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Goods goods = new Goods();
         goods.setGoodsName(goodsName);
         goods.setGoodsState(goodsState);
         goods.setGoodsId(goodsId);
-        imageService.saveGoodsImage(uploadImage,goods);
+        goods.setGoodsImage(goodsImage);
+
         if(goodsService.updateGoods(goods) == 1){
             return ResponseEntity.ok().build();
         }else {
@@ -91,6 +111,7 @@ public class AdmGoodsController {
         }else {
             return ResponseEntity.notFound().build();
         }
+
     }
 
     /**

@@ -39,7 +39,7 @@ public class GoodsResult {
     private PageInfo<Goods> data;
     private int totalPages;
     //    private ResponseEntity<byte[]>[] responseEntity;
-    private List<ResponseEntity<byte[]>> responseEntityList;
+
 
     public PageInfo<Goods> getData() {
         return data;
@@ -57,13 +57,7 @@ public class GoodsResult {
         this.totalPages = totalPages;
     }
 
-    public List<ResponseEntity<byte[]>> getResponseEntityList() {
-        return responseEntityList;
-    }
 
-    public void setResponseEntityList(List<ResponseEntity<byte[]>> responseEntityList) {
-        this.responseEntityList = responseEntityList;
-    }
 
     /**
      * 返回一个物品结果集，包含一页的数据，数据对应的图片数据，总页码
@@ -71,58 +65,21 @@ public class GoodsResult {
      * @param pageInfo
      * @return
      */
-    public static GoodsResult pagingGoodsResult(int pageNum,int pageSize, PageInfo<Goods> pageInfo) {
+    public static GoodsResult pagingGoodsResult(int pageSize, PageInfo<Goods> pageInfo) {
         GoodsResult goodsResult = new GoodsResult();
 
         // 获取总记录数和总页码
         long total =pageInfo.getTotal();
         int totalPages = (int) Math.ceil((double) total / pageSize);
 
-        List<Goods> goodsList = pageInfo.getList();
-        List<ResponseEntity<byte[]>> responseEntityList = new ArrayList<ResponseEntity<byte[]>>();
 
-        if(pageNum != totalPages){
-            for (int i = 0; i < pageSize; i++){
-                responseEntityList.add(ProcessPictures(goodsList.get(i)));
-            }
-        }else{
-            for (int i = 0; i < total-pageSize*(totalPages-1); i++){
-                responseEntityList.add(ProcessPictures(goodsList.get(i)));
-            }
-        }
-
-
-        goodsResult.setResponseEntityList(responseEntityList);
         goodsResult.setData(pageInfo);
         goodsResult.setTotalPages(totalPages);
         return goodsResult;
     }
 
 
-    /**
-     * 将url转为图片数据
-     * @param goods
-     * @return
-     */
-    public static ResponseEntity<byte[]> ProcessPictures(Goods goods){
-        String goodsImage = goods.getGoodsImage();
-        InputStream inputStream = null;
 
-        try {
-            inputStream  = ClassLoader.getSystemClassLoader().getResourceAsStream(goodsImage.substring(1));
 
-            byte[] bytes = new byte[1024];
-            int b;
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            while((b = inputStream.read(bytes)) != -1){
-                byteArrayOutputStream.write(bytes,0,b);
-            }
-            return new ResponseEntity<>(byteArrayOutputStream.toByteArray(), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
-
 

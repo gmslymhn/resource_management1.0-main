@@ -24,7 +24,7 @@ public class GoodsServicelmpl implements GoodsService {
         PageHelper.startPage(pageNum,pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectAllGoods());
         if(pageInfo.getTotal() != 0) {
-            return  GoodsResult.pagingGoodsResult(pageNum,pageSize,pageInfo);
+            return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
         }else{
             return null;
         }
@@ -36,7 +36,7 @@ public class GoodsServicelmpl implements GoodsService {
         PageHelper.startPage(pageNum, pageSize);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsByGoodsName(goodsName));
         if(pageInfo.getTotal() != 0) {
-            return  GoodsResult.pagingGoodsResult(pageNum,pageSize,pageInfo);
+            return  GoodsResult.pagingGoodsResult(pageSize,pageInfo);
         }else{
             return null;
         }
@@ -48,7 +48,7 @@ public class GoodsServicelmpl implements GoodsService {
         PageHelper.startPage(1, 1);
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsMapper.selectGoodsById(goodsId));
         if(pageInfo.getTotal() != 0) {
-            return GoodsResult.pagingGoodsResult(1,1,pageInfo);
+            return GoodsResult.pagingGoodsResult(1,pageInfo);
         }else{
             return null;
         }
